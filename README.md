@@ -131,8 +131,45 @@ Trade-off accepted: someone who genuinely does two jobs at once must be modelled
   instead of a hard-to-reverse type change.
 - **No cascading deletes**: the database refuses to delete a department, role or manager that is still
   referenced. Use `is_active = false`.
-- **Cycles in the hierarchy** longer than "own manager" are not blocked by the DB; Task 3's service layer must check.
+- **Cycles in the hierarchy** longer than "own manager" are checked and prevented by `employee_service.py`.
+
+## Employee & Team APIs (Task 3)
+
+Layered CRUD and query endpoints with validation, pagination, filtering, search, and soft deletion.
+
+### Endpoints
+
+| Method | Path | Summary | Notes |
+|---|---|---|---|
+| `POST` | `/employees` | Create employee | Auto-assigns next `EMP-XXXX` if omitted; checks unique email, valid dates |
+| `GET` | `/employees` | List employees | Query params: `page=1`, `size=20`, `department=D01`, `status=Active`, `q=name/email`, `include_inactive=false` |
+| `GET` | `/employees/{id}` | Get employee | 200 with details or 404 |
+| `PATCH` | `/employees/{id}` | Update employee | Partial update; checks email uniqueness & prevents hierarchy cycles |
+| `DELETE` | `/employees/{id}` | Soft delete | Sets `is_active = false` (never erases historical records) |
+| `GET` | `/employees/{id}/team` | Direct reports | Returns all employees reporting directly to this manager |
+| `GET` | `/departments` | List departments | All 11 active departments |
+| `GET` | `/departments/{id}/employees`| Department employees | All employees in a department |
+
+### Error Format
+
+All errors return a consistent JSON response:
+```json
+{
+  "detail": "Description of the error",
+  "error_code": "NOT_FOUND | CONFLICT | VALIDATION_ERROR | BAD_REQUEST"
+}
+```
+
+### Quick Commands
+
+```powershell
+# Run all 65 automated tests
+.venv\Scripts\python -m pytest -v
+
+# Seed or re-seed the full 745 employees from Excel
+.venv\Scripts\python scripts\seed_from_dataset.py
+```
 
 ## Next
 
-Task 3 puts a CRUD API on top of these tables.
+Task 4 fills the system with realistic synthetic data automatically.
