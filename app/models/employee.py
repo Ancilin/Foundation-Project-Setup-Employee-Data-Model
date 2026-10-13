@@ -9,8 +9,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base, TimestampMixin
 
 if TYPE_CHECKING:
+    from app.models.attendance import Attendance
     from app.models.department import Department
     from app.models.role import Role
+    from app.models.salary import Salary
 
 GENDERS = ("Male", "Female", "Other")
 EMPLOYMENT_STATUSES = ("Active", "Resigned", "Terminated", "Contract Ended")
@@ -68,6 +70,8 @@ class Employee(TimestampMixin, Base):
         back_populates="direct_reports", remote_side=[employee_id]
     )
     direct_reports: Mapped[list["Employee"]] = relationship(back_populates="manager")
+    salaries: Mapped[list["Salary"]] = relationship(back_populates="employee", cascade="all, delete-orphan")
+    attendance_records: Mapped[list["Attendance"]] = relationship(back_populates="employee", cascade="all, delete-orphan")
 
     @property
     def full_name(self) -> str:

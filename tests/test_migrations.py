@@ -12,7 +12,7 @@ from sqlalchemy import create_engine, inspect
 from app.models import Base
 
 ROOT = Path(__file__).resolve().parent.parent
-APP_TABLES = {"departments", "roles", "employees"}
+APP_TABLES = set(Base.metadata.tables.keys())
 
 
 @pytest.fixture

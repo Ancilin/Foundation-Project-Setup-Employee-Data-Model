@@ -1,0 +1,11 @@
+employee_id,first_name,last_name,work_email,gender,date_of_birth,hire_date,exit_date,employment_status,employment_type,department_id,role_id,manager_id,work_location,work_mode,is_active,created_at,updated_at
+EMP-0001,Daksh,Bakshi,daksh.bakshi.emp0001@znova-demo.example,Male,1989-10-08,2012-01-19,2020-01-24,Resigned,Permanent,D01,R002,EMP-0002,Pune,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0002,Laksh,Konda,laksh.konda.emp0002@znova-demo.example,Male,1973-06-25,2012-01-31,,Active,Permanent,D08,R047,,Pune,Remote,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0003,Isaac,Dewan,isaac.dewan.emp0003@znova-demo.example,Male,1985-05-21,2012-03-08,2021-12-09,Resigned,Permanent,D09,R051,,Coimbatore,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0004,Charan,Chahal,charan.chahal.emp0004@znova-demo.example,Male,1984-06-05,2012-03-20,,Active,Permanent,D03,R017,,Erode,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0005,Udyati,Balay,udyati.balay.emp0005@znova-demo.example,Female,1987-06-22,2012-03-28,2022-08-25,Resigned,Permanent,D02,R010,,Bengaluru,Onsite,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0006,Alexander,Chander,alexander.chander.emp0006@znova-demo.example,Male,1965-04-28,2012-04-02,,Active,Permanent,D00,R001,,Coimbatore,Onsite,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0007,Janani,Kaul,janani.kaul.emp0007@znova-demo.example,Female,1981-09-06,2012-04-03,2025-03-06,Resigned,Permanent,D01,R006,,Hyderabad,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0008,Yashawini,Bala,yashawini.bala.emp0008@znova-demo.example,Female,1988-04-16,2012-05-07,2024-06-27,Resigned,Permanent,D06,R035,,Chennai,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0009,Hardik,Saini,hardik.saini.emp0009@znova-demo.example,Male,1974-06-29,2012-07-18,2021-09-13,Resigned,Permanent,D04,R025,,Chennai,Hybrid,True,2026-10-13T10:53:31,2026-10-13T10:53:31
+EMP-0010,Imaran,Sen,imaran.sen.emp0010@znova-demo.example,Male,1980-08-23,2012-09-28,2020-09-07,Resigned,Permanent,D01,R005,,Delhi NCR,Remote,True,2026-10-13T10:53:31,2026-10-13T10:53:31

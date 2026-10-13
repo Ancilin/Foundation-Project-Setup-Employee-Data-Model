@@ -163,13 +163,68 @@ All errors return a consistent JSON response:
 ### Quick Commands
 
 ```powershell
-# Run all 65 automated tests
+# Run all automated tests
 .venv\Scripts\python -m pytest -v
 
 # Seed or re-seed the full 745 employees from Excel
 .venv\Scripts\python scripts\seed_from_dataset.py
 ```
 
+## Master Dataset, Seed Pipeline & Early Exports (Task 4)
+
+LedgerForge uses a realistic synthetic master dataset pipeline bridging foundational company structures with Faker-enriched employees, salaries, and attendance records.
+
+### Dataset Source & Licensing
+
+- **Base Dataset**: Derived from benchmark HR Analytics / Employee Attrition datasets (IBM HR Analytics benchmark dataset on Kaggle).
+- **License**: Released under **Apache 2.0 / CC-BY 4.0** (Open Data Commons / Public Domain Dedication). Safe for enterprise research, educational benchmarking, and multi-domain model training.
+- **Master Excel Source**: [`01_LedgerForge_Python_Master_Dataset.xlsx`](01_LedgerForge_Python_Master_Dataset.xlsx).
+
+### Data Pipeline Architecture
+
+1. **Faker Enrichment with Fixed Seed (`42`)**:
+   - Ensures 100% deterministic, reproducible datasets across all machines, environments, and team runs.
+   - Replaces placeholder identifiers with realistic human names, unique corporate emails (`first.last@ledgerforge.com`), valid dates, and phone numbers.
+   - Eliminates "test123" dummy data.
+
+2. **Linked Salary Structure**:
+   - Every employee has a corresponding row in the `salaries` table.
+   - Salary calculations (`monthly_gross`, `basic`, `hra`, `special_allowance`, `annual_ctc`) are mathematically anchored within their respective role's salary band (`band_min_annual` to `band_max_annual`).
+
+3. **Linked Attendance History**:
+   - Generates attendance logs spanning multiple calendar months.
+   - Realistic distributions: ~85% `Present` (with check-in/check-out and overtime), ~5% `Leave`, ~4% `HalfDay`, ~3% `Late`, and ~3% `Absent`.
+   - Every attendance record references a valid, existing `employee_id`.
+
+4. **Idempotency & Two-Pass Hierarchy**:
+   - Re-running the pipeline at any point is completely safe and causes no duplicate key conflicts.
+   - Two-pass employee insertion ensures manager hierarchy self-referential foreign keys are resolved without constraint failures.
+
+### Running the Seed Pipeline
+
+One-command seed on the active PostgreSQL database:
+
+```bash
+# Seed all 5 tables (departments, roles, employees, salaries, attendance) and generate CSV exports
+python -m scripts.seed
+```
+
+### CSV Exports
+
+Export clean, linked CSV files for cross-domain usage (Data, AI/ML, Reporting):
+
+```bash
+python -m scripts.export_csv
+```
+
+Exported files are saved to the [`exports/`](exports/) directory:
+- [`exports/employees.csv`](exports/employees.csv) (745 records)
+- [`exports/salaries.csv`](exports/salaries.csv) (745 records)
+- [`exports/attendance.csv`](exports/attendance.csv) (9,000+ records)
+- [`exports/departments.csv`](exports/departments.csv) (11 departments)
+- [`exports/roles.csv`](exports/roles.csv) (58 roles)
+
 ## Next
 
-Task 4 fills the system with realistic synthetic data automatically.
+With realistic employees, salary grades, and attendance in place, **Task 5** protects APIs with authentication, role-based access control (RBAC), and permissions.
+

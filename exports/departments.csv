@@ -1,0 +1,12 @@
+department_id,department_name,cost_center,description,is_active
+D00,Executive Office,CC-000,Leadership & strategy,True
+D01,Engineering,CC-100,"Product engineering, QA and DevOps",True
+D02,Product & Design,CC-200,Product management and UX design,True
+D03,Data & AI,CC-300,"Data engineering, analytics and machine learning",True
+D04,Sales,CC-400,Enterprise and mid-market sales,True
+D05,Marketing,CC-500,"Brand, content and digital marketing",True
+D06,Customer Support,CC-600,Customer success and support desk,True
+D07,Human Resources,CC-700,"Talent, people operations and payroll",True
+D08,Finance & Accounts,CC-800,"Accounting, controls and reporting",True
+D09,Operations & IT,CC-900,"Facilities, IT systems and operations",True
+D10,Legal & Compliance,CC-950,"Contracts, policy and statutory compliance",True
