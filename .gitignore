@@ -7,3 +7,5 @@ __pycache__/
 .vscode/
 # Large source dataset; keep out of git (share separately)
 *.xlsx
+*.db
+
