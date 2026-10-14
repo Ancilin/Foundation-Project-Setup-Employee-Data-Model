@@ -30,10 +30,12 @@ def _clean_val(val):
     return str(val)
 
 
-def export_table(session: Session, model, filename: str, columns: list[str]) -> int:
+def export_table(
+    session: Session, model, filename: str, columns: list[str], target_dir: Path = EXPORTS_DIR
+) -> int:
     """Export a SQLAlchemy model to a CSV file."""
-    EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = EXPORTS_DIR / filename
+    target_dir.mkdir(parents=True, exist_ok=True)
+    out_path = target_dir / filename
 
     stmt = select(model)
     rows = session.scalars(stmt).all()
@@ -44,11 +46,11 @@ def export_table(session: Session, model, filename: str, columns: list[str]) -> 
         for r in rows:
             writer.writerow([_clean_val(getattr(r, col, None)) for col in columns])
 
-    print(f"Exported {len(rows):>5} rows to {out_path.relative_to(ROOT)}")
+    print(f"Exported {len(rows):>5} rows to {out_path.name}")
     return len(rows)
 
 
-def _do_export(session: Session) -> dict[str, int]:
+def _do_export(session: Session, target_dir: Path = EXPORTS_DIR) -> dict[str, int]:
     results = {}
 
     # 1. Employees
@@ -76,6 +78,7 @@ def _do_export(session: Session) -> dict[str, int]:
             "created_at",
             "updated_at",
         ],
+        target_dir=target_dir,
     )
 
     # 2. Salaries
@@ -96,6 +99,7 @@ def _do_export(session: Session) -> dict[str, int]:
             "is_active",
             "created_at",
         ],
+        target_dir=target_dir,
     )
 
     # 3. Attendance
@@ -116,6 +120,7 @@ def _do_export(session: Session) -> dict[str, int]:
             "late_flag",
             "is_active",
         ],
+        target_dir=target_dir,
     )
 
     # 4. Departments
@@ -124,6 +129,7 @@ def _do_export(session: Session) -> dict[str, int]:
         Department,
         "departments.csv",
         ["department_id", "department_name", "cost_center", "description", "is_active"],
+        target_dir=target_dir,
     )
 
     # 5. Roles
@@ -143,19 +149,24 @@ def _do_export(session: Session) -> dict[str, int]:
             "overtime_eligible",
             "is_active",
         ],
+        target_dir=target_dir,
     )
 
     return results
 
 
-def export_all_to_csv(session: Session | None = None) -> dict[str, int]:
+def export_all_to_csv(
+    session: Session | None = None, target_dir: Path | None = None
+) -> dict[str, int]:
     """Export employees, salaries, attendance, departments, and roles to CSV."""
+    dst = target_dir or EXPORTS_DIR
     if session is not None:
-        return _do_export(session)
+        return _do_export(session, target_dir=dst)
     engine = get_engine()
     with Session(engine) as s:
-        return _do_export(s)
+        return _do_export(s, target_dir=dst)
 
 
 if __name__ == "__main__":
     export_all_to_csv()
+
