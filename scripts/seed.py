@@ -352,17 +352,36 @@ def seed_master_dataset(
 
 def main():
     parser = argparse.ArgumentParser(description="Seed LedgerForge database with master dataset")
+    default_file = (
+        ROOT / "data" / "seed" / "01_LedgerForge_Python_Master_Dataset.xlsx"
+        if (ROOT / "data" / "seed" / "01_LedgerForge_Python_Master_Dataset.xlsx").exists()
+        else ROOT / "01_LedgerForge_Python_Master_Dataset.xlsx"
+    )
     parser.add_argument(
         "--file",
         type=Path,
-        default=ROOT / "01_LedgerForge_Python_Master_Dataset.xlsx",
+        default=default_file,
         help="Path to Excel dataset",
     )
     parser.add_argument("--days", type=int, default=60, help="Days of attendance")
     parser.add_argument("--limit", type=int, default=None, help="Employee limit for speed (optional)")
     parser.add_argument("--no-export", action="store_true", help="Skip CSV export")
+    parser.add_argument("--reset", action="store_true", help="Reset/clear existing data before seeding")
 
     args = parser.parse_args()
+
+    if args.reset:
+        engine = get_engine()
+        with Session(engine) as s:
+            print("Resetting existing tables...")
+            s.query(Attendance).delete()
+            s.query(Salary).delete()
+            s.query(Employee).delete()
+            s.query(Role).delete()
+            s.query(Department).delete()
+            s.commit()
+            print("Tables cleared.")
+
     seed_master_dataset(
         xlsx_path=args.file,
         attendance_days=args.days,

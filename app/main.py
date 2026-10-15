@@ -36,6 +36,7 @@ def create_app() -> FastAPI:
     def root_redirect():
         return RedirectResponse(url="/docs")
 
+    app.include_router(api_router, prefix="/api/v1")
     app.include_router(api_router)
     return app
 

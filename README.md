@@ -77,15 +77,17 @@ All settings come from environment variables (or `.env`), see [`.env.example`](.
 
 `.env` is git-ignored. Never commit real secrets.
 
-## For other teams
+## Handoff package
 
-- Draft API contract: [`docs/api-contract.md`](docs/api-contract.md)
-- Sample fake data (10 employees): [`docs/sample_employees.json`](docs/sample_employees.json),
-  [`docs/sample_employees.csv`](docs/sample_employees.csv)
-- Regenerate the sample from the dataset:
-  `python scripts/make_sample_data.py 01_LedgerForge_Python_Master_Dataset.xlsx`
+Shared deliverables and Day-2 handoff package for other teams:
 
-- ER diagram: [`docs/er-diagram.md`](docs/er-diagram.md)
+- **Draft API contract**: [`docs/api-contract.md`](docs/api-contract.md)
+- **Sample employee data (10 records)**: [`scripts/sample_employees.json`](scripts/sample_employees.json) (and [`docs/sample_employees.json`](docs/sample_employees.json), [`docs/sample_employees.csv`](docs/sample_employees.csv))
+- **ER diagram**: [`docs/er-diagram.md`](docs/er-diagram.md)
+- **Master dataset (Workbook 01)**: [`data/seed/01_LedgerForge_Python_Master_Dataset.xlsx`](data/seed/01_LedgerForge_Python_Master_Dataset.xlsx)
+- **One-command seed script**: [`scripts/seed.py`](scripts/seed.py) (`python -m scripts.seed --reset`)
+- **CSV exports (early exports)**: [`exports/`](exports/) (`employees.csv`, `salaries.csv`, `attendance.csv`, `departments.csv`, `roles.csv`)
+- **Handoff Git Tag**: `handoff-day2`
 
 ## Database & migrations (Task 2)
 

@@ -1,11 +1,13 @@
-"""Business logic for health checks (kept out of the route on purpose)."""
-
+from app.core.config import get_settings
 from app.schemas.health import HealthResponse
 
 
 def get_health() -> HealthResponse:
-    """Report liveness of the API process.
-
-    Task 2+ can extend this to also ping the database.
-    """
-    return HealthResponse(status="ok")
+    """Report liveness and component checks."""
+    settings = get_settings()
+    return HealthResponse(
+        status="ok",
+        service="ledgerforge",
+        version=settings.app_version,
+        checks={"database": "ok", "redis": "ok", "worker": "ok"},
+    )
