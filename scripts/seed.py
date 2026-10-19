@@ -13,6 +13,7 @@ import argparse
 import random
 import sys
 from datetime import date, datetime, timedelta
+from decimal import Decimal
 from pathlib import Path
 
 from faker import Faker
@@ -25,7 +26,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app.db.session import get_engine  # noqa: E402
-from app.models import Attendance, Department, Employee, Role, Salary  # noqa: E402
+from app.models import (  # noqa: E402
+    Attendance,
+    Department,
+    Employee,
+    EmployeeAssignment,
+    Role,
+    Salary,
+    SalaryComponent,
+    SalaryRevision,
+    SalaryStructure,
+)
 from scripts.export_csv import export_all_to_csv  # noqa: E402
 
 # Fixed seed for 100% reproducible synthetic generation
@@ -332,6 +343,139 @@ def seed_master_dataset(
         counts["attendance"] = total_att
         print(f"[Attendance] {new_attendance} inserted, total in DB: {total_att}")
 
+        # -------------------------------------------------------------
+        # 6. Employee Assignments (LF-02)
+        # -------------------------------------------------------------
+        csv_as_path = ROOT / "data" / "csv" / "employee_assignments.csv"
+        if csv_as_path.exists():
+            df_as = pd.read_csv(csv_as_path)
+            existing_as = set(session.scalars(select(EmployeeAssignment.assignment_id)).all())
+            new_as = 0
+            to_add_as = []
+            for _, row in df_as.iterrows():
+                aid = str(row["assignment_id"]).strip()
+                eid = str(row["employee_id"]).strip()
+                if aid not in existing_as and eid in existing_emps:
+                    to_add_as.append(EmployeeAssignment(
+                        assignment_id=aid,
+                        employee_id=eid,
+                        effective_from=pd.to_datetime(row["effective_from"]).date(),
+                        effective_to=pd.to_datetime(row["effective_to"]).date() if pd.notna(row.get("effective_to")) else None,
+                        department_id=str(row["department_id"]).strip(),
+                        role_id=str(row["role_id"]).strip(),
+                        job_level=str(row["job_level"]).strip() if pd.notna(row.get("job_level")) else None,
+                        manager_id=str(row["manager_id"]).strip() if pd.notna(row.get("manager_id")) else None,
+                        change_reason=str(row["change_reason"]).strip() if pd.notna(row.get("change_reason")) else None,
+                    ))
+                    existing_as.add(aid)
+                    new_as += 1
+                    if len(to_add_as) >= 500:
+                        session.add_all(to_add_as)
+                        session.commit()
+                        to_add_as.clear()
+            if to_add_as:
+                session.add_all(to_add_as)
+                session.commit()
+            counts["employee_assignments"] = len(existing_as)
+            print(f"[Employee Assignments] {new_as} inserted, total in DB: {len(existing_as)}")
+
+        # -------------------------------------------------------------
+        # 7. Salary Components (LF-05)
+        # -------------------------------------------------------------
+        csv_comp_path = ROOT / "data" / "csv" / "salary_components.csv"
+        if csv_comp_path.exists():
+            df_comp = pd.read_csv(csv_comp_path)
+            existing_comp = set(session.scalars(select(SalaryComponent.component_id)).all())
+            new_comp = 0
+            for _, row in df_comp.iterrows():
+                cid = str(row["component_id"]).strip()
+                if cid not in existing_comp:
+                    session.add(SalaryComponent(
+                        component_id=cid,
+                        component_name=str(row["component_name"]).strip(),
+                        component_type=str(row["component_type"]).strip(),
+                        taxable=str(row["taxable"]).strip(),
+                        calculation_rule=str(row["calculation_rule"]).strip() if pd.notna(row.get("calculation_rule")) else None,
+                        is_fixed=str(row["is_fixed"]).strip(),
+                    ))
+                    existing_comp.add(cid)
+                    new_comp += 1
+            session.commit()
+            counts["salary_components"] = len(existing_comp)
+            print(f"[Salary Components] {new_comp} inserted, total in DB: {len(existing_comp)}")
+
+        # -------------------------------------------------------------
+        # 8. Salary Revisions (LF-05)
+        # -------------------------------------------------------------
+        csv_rev_path = ROOT / "data" / "csv" / "salary_revisions.csv"
+        if csv_rev_path.exists():
+            df_rev = pd.read_csv(csv_rev_path)
+            existing_rev = set(session.scalars(select(SalaryRevision.revision_id)).all())
+            new_rev = 0
+            to_add_rev = []
+            for _, row in df_rev.iterrows():
+                rid = str(row["revision_id"]).strip()
+                eid = str(row["employee_id"]).strip()
+                if rid not in existing_rev and eid in existing_emps:
+                    to_add_rev.append(SalaryRevision(
+                        revision_id=rid,
+                        employee_id=eid,
+                        effective_from=pd.to_datetime(row["effective_from"]).date(),
+                        revision_reason=str(row["revision_reason"]).strip() if pd.notna(row.get("revision_reason")) else None,
+                        previous_annual_fixed=Decimal(str(row["previous_annual_fixed"])) if pd.notna(row.get("previous_annual_fixed")) else None,
+                        new_annual_fixed=Decimal(str(row["new_annual_fixed"])),
+                        pct_change=Decimal(str(row["pct_change"])) if pd.notna(row.get("pct_change")) else None,
+                        role_id_after=str(row["role_id_after"]).strip() if pd.notna(row.get("role_id_after")) else None,
+                        approved_by=str(row["approved_by"]).strip() if pd.notna(row.get("approved_by")) else None,
+                    ))
+                    existing_rev.add(rid)
+                    new_rev += 1
+                    if len(to_add_rev) >= 500:
+                        session.add_all(to_add_rev)
+                        session.commit()
+                        to_add_rev.clear()
+            if to_add_rev:
+                session.add_all(to_add_rev)
+                session.commit()
+            counts["salary_revisions"] = len(existing_rev)
+            print(f"[Salary Revisions] {new_rev} inserted, total in DB: {len(existing_rev)}")
+
+        # -------------------------------------------------------------
+        # 9. Salary Structures (LF-05)
+        # -------------------------------------------------------------
+        csv_st_path = ROOT / "data" / "csv" / "salary_structures.csv"
+        if csv_st_path.exists():
+            df_st = pd.read_csv(csv_st_path)
+            existing_st = set(session.scalars(select(SalaryStructure.structure_id)).all())
+            new_st = 0
+            to_add_st = []
+            for _, row in df_st.iterrows():
+                sid = str(row["structure_id"]).strip()
+                eid = str(row["employee_id"]).strip()
+                if sid not in existing_st and eid in existing_emps:
+                    to_add_st.append(SalaryStructure(
+                        structure_id=sid,
+                        employee_id=eid,
+                        component_id=str(row["component_id"]).strip(),
+                        component_name=str(row["component_name"]).strip(),
+                        component_type=str(row["component_type"]).strip(),
+                        monthly_amount=Decimal(str(row["monthly_amount"])),
+                        effective_from=pd.to_datetime(row["effective_from"]).date(),
+                        effective_to=pd.to_datetime(row["effective_to"]).date() if pd.notna(row.get("effective_to")) else None,
+                        revision_id=str(row["revision_id"]).strip() if pd.notna(row.get("revision_id")) else None,
+                    ))
+                    existing_st.add(sid)
+                    new_st += 1
+                    if len(to_add_st) >= 1000:
+                        session.add_all(to_add_st)
+                        session.commit()
+                        to_add_st.clear()
+            if to_add_st:
+                session.add_all(to_add_st)
+                session.commit()
+            counts["salary_structures"] = len(existing_st)
+            print(f"[Salary Structures] {new_st} inserted, total in DB: {len(existing_st)}")
+
     if session is not None:
         _run_seed(session)
     else:
@@ -374,6 +518,10 @@ def main():
         engine = get_engine()
         with Session(engine) as s:
             print("Resetting existing tables...")
+            s.query(SalaryStructure).delete()
+            s.query(SalaryRevision).delete()
+            s.query(SalaryComponent).delete()
+            s.query(EmployeeAssignment).delete()
             s.query(Attendance).delete()
             s.query(Salary).delete()
             s.query(Employee).delete()

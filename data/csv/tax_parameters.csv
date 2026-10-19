@@ -1,0 +1,4 @@
+parameter,value,note
+standard_deduction,75000,Standard deduction on salary income (sample)
+rebate_threshold_taxable,1200000,"No tax if taxable income up to this value, with marginal relief (sample)"
+health_education_cess_percent,4,Cess added to tax

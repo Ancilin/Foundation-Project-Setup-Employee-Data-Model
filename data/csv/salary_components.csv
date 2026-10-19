@@ -1,0 +1,15 @@
+component_id,component_name,component_type,taxable,calculation_rule,is_fixed
+BASIC,Basic Salary,EARNING,Y,40% of monthly fixed gross,Y
+HRA,House Rent Allowance,EARNING,Y,50% of basic,Y
+CONV,Conveyance Allowance,EARNING,Y,"Fixed 1,600 (800 below 20,000 monthly gross)",Y
+MED,Medical Allowance,EARNING,Y,"Fixed 1,250 (nil below 20,000 monthly gross)",Y
+SPECIAL,Special Allowance,EARNING,Y,Balancing figure to reach monthly fixed gross,Y
+OT,Overtime Pay,EARNING,Y,Hours x (monthly fixed gross / 208) x 2.0; cap 50 hours; eligible roles only,N
+VAR,Variable Pay (bonus / incentive / award),EARNING,Y,"Performance bonus (April), sales incentive (quarter-end), festival bonus, spot award",N
+PF_EE,Provident Fund - Employee,DEDUCTION,N,"12% of basic, wage ceiling 15,000",N
+ESI_EE,ESI - Employee,DEDUCTION,N,"0.75% of gross if monthly fixed gross <= 21,000",N
+PT,Professional Tax,DEDUCTION,N,"200 per month if gross >= 25,000 (sample rule)",N
+TDS,Income Tax (TDS),DEDUCTION,N,Projected annual tax / 12 + marginal tax on variable pay,N
+LOAN,Loan / Advance Recovery,DEDUCTION,N,Fixed EMI as per employee advance,N
+PF_ER,Provident Fund - Employer,EMPLOYER_CONTRIBUTION,N,"12% of basic, wage ceiling 15,000",N
+ESI_ER,ESI - Employer,EMPLOYER_CONTRIBUTION,N,"3.25% of gross if monthly fixed gross <= 21,000",N

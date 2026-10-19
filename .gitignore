@@ -8,4 +8,6 @@ __pycache__/
 # Large source dataset; keep out of git (share separately)
 *.xlsx
 *.db
+Task details/
+data/csv/attendance.csv
 

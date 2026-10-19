@@ -1,0 +1,314 @@
+sheet,column,data_type,description,null_count,null_percent,distinct_values,example
+departments,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+departments,department_name,text,Department name.,0,0.0,11,Executive Office
+departments,cost_center,text,Cost-centre code.,0,0.0,11,CC-000
+departments,description,text,Description.,0,0.0,11,Leadership & strategy
+roles,role_id,text,Job role code from the roles table.,0,0.0,58,R001
+roles,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+roles,role_title,text,Role title.,0,0.0,58,Chief Executive Officer
+roles,level,integer,"Level 1 to 7 (1 Associate ... 6 Head, 7 CEO).",0,0.0,7,7
+roles,grade,text,Level label.,0,0.0,7,L7 Executive Leadership
+roles,band_min_annual,integer,"Minimum annual fixed pay for the role (2026 reference, INR).",0,0.0,44,9600000
+roles,band_mid_annual,integer,Mid-point annual fixed pay for the role (INR).,0,0.0,44,12000000
+roles,band_max_annual,integer,Maximum annual fixed pay for the role (INR).,0,0.0,44,15600000
+roles,overtime_eligible,text,"Y if the role earns overtime pay (levels 1-2 in Support, HR, Finance, Operations).",0,0.0,2,N
+roles,band_year,integer,Year the pay band refers to.,0,0.0,1,2026
+holidays,holiday_date,date,Date of the holiday.,0,0.0,19,2025-04-14
+holidays,holiday_name,text,Name of the holiday.,0,0.0,14,Dr. Ambedkar Jayanti / Tamil New Year
+holidays,holiday_type,text,"National, Regional or Optional.",0,0.0,3,Regional
+holidays,weekday,text,Day of week (three letters).,0,0.0,6,Monday
+holidays,falls_on_weekend,text,Y if the holiday falls on a Saturday or Sunday.,0,0.0,2,N
+holidays,calendar_note,text,Note about the calendar.,0,0.0,1,Sample calendar for demo purposes
+leave_types,leave_type_code,text,"Leave type: CL, SL, EL, ML, BL or LOP.",0,0.0,6,CL
+leave_types,leave_type_name,text,Leave type name.,0,0.0,6,Casual Leave
+leave_types,pay_type,text,Paid or Unpaid.,0,0.0,2,Paid
+leave_types,annual_quota_days,integer,Annual quota in days.,0,0.0,5,12
+leave_types,prorated_for_joiners,text,Y if the quota is prorated for new joiners.,0,0.0,2,Y
+leave_types,carry_forward_allowed,text,Y if unused leave carries forward.,0,0.0,2,N
+leave_types,max_carry_forward_days,integer,Maximum days that can be carried forward.,0,0.0,2,0
+leave_types,policy_note,text,Policy note.,0,0.0,6,Short-notice personal leave
+salary_components,component_id,text,"Pay component code: BASIC, HRA, CONV, MED, SPECIAL, OT, VAR, PF_EE, ESI_EE, PT, TDS, LOAN, PF_ER, ESI_ER.",0,0.0,14,BASIC
+salary_components,component_name,text,Pay component name.,0,0.0,14,Basic Salary
+salary_components,component_type,text,"EARNING, DEDUCTION or EMPLOYER_CONTRIBUTION.",0,0.0,3,EARNING
+salary_components,taxable,text,Y if the component is taxable.,0,0.0,2,Y
+salary_components,calculation_rule,text,How the component is calculated.,0,0.0,13,40% of monthly fixed gross
+salary_components,is_fixed,text,Y if part of the fixed monthly structure.,0,0.0,2,Y
+tax_slabs,slab_id,text,Tax slab id.,0,0.0,14,TS-001
+tax_slabs,regime,text,Tax regime.,0,0.0,1,NEW
+tax_slabs,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,2,FY2025-26
+tax_slabs,income_from,integer,"Slab lower bound (annual taxable income, INR).",0,0.0,7,0
+tax_slabs,income_to,decimal,Slab upper bound; blank for the top slab.,2,14.3,6,400000.0
+tax_slabs,rate_percent,decimal,Tax rate for the slab (percent).,0,0.0,7,0.0
+tax_slabs,effective_from,date,First day the row applies.,0,0.0,2,2025-04-01
+tax_slabs,note,text,Free-text note.,0,0.0,1,SAMPLE slabs for training only - confirm against current law
+tax_parameters,parameter,text,Name of the parameter.,0,0.0,3,standard_deduction
+tax_parameters,value,decimal,Parameter value.,0,0.0,3,75000.0
+tax_parameters,note,text,Free-text note.,0,0.0,3,Standard deduction on salary income (sample)
+statutory_rates,parameter,text,Name of the parameter.,0,0.0,11,PF_EMPLOYEE_RATE
+statutory_rates,value,decimal,Parameter value.,0,0.0,10,12.0
+statutory_rates,unit,text,Unit of measure.,0,0.0,5,percent of basic
+statutory_rates,note,text,Free-text note.,0,0.0,11,Employee PF contribution rate (SAMPLE values for training)
+statutory_rates,effective_from,date,First day the row applies.,0,0.0,1,2025-04-01
+employees,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+employees,first_name,text,Fictional first name.,0,0.0,128,Ganesh
+employees,last_name,text,Fictional surname.,0,0.0,91,Murthy
+employees,full_name,text,First and last name (fictional).,0,0.0,719,Ganesh Murthy
+employees,work_email,text,Fictional work e-mail on the example domain znova-demo.example.,0,0.0,745,ganesh.murthy@znova-demo.example
+employees,gender,text,"Self-declared gender: Male, Female or Other. Use only for fairness testing, never as a model input.",0,0.0,3,Male
+employees,date_of_birth,date,Date of birth (fictional).,0,0.0,710,1989-10-08
+employees,hire_date,date,Date the employee joined.,0,0.0,650,2012-01-19
+employees,exit_date,date,Last working day; blank for active employees.,441,59.2,280,2020-01-24
+employees,employment_status,text,"Active, Resigned, Terminated or Contract Ended.",0,0.0,4,Resigned
+employees,employment_type,text,Permanent or Fixed-Term Contract. Contract staff have no PF/ESI.,0,0.0,2,Permanent
+employees,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D01
+employees,role_id,text,Job role code from the roles table.,0,0.0,58,R002
+employees,manager_id,text,Employee id of the reporting manager at that time.,1,0.1,117,EMP-0002
+employees,work_location,text,City of the office the employee is attached to.,0,0.0,9,Pune
+employees,work_mode,text,"Onsite, Hybrid or Remote.",0,0.0,3,Hybrid
+employees,highest_education,text,Highest qualification (may be blank).,0,0.0,28,B.E. Computer Science
+employees,prior_experience_years,decimal,Years of work experience before joining.,0,0.0,175,0.0
+employees,career_gap_months,integer,Months of career break before joining (0 if none). Linked to a planted pay bias; see the AI answer key.,0,0.0,8,0
+employees,commute_distance_km,decimal,Home-to-office distance in kilometres.,0,0.0,276,10.3
+employees,pf_applicable,text,Y if provident fund applies (permanent staff).,0,0.0,2,Y
+employees,esi_applicable,text,"Y if health insurance scheme (ESI) applies at current pay (monthly fixed gross at or below 21,000).",0,0.0,2,Y
+employees,notice_period_days,integer,"Contractual notice period (30, 60 or 90 days by level).",0,0.0,3,30
+employees,resignation_date,date,Date resignation was submitted (voluntary leavers only).,478,64.2,248,2019-12-25
+employees,exit_type,text,"Voluntary, Involuntary or Contract End (blank for active).",441,59.2,3,Voluntary
+employees,exit_reason,text,Reason recorded at exit. POST-OUTCOME information: leakage risk in the AI dataset.,441,59.2,11,Compensation
+employees,created_at,timestamp,Timestamp the record was created.,0,0.0,650,2012-01-12 00:00:00
+users,user_id,text,Login account id.,0,0.0,745,U-0001
+users,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+users,username,text,Login name (the work e-mail).,0,0.0,745,ganesh.murthy@znova-demo.example
+users,role,text,"Access role: ADMIN, HR or EMPLOYEE.",0,0.0,3,EMPLOYEE
+users,is_active,text,Y if the record is active.,0,0.0,2,N
+users,mfa_enabled,text,Y if multi-factor authentication is on.,0,0.0,2,N
+users,last_login_at,timestamp,Timestamp of last login.,0,0.0,534,2020-01-23 00:00:00
+users,created_at,timestamp,Timestamp the record was created.,0,0.0,650,2012-01-19 00:00:00
+users,password_policy_note,text,Reminder that no passwords or hashes are stored in this file.,0,0.0,1,hash generated by seed script (bcrypt); no passwords stored 
+employee_assignments,assignment_id,text,Id of one assignment segment (department/role/manager period).,0,0.0,1606,AS-00001
+employee_assignments,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+employee_assignments,effective_from,date,First day the row applies.,0,0.0,1083,2012-01-19
+employee_assignments,effective_to,date,Last day the row applies; blank means still current.,441,27.5,779,2012-05-02
+employee_assignments,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D01
+employee_assignments,role_id,text,Job role code from the roles table.,0,0.0,58,R002
+employee_assignments,job_level,integer,"Level 1 to 7 (1 Associate ... 6 Head, 7 CEO).",0,0.0,7,1
+employee_assignments,manager_id,text,Employee id of the reporting manager at that time.,1,0.1,143,EMP-0051
+employee_assignments,change_reason,text,"Why the assignment changed: Joining, Promotion, Transfer, Manager Change or Manager Exit / Reassignment.",0,0.0,5,Joining
+salary_revisions,revision_id,text,Id of a salary revision.,0,0.0,2459,SR-00001
+salary_revisions,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+salary_revisions,effective_from,date,First day the row applies.,0,0.0,666,2012-01-19
+salary_revisions,revision_reason,text,"Joining, Annual Increment, Promotion or Market Correction.",0,0.0,4,Joining
+salary_revisions,previous_annual_fixed,decimal,Annual fixed pay before the revision (INR).,745,30.3,1702,1312440.0
+salary_revisions,new_annual_fixed,integer,Annual fixed pay after the revision (INR).,0,0.0,2434,240480
+salary_revisions,pct_change,decimal,Percentage increase at the revision.,745,30.3,232,3.3
+salary_revisions,role_id_after,text,Role the employee holds after the revision.,0,0.0,58,R002
+salary_revisions,approved_by,text,Id of the person who approved.,745,30.3,20,U-0443
+salary_revisions,created_at,timestamp,Timestamp the record was created.,0,0.0,767,2012-01-07 00:00:00
+salary_structures,structure_id,text,Id of one salary component row.,0,0.0,12295,SS-000001
+salary_structures,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+salary_structures,component_id,text,"Pay component code: BASIC, HRA, CONV, MED, SPECIAL, OT, VAR, PF_EE, ESI_EE, PT, TDS, LOAN, PF_ER, ESI_ER.",0,0.0,5,BASIC
+salary_structures,component_name,text,Pay component name.,0,0.0,5,Basic Salary
+salary_structures,component_type,text,"EARNING, DEDUCTION or EMPLOYER_CONTRIBUTION.",0,0.0,1,EARNING
+salary_structures,monthly_amount,integer,Monthly amount of the component (INR).,0,0.0,6820,8016
+salary_structures,effective_from,date,First day the row applies.,0,0.0,666,2012-01-19
+salary_structures,effective_to,date,Last day the row applies; blank means still current.,2205,17.9,296,2020-01-24
+salary_structures,revision_id,text,Id of a salary revision.,0,0.0,2459,SR-00001
+performance_reviews,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,562,EMP-0002
+performance_reviews,review_year,integer,Appraisal year (cycle effective 1 April of that year).,0,0.0,7,2020
+performance_reviews,appraisal_date,date,Date the appraisal rating took effect.,0,0.0,7,2020-04-01
+performance_reviews,performance_rating,integer,Rating from 1 (Needs Improvement) to 5 (Outstanding).,0,0.0,5,4
+performance_reviews,rating_label,text,Text label for the rating.,0,0.0,5,Exceeds Expectations
+attendance,attendance_id,text,Unique attendance row id.,0,0.0,150155,ATT-0000001
+attendance,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,528,EMP-0002
+attendance,attendance_date,date,Working day the row refers to.,0,0.0,374,2025-04-01
+attendance,weekday,text,Day of week (three letters).,0,0.0,5,Tue
+attendance,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,6,WFH
+attendance,leave_type_code,text,"Leave type: CL, SL, EL, ML, BL or LOP.",141139,94.0,6,LOP
+attendance,check_in,text,"Check-in time (HH:MM, 24-hour).",8444,5.6,219,08:51
+attendance,check_out,text,Check-out time (HH:MM); blank when missed.,8642,5.8,571,17:51
+attendance,hours_worked,decimal,Working hours (excluding 1-hour break); blank when check-out is missing.,198,0.1,32,8.0
+attendance,overtime_hours,decimal,Overtime hours recorded (only overtime-eligible roles).,0,0.0,7,0.0
+attendance,late_flag,text,Y if check-in was after 09:45.,0,0.0,2,N
+attendance,source,text,"Where the row came from (Biometric, Web Check-in, HR System, or dataset origin).",0,0.0,3,Web Check-in
+attendance,data_quality_flag,text,MISSING_CHECKOUT when the punch-out was not captured (realistic dirt).,149957,99.9,1,MISSING_CHECKOUT
+attendance,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D08
+leave_requests,leave_request_id,text,Leave application id.,0,0.0,3441,LR-000137
+leave_requests,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,477,EMP-0034
+leave_requests,leave_type_code,text,"Leave type: CL, SL, EL, ML, BL or LOP.",0,0.0,6,CL
+leave_requests,start_date,date,First day of leave.,0,0.0,374,2025-04-01
+leave_requests,end_date,date,Last day of leave.,0,0.0,376,2025-04-07
+leave_requests,days,decimal,Working days of leave.,0,0.0,9,5.0
+leave_requests,reason,text,Reason given by the employee.,0,0.0,11,Child school event
+leave_requests,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,4,Approved
+leave_requests,applied_on,date,Date the leave was applied.,0,0.0,552,2025-03-29
+leave_requests,approver_id,text,Employee id of the approver (manager at that time).,12,0.3,98,EMP-0325
+leave_requests,decided_on,date,Date the manager decided.,34,1.0,553,2025-04-01
+leave_balances,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,441,EMP-0002
+leave_balances,as_of_date,date,Date the snapshot or prediction refers to.,0,0.0,1,2026-09-30
+leave_balances,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,1,FY2026-27
+leave_balances,cl_entitlement,decimal,Casual leave available in the financial year.,0,0.0,6,12.0
+leave_balances,cl_used,decimal,Casual leave days used (approved or pending).,0,0.0,12,0.0
+leave_balances,cl_balance,decimal,Casual leave days remaining.,0,0.0,12,12.0
+leave_balances,sl_entitlement,decimal,Sick leave available in the financial year.,0,0.0,6,12.0
+leave_balances,sl_used,decimal,Sick leave days used.,0,0.0,12,0.0
+leave_balances,sl_balance,decimal,Sick leave days remaining.,0,0.0,12,12.0
+leave_balances,el_used_fy,decimal,Earned leave days used in the financial year.,0,0.0,15,1.0
+leave_balances,el_balance,decimal,Earned leave days remaining (accrues 1.25 a month).,0,0.0,89,30.0
+leave_balances,pending_days,decimal,Leave days waiting for approval.,0,0.0,7,0.0
+payroll_runs,run_id,text,Payroll run id (PR-YYYY-MM).,0,0.0,18,PR-2025-04
+payroll_runs,period_start,date,First day of the pay period.,0,0.0,18,2025-04-01
+payroll_runs,period_end,date,Last day of the pay period.,0,0.0,18,2025-04-30
+payroll_runs,pay_date,date,Date salaries were paid; blank if payment pending.,1,5.6,17,2025-05-01
+payroll_runs,employees_paid,integer,Number of employees in the run.,0,0.0,13,386
+payroll_runs,total_gross,decimal,Total gross pay of the run.,0,0.0,18,52740110.43
+payroll_runs,total_deductions,decimal,Sum of all employee deductions.,0,0.0,18,6704999.27
+payroll_runs,total_net,decimal,Total net pay of the run.,0,0.0,18,46035111.16
+payroll_runs,total_employer_contributions,decimal,Employer PF plus employer ESI.,0,0.0,18,623281.65
+payroll_runs,total_employer_cost,decimal,Gross pay plus employer contributions.,0,0.0,18,53363392.08
+payroll_runs,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,2,PAID
+payroll_runs,run_by,text,User who ran payroll.,0,0.0,11,U-0237
+payroll_runs,approved_by,text,Id of the person who approved.,0,0.0,1,U-0099
+payroll_runs,created_at,timestamp,Timestamp the record was created.,0,0.0,18,2025-04-29 10:00:00
+payroll_runs,approved_at,timestamp,Timestamp of approval.,0,0.0,18,2025-04-30 14:00:00
+payroll_runs,idempotency_key,text,Unique key that stops the same month being run twice.,0,0.0,18,payroll:2025-04:ZNT
+payroll_runs,journal_entry_id,text,Ledger entry created by this payroll run.,0,0.0,18,JE-000105
+payroll_runs,calculation_version,text,Version of the payroll rules used.,0,0.0,1,payroll-engine-1.0
+payroll_items,payroll_item_id,text,Unique id of one employee-month pay calculation.,0,0.0,7340,PI-000001
+payroll_items,run_id,text,Payroll run id (PR-YYYY-MM).,0,0.0,18,PR-2025-04
+payroll_items,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,528,EMP-0002
+payroll_items,period_start,date,First day of the pay period.,0,0.0,18,2025-04-01
+payroll_items,period_end,date,Last day of the pay period.,0,0.0,18,2025-04-30
+payroll_items,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D08
+payroll_items,role_id,text,Job role code from the roles table.,0,0.0,57,R047
+payroll_items,calendar_days,integer,Calendar days in the month.,0,0.0,3,30
+payroll_items,days_employed,integer,Days employed in the month (partial months for joiners and leavers).,0,0.0,31,30
+payroll_items,lop_days,decimal,"Loss-of-pay days (unpaid absence, unpaid leave, half day = 0.5).",0,0.0,14,0.0
+payroll_items,payable_days,decimal,Days paid = days employed minus loss-of-pay days.,0,0.0,44,30.0
+payroll_items,monthly_fixed_gross,integer,Full-month fixed gross entitlement (INR).,0,0.0,886,144460
+payroll_items,basic,decimal,Basic salary earned in the month.,0,0.0,2338,57784.0
+payroll_items,hra,decimal,House rent allowance earned.,0,0.0,2324,28892.0
+payroll_items,conveyance,decimal,Conveyance allowance earned.,0,0.0,89,1600.0
+payroll_items,medical,decimal,Medical allowance earned.,0,0.0,86,1250.0
+payroll_items,special_allowance,decimal,Special allowance earned (balancing component).,0,0.0,2340,54934.0
+payroll_items,earned_fixed_pay,decimal,Sum of fixed components after loss-of-pay proration.,0,0.0,2346,144460.0
+payroll_items,overtime_hours_paid,decimal,Overtime hours paid (capped at 50).,0,0.0,55,0.0
+payroll_items,overtime_pay,decimal,Overtime pay (2x hourly rate).,0,0.0,901,0.0
+payroll_items,variable_pay,decimal,"Bonus, incentive or award paid in the month.",0,0.0,758,34670.4
+payroll_items,variable_pay_type,text,"Performance Bonus, Sales Incentive, Festival Bonus or Spot Award.",6188,84.3,4,Performance Bonus
+payroll_items,gross_pay,decimal,Earned fixed pay + overtime + variable pay.,0,0.0,3845,179130.4
+payroll_items,pf_employee,decimal,Employee provident fund deduction.,0,0.0,420,1800.0
+payroll_items,esi_employee,decimal,Employee ESI deduction.,0,0.0,93,0.0
+payroll_items,professional_tax,decimal,Professional tax deduction.,0,0.0,2,200.0
+payroll_items,tds,decimal,Income tax deducted at source.,0,0.0,1247,18625.79
+payroll_items,other_deductions,decimal,Other deductions (loan recovery).,0,0.0,8,0.0
+payroll_items,total_deductions,decimal,Sum of all employee deductions.,0,0.0,1744,20625.79
+payroll_items,net_pay,decimal,Take-home pay = gross pay minus total deductions.,0,0.0,3861,158504.61
+payroll_items,pf_employer,decimal,Employer provident fund contribution.,0,0.0,420,1800.0
+payroll_items,esi_employer,decimal,Employer ESI contribution.,0,0.0,93,0.0
+payroll_items,employer_cost,decimal,Full cost to company = gross pay + employer PF + employer ESI.,0,0.0,3845,180930.4
+payroll_items,calculation_note,text,How loss of pay and overtime were calculated.,0,0.0,1,LOP on calendar-day basis; OT 2x hourly (cap 50h)
+chart_of_accounts,account_code,text,Ledger account code.,0,0.0,47,1000
+chart_of_accounts,account_name,text,Ledger account name.,0,0.0,47,Assets
+chart_of_accounts,account_type,text,"ASSET, LIABILITY, EQUITY, INCOME or EXPENSE.",0,0.0,5,ASSET
+chart_of_accounts,normal_balance,text,Side on which the account normally increases (DEBIT or CREDIT).,0,0.0,2,DEBIT
+chart_of_accounts,parent_code,text,Parent account group.,5,10.6,5,1000
+chart_of_accounts,is_group,text,"Y if the row is a heading, not a postable account.",0,0.0,2,Y
+chart_of_accounts,statement,text,Balance Sheet or Profit & Loss.,0,0.0,2,Balance Sheet
+chart_of_accounts,is_active,text,Y if the record is active.,0,0.0,1,Y
+journal_entries,entry_id,text,Journal entry id (JE-000001 ...).,0,0.0,2524,JE-000001
+journal_entries,entry_date,date,Posting date.,0,0.0,398,2025-04-01
+journal_entries,posting_period,text,Accounting month (YYYY-MM).,0,0.0,18,2025-04
+journal_entries,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,2,2025-26
+journal_entries,description,text,Description.,0,0.0,2492,Opening balances as at 1 April 2025
+journal_entries,source_type,text,"What created the entry: PAYROLL_RUN, SALARY_PAYMENT, STATUTORY_REMITTANCE, INVOICE, INVOICE_PAYMENT, EXPENSE, EXPENSE_PAYMENT, GST_SETTLEMENT, DEPRECIATION, BANK_CHARGES, INTEREST, MANUAL or OPENING.",0,0.0,13,OPENING
+journal_entries,source_id,text,Id of the source document.,0,0.0,1978,OB-2025
+journal_entries,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,1,POSTED
+journal_entries,total_debit,decimal,Total debits of the entry.,0,0.0,1423,183710344.0
+journal_entries,total_credit,decimal,Total credits of the entry (always equals total debits).,0,0.0,1423,183710344.0
+journal_entries,reversal_of_source_id,text,Id of the manual entry that this entry reverses.,2523,100.0,1,MJ-0001
+journal_entries,created_by,text,User who created the record.,0,0.0,28,U-0099
+journal_entries,created_at,timestamp,Timestamp the record was created.,0,0.0,2507,2025-04-01 13:03:00
+journal_lines,line_id,text,Journal line id.,0,0.0,6784,JL-000001
+journal_lines,entry_id,text,Journal entry id (JE-000001 ...).,0,0.0,2524,JE-000001
+journal_lines,line_no,integer,Line number within the entry.,0,0.0,44,1
+journal_lines,account_code,text,Ledger account code.,0,0.0,40,1001
+journal_lines,debit,decimal,Debit amount (INR).,0,0.0,2877,20400000.0
+journal_lines,credit,decimal,Credit amount (INR).,0,0.0,2525,0.0
+journal_lines,cost_center_department_id,text,Department the amount is charged to.,5688,83.8,11,D09
+journal_lines,line_description,text,Description of the line.,0,0.0,3392,Opening bank balance
+clients,client_id,text,Client code (CL-001 ...).,0,0.0,28,CL-001
+clients,client_name,text,Fictional client company.,0,0.0,28,Meridian Retail Pvt Ltd
+clients,industry,text,Industry of the client.,0,0.0,20,Retail
+clients,city,text,City.,0,0.0,23,Chennai
+clients,state_or_region,text,State or region.,0,0.0,18,Tamil Nadu
+clients,country,text,Country code.,0,0.0,11,IN
+clients,client_type,text,DOMESTIC (18% GST) or EXPORT (zero-rated).,0,0.0,2,DOMESTIC
+clients,gst_registration,text,Fictional GST registration label (not a real number).,11,39.3,17,DEMO-GSTIN-0001
+clients,payment_terms_days,integer,Agreed payment terms in days.,0,0.0,3,30
+clients,payment_behaviour,text,"Typical payer type: prompt, normal, slow or risky.",0,0.0,4,normal
+clients,primary_service_line,text,Main revenue account for the client.,0,0.0,4,4001
+clients,contact_email,text,Fictional accounts e-mail.,0,0.0,28,accounts@meridian-demo.example
+clients,onboarded_on,date,Date the client was onboarded.,0,0.0,28,2020-02-06
+clients,is_active,text,Y if the record is active.,0,0.0,1,Y
+invoices,invoice_id,text,Invoice id (INV-00001 ...).,0,0.0,743,INV-00001
+invoices,invoice_number,text,Invoice number shown to the client (INV/FY/0001).,0,0.0,743,INV/2024-25/0001
+invoices,client_id,text,Client code (CL-001 ...).,0,0.0,28,CL-008
+invoices,invoice_date,date,Date the invoice was issued.,0,0.0,365,2025-02-03
+invoices,due_date,date,Payment due date.,0,0.0,412,2025-03-20
+invoices,service_line_account,text,Revenue account the invoice is booked to.,0,0.0,4,4004
+invoices,currency,text,Currency (all amounts are INR).,0,0.0,1,INR
+invoices,subtotal,decimal,Invoice amount before GST.,0,0.0,730,1583500.0
+invoices,gst_rate_percent,decimal,"GST rate (18 for domestic, 0 for export).",0,0.0,2,18.0
+invoices,gst_amount,decimal,GST amount.,0,0.0,608,285030.0
+invoices,total_amount,decimal,Invoice total including GST (or expense total including GST).,0,0.0,734,1868530.0
+invoices,amount_paid,decimal,Total received against the invoice.,0,0.0,674,1868530.0
+invoices,balance_due,decimal,Amount still unpaid.,0,0.0,64,0.0
+invoices,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,6,PAID
+invoices,last_payment_date,date,Date of the last receipt.,66,8.9,300,2025-04-01
+invoices,po_number,text,Client purchase order number (fictional).,225,30.3,518,PO-825451
+invoices,carried_in_from_prior_period,text,Y if invoiced before 1 April 2025 and still open on that date.,0,0.0,2,Y
+invoices,created_by,text,User who created the record.,0,0.0,17,U-0731
+invoices,created_at,timestamp,Timestamp the record was created.,0,0.0,737,2025-02-03 11:13:00
+invoices,ledger_entry_id,text,Journal entry created for this document.,56,7.5,687,JE-000007
+invoice_items,invoice_item_id,text,Invoice line id.,0,0.0,1542,II-000001
+invoice_items,invoice_id,text,Invoice id (INV-00001 ...).,0,0.0,743,INV-00001
+invoice_items,line_no,integer,Line number within the entry.,0,0.0,4,1
+invoice_items,description,text,Description.,0,0.0,16,Annual maintenance contract
+invoice_items,quantity,decimal,"Quantity (hours, units or 1).",0,0.0,6,1.0
+invoice_items,unit_price,decimal,Price per unit.,0,0.0,1519,1583500.0
+invoice_items,amount,decimal,Amount (INR).,0,0.0,1478,1583500.0
+invoice_items,revenue_account,text,Revenue account for the line.,0,0.0,4,4004
+invoice_payments,payment_id,text,Receipt id.,0,0.0,709,PAY-00001
+invoice_payments,invoice_id,text,Invoice id (INV-00001 ...).,0,0.0,677,INV-00001
+invoice_payments,payment_date,date,Date the payment was received.,0,0.0,304,2025-04-01
+invoice_payments,amount,decimal,Amount (INR).,0,0.0,705,1868530.0
+invoice_payments,payment_mode,text,"NEFT, RTGS, Wire Transfer, UPI Business.",0,0.0,4,NEFT
+invoice_payments,reference_no,text,Bank reference (fictional).,0,0.0,709,UTR3308846165
+invoice_payments,received_by,text,User who recorded the receipt.,0,0.0,17,U-0097
+invoice_payments,ledger_entry_id,text,Journal entry created for this document.,0,0.0,709,JE-000012
+vendors,vendor_id,text,Vendor code (V-001 ...).,0,0.0,30,V-001
+vendors,vendor_name,text,Fictional vendor.,0,0.0,30,Skyline Realty Holdings
+vendors,primary_expense_account,text,Main expense account of the vendor.,0,0.0,12,5101
+vendors,payment_terms_days,integer,Agreed payment terms in days.,0,0.0,4,30
+vendors,city,text,City.,0,0.0,6,Mumbai
+vendors,gst_registration,text,Fictional GST registration label (not a real number).,0,0.0,30,DEMO-VGSTIN-0001
+vendors,is_active,text,Y if the record is active.,0,0.0,1,Y
+expenses,expense_id,text,Expense bill id.,0,0.0,501,EXP-00001
+expenses,expense_date,date,Bill date.,0,0.0,272,2025-04-01
+expenses,category_account,text,Expense account.,0,0.0,12,5101
+expenses,vendor_id,text,Vendor code (V-001 ...).,0,0.0,30,V-002
+expenses,bill_reference,text,Vendor bill reference.,0,0.0,501,BILL-2504-9791
+expenses,description,text,Description.,0,0.0,166,Monthly office rent
+expenses,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,9,D09
+expenses,amount_excl_gst,decimal,Amount before GST.,0,0.0,499,70650.0
+expenses,gst_rate_percent,decimal,"GST rate (18 for domestic, 0 for export).",0,0.0,3,18.0
+expenses,gst_amount,decimal,GST amount.,0,0.0,501,12717.0
+expenses,total_amount,decimal,Invoice total including GST (or expense total including GST).,0,0.0,501,83367.0
+expenses,due_date,date,Payment due date.,0,0.0,305,2025-04-16
+expenses,paid_date,date,Date the bill was paid; blank if unpaid.,23,4.6,248,2025-04-10
+expenses,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,2,PAID
+expenses,payment_mode,text,"NEFT, RTGS, Wire Transfer, UPI Business.",23,4.6,1,NEFT
+expenses,submitted_by,text,Employee who submitted the bill.,0,0.0,196,EMP-0148
+expenses,approved_by,text,Id of the person who approved.,0,0.0,9,EMP-0121
+expenses,ledger_entry_id,text,Journal entry created for this document.,0,0.0,501,JE-000002
+expenses,payment_ledger_entry_id,text,Journal entry for the vendor payment.,23,4.6,478,JE-000044

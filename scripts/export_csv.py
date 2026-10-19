@@ -6,6 +6,7 @@ Usage:
 
 import csv
 from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
 import sys
 
@@ -17,7 +18,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app.db.session import get_engine  # noqa: E402
-from app.models import Attendance, Department, Employee, Role, Salary  # noqa: E402
+from app.models import (  # noqa: E402
+    Attendance,
+    Department,
+    Employee,
+    EmployeeAssignment,
+    Role,
+    Salary,
+    SalaryComponent,
+    SalaryRevision,
+    SalaryStructure,
+)
 
 EXPORTS_DIR = ROOT / "exports"
 
@@ -27,6 +38,8 @@ def _clean_val(val):
         return ""
     if isinstance(val, (datetime, date)):
         return val.isoformat()
+    if isinstance(val, Decimal):
+        return str(val)
     return str(val)
 
 
@@ -152,13 +165,79 @@ def _do_export(session: Session, target_dir: Path = EXPORTS_DIR) -> dict[str, in
         target_dir=target_dir,
     )
 
+    # 6. Employee Assignments
+    results["employee_assignments"] = export_table(
+        session,
+        EmployeeAssignment,
+        "employee_assignments.csv",
+        [
+            "assignment_id",
+            "employee_id",
+            "effective_from",
+            "effective_to",
+            "department_id",
+            "role_id",
+            "job_level",
+            "manager_id",
+            "change_reason",
+        ],
+        target_dir=target_dir,
+    )
+
+    # 7. Salary Components
+    results["salary_components"] = export_table(
+        session,
+        SalaryComponent,
+        "salary_components.csv",
+        ["component_id", "component_name", "component_type", "taxable", "calculation_rule", "is_fixed"],
+        target_dir=target_dir,
+    )
+
+    # 8. Salary Structures
+    results["salary_structures"] = export_table(
+        session,
+        SalaryStructure,
+        "salary_structures.csv",
+        [
+            "structure_id",
+            "employee_id",
+            "component_id",
+            "component_name",
+            "component_type",
+            "monthly_amount",
+            "effective_from",
+            "effective_to",
+            "revision_id",
+        ],
+        target_dir=target_dir,
+    )
+
+    # 9. Salary Revisions
+    results["salary_revisions"] = export_table(
+        session,
+        SalaryRevision,
+        "salary_revisions.csv",
+        [
+            "revision_id",
+            "employee_id",
+            "effective_from",
+            "revision_reason",
+            "previous_annual_fixed",
+            "new_annual_fixed",
+            "pct_change",
+            "role_id_after",
+            "approved_by",
+        ],
+        target_dir=target_dir,
+    )
+
     return results
 
 
 def export_all_to_csv(
     session: Session | None = None, target_dir: Path | None = None
 ) -> dict[str, int]:
-    """Export employees, salaries, attendance, departments, and roles to CSV."""
+    """Export database tables to CSV."""
     dst = target_dir or EXPORTS_DIR
     if session is not None:
         return _do_export(session, target_dir=dst)
@@ -169,4 +248,3 @@ def export_all_to_csv(
 
 if __name__ == "__main__":
     export_all_to_csv()
-

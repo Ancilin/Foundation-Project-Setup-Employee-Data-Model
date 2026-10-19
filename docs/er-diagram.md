@@ -1,15 +1,18 @@
-# ER Diagram – Employee, Department & Role data model
+# ER Diagram – Employee, Department, Role & Salary Data Model
 
-Source of truth: [`app/models/`](../app/models) and migration
-[`0001_create_employee_tables.py`](../migrations/versions/0001_create_employee_tables.py).
-Column names follow the `01_LedgerForge_Python_Master_Dataset` workbook (`employees`, `departments`, `roles` sheets).
+Source of truth: [`app/models/`](../app/models) and migrations.
+Matches the official LedgerForge dataset schema (`departments`, `roles`, `employees`, `employee_assignments`, `salary_components`, `salary_structures`, `salary_revisions`).
 
 ```mermaid
 erDiagram
     DEPARTMENTS ||--o{ ROLES : "defines"
-    DEPARTMENTS ||--o{ EMPLOYEES : "has"
-    ROLES ||--o{ EMPLOYEES : "held by"
+    DEPARTMENTS ||--o{ EMPLOYEES : "has current"
+    ROLES ||--o{ EMPLOYEES : "held currently"
     EMPLOYEES |o--o{ EMPLOYEES : "manages (manager_id)"
+    EMPLOYEES ||--o{ EMPLOYEE_ASSIGNMENTS : "has history"
+    EMPLOYEES ||--o{ SALARY_STRUCTURES : "has components"
+    EMPLOYEES ||--o{ SALARY_REVISIONS : "has revisions"
+    SALARY_COMPONENTS ||--o{ SALARY_STRUCTURES : "categorizes"
 
     DEPARTMENTS {
         string department_id PK "D00..D10"
@@ -56,6 +59,51 @@ erDiagram
         timestamptz created_at
         timestamptz updated_at
     }
+
+    EMPLOYEE_ASSIGNMENTS {
+        string assignment_id PK "AS-00001.."
+        string employee_id FK
+        date effective_from
+        date effective_to "nullable"
+        string department_id FK
+        string role_id FK
+        string job_level
+        string manager_id "nullable"
+        string change_reason
+    }
+
+    SALARY_COMPONENTS {
+        string component_id PK "BASIC, HRA, etc."
+        string component_name
+        string component_type "EARNING or DEDUCTION"
+        string taxable "Y/N"
+        string calculation_rule
+        string is_fixed "Y/N"
+    }
+
+    SALARY_STRUCTURES {
+        string structure_id PK "SS-000001.."
+        string employee_id FK
+        string component_id FK
+        string component_name
+        string component_type
+        numeric monthly_amount "Decimal(12,2)"
+        date effective_from
+        date effective_to "nullable"
+        string revision_id "nullable"
+    }
+
+    SALARY_REVISIONS {
+        string revision_id PK "SR-00001.."
+        string employee_id FK
+        date effective_from
+        string revision_reason
+        numeric previous_annual_fixed "Decimal(14,2), nullable"
+        numeric new_annual_fixed "Decimal(14,2)"
+        numeric pct_change "Decimal(6,2), nullable"
+        string role_id_after "nullable"
+        string approved_by "nullable"
+    }
 ```
 
 ## Relationships
@@ -66,9 +114,33 @@ erDiagram
 | department → employees | one-to-many | blocked while employees exist |
 | role → employees | one-to-many | blocked while employees hold it |
 | employee → manager (employee) | many-to-one, **self-reference** | blocked while the manager has reports |
+| employee → assignments | one-to-many | cascades on employee deletion |
+| employee → salary structures | one-to-many | cascades on employee deletion |
+| employee → salary revisions | one-to-many | cascades on employee deletion |
 
-Nothing cascades: rows are never hard-deleted in normal use. Set `is_active = false` instead (soft delete),
-so payroll, leave and reports can still resolve old IDs.
+---
+
+## Which Columns Can Be Empty and Why (Task 2 Requirement)
+
+1. **`employees.exit_date`**: NULL for active employees who are currently employed; populated only when an employee resigns or is terminated.
+2. **`employees.manager_id`**: NULL strictly for the company's executive head (e.g., CEO/Managing Director) who sits at the top of the reporting hierarchy and has no superior.
+3. **`effective_to` (in assignments & salary structures)**: NULL for current, active records that remain in force today; populated with an end date only when superseded by a new revision or assignment.
+
+---
+
+## Temporal Query: "Who was in department D05 on 30 June 2025?"
+
+To determine historical assignment at a specific point in time without relying solely on current mutable columns, query `employee_assignments`:
+
+```sql
+SELECT employee_id, role_id, manager_id, effective_from, effective_to
+FROM employee_assignments
+WHERE department_id = 'D05'
+  AND effective_from <= '2025-06-30'
+  AND (effective_to IS NULL OR effective_to >= '2025-06-30');
+```
+
+---
 
 ## Constraints
 
@@ -76,28 +148,24 @@ so payroll, leave and reports can still resolve old IDs.
 |---|---|---|
 | employees | `UNIQUE(work_email)` | one login/identity per person |
 | employees | `CHECK exit_date IS NULL OR exit_date >= hire_date` | no leaving before joining |
-| employees | `CHECK hire_date > date_of_birth` | sanity |
+| employees | `CHECK hire_date > date_of_birth` | sanity: employment cannot precede birth |
 | employees | `CHECK manager_id IS NULL OR manager_id <> employee_id` | nobody manages themselves |
-| employees | `CHECK` on gender / status / type / work mode | allowed values enforced by the DB |
+| employees | `CHECK` on gender / status / type / work mode | allowed values enforced at database level |
 | roles | `UNIQUE(department_id, role_title)` | no duplicate titles within a department |
-| roles | `CHECK level BETWEEN 1 AND 7`, band order | matches dataset rules |
-| departments | `UNIQUE(department_name)`, `UNIQUE(cost_center)` | |
+| roles | `CHECK level BETWEEN 1 AND 7`, band order | ensures valid compensation ladders |
+| departments | `UNIQUE(department_name)`, `UNIQUE(cost_center)` | unique enterprise identifiers |
 
-## Indexes (for searching)
+## Indexes (for Searching & Fast Joins)
 
 | Index | Columns | Serves |
 |---|---|---|
-| `ix_employees_name` | `last_name, first_name` | name search / sorted lists |
+| `ix_employees_name` | `last_name, first_name` | name search / alphabetical directory |
 | `ix_employees_department_id` | `department_id` | "all employees in department X" |
 | `ix_employees_role_id` | `role_id` | "who holds role X" |
 | `ix_employees_manager_id` | `manager_id` | "show my team" (hierarchy lookups) |
 | `ix_employees_employment_status` | `employment_status` | active/leaver filters |
-| `ix_roles_department_id` | `department_id` | roles per department |
-| (automatic) | `work_email` unique index | login / duplicate check |
-
-## Known limits
-
-- Cycles longer than one step (A manages B, B manages A) are not blocked by the database; the
-  service layer in Task 3 must reject them when a manager is changed.
-- Only the *current* role/manager/department is stored. Dataset sheets such as `employee_assignments`
-  (history) are a later addition.
+| `ix_assignments_employee_id` | `employee_id` | historical career progression lookups |
+| `ix_assignments_effective_from` | `effective_from` | point-in-time organization audits |
+| `ix_structures_employee_id` | `employee_id` | salary component breakdown queries |
+| `ix_structures_effective_from` | `effective_from` | effective-dated compensation resolution |
+| `ix_revisions_employee_id` | `employee_id` | appraisal & raise tracking |
