@@ -3,7 +3,7 @@
 - **Candidate Name:** Ancillin P G
 - **Track:** Python Developer — WorkforceOS (Core Payroll, Accounting & Employee Data Engine)
 - **Phase:** Phase 1 (Foundation)
-- **Git Repository:** [Your GitHub Repository URL]
+- **Git Repository:** [https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model](https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model)
 - **Git Tag:** `phase-1` (and `handoff-day2`)
 
 ---
