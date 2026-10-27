@@ -16,6 +16,11 @@ class NotFoundError(AppException):
         super().__init__(message=message, error_code=error_code, status_code=404)
 
 
+class ForbiddenError(AppException):
+    def __init__(self, message: str, error_code: str = "FORBIDDEN"):
+        super().__init__(message=message, error_code=error_code, status_code=403)
+
+
 class ConflictError(AppException):
     def __init__(self, message: str, error_code: str = "CONFLICT"):
         super().__init__(message=message, error_code=error_code, status_code=409)

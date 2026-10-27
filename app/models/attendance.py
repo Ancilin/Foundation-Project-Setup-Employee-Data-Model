@@ -1,6 +1,7 @@
-"""Attendance model linked to employees."""
+"""Attendance model linked to employees (LF-06)."""
 
 from datetime import date
+from decimal import Decimal
 from typing import TYPE_CHECKING
 from sqlalchemy import CheckConstraint, Date, ForeignKey, Index, Numeric, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -10,7 +11,18 @@ from app.models.base import Base, TimestampMixin
 if TYPE_CHECKING:
     from app.models.employee import Employee
 
-ATTENDANCE_STATUSES = ("PRESENT", "ABSENT", "WFH", "HALF_DAY", "ON_LEAVE")
+ATTENDANCE_STATUSES = (
+    "PRESENT",
+    "ABSENT",
+    "WFH",
+    "HALF_DAY",
+    "ON_LEAVE",
+    "PAID_LEAVE",
+    "ABSENT_LOP",
+    "HALF_DAY_UNPAID",
+    "UNPAID_LEAVE",
+    "HALF_DAY_PAID",
+)
 
 
 class Attendance(TimestampMixin, Base):
@@ -26,15 +38,19 @@ class Attendance(TimestampMixin, Base):
     )
 
     attendance_id: Mapped[str] = mapped_column(String(32), primary_key=True)
-    employee_id: Mapped[str] = mapped_column(ForeignKey("employees.employee_id"))
+    employee_id: Mapped[str] = mapped_column(String(10), ForeignKey("employees.employee_id"))
     attendance_date: Mapped[date] = mapped_column(Date)
     weekday: Mapped[str] = mapped_column(String(10))
     status: Mapped[str] = mapped_column(String(20))
+    leave_type_code: Mapped[str | None] = mapped_column(String(10), nullable=True)
     check_in: Mapped[str | None] = mapped_column(String(10), nullable=True)
     check_out: Mapped[str | None] = mapped_column(String(10), nullable=True)
-    hours_worked: Mapped[float] = mapped_column(Numeric(4, 2), default=0.0)
-    overtime_hours: Mapped[float] = mapped_column(Numeric(4, 2), default=0.0)
-    late_flag: Mapped[str] = mapped_column(String(1), default="N")
+    hours_worked: Mapped[Decimal | None] = mapped_column(Numeric(4, 2), nullable=True)
+    overtime_hours: Mapped[Decimal] = mapped_column(Numeric(4, 2), default=Decimal("0.00"), server_default="0")
+    late_flag: Mapped[str] = mapped_column(String(1), default="N", server_default="N")
+    source: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    data_quality_flag: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    department_id: Mapped[str | None] = mapped_column(String(10), nullable=True)
 
     employee: Mapped["Employee"] = relationship(back_populates="attendance_records")
 

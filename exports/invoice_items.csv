@@ -1,0 +1,1543 @@
+invoice_item_id,invoice_id,line_no,description,quantity,unit_price,amount,revenue_account
+II-000001,INV-00001,1,Annual maintenance contract,1.00,1583500.00,1583500.00,4004
+II-000002,INV-00002,1,Digital transformation consulting,176.00,7409.66,1304100.00,4003
+II-000003,INV-00003,1,Platform subscription - annual licence (monthly billing),1.00,541400.00,541400.00,4002
+II-000004,INV-00003,2,Premium support add-on,1.00,536300.00,536300.00,4002
+II-000005,INV-00003,3,Managed SaaS hosting plan,1.00,857100.00,857100.00,4002
+II-000006,INV-00003,4,Platform subscription - annual licence (monthly billing),1.00,69100.00,69100.00,4002
+II-000007,INV-00004,1,Architecture review & roadmap,120.00,12715.83,1525900.00,4003
+II-000008,INV-00005,1,Annual maintenance contract,1.00,2342100.00,2342100.00,4004
+II-000009,INV-00006,1,Mobile app enhancement sprint,12.00,38841.67,466100.00,4001
+II-000010,INV-00006,2,Dedicated engineering pod,1.00,339800.00,339800.00,4001
+II-000011,INV-00006,3,Application development - time & material,176.00,2362.50,415800.00,4001
+II-000012,INV-00007,1,Annual maintenance contract,12.00,15008.33,180100.00,4004
+II-000013,INV-00007,2,Annual maintenance contract,120.00,1746.67,209600.00,4004
+II-000014,INV-00007,3,24x7 production support retainer,12.00,65616.67,787400.00,4004
+II-000015,INV-00008,1,Application development - time & material,176.00,494.89,87100.00,4001
+II-000016,INV-00008,2,QA & test automation services,80.00,29618.75,2369500.00,4001
+II-000017,INV-00008,3,Mobile app enhancement sprint,80.00,33028.75,2642300.00,4001
+II-000018,INV-00009,1,Platform subscription - annual licence (monthly billing),1.00,630500.00,630500.00,4002
+II-000019,INV-00009,2,Analytics module subscription,1.00,390900.00,390900.00,4002
+II-000020,INV-00010,1,Analytics module subscription,1.00,77100.00,77100.00,4002
+II-000021,INV-00010,2,Premium support add-on,1.00,61100.00,61100.00,4002
+II-000022,INV-00010,3,Managed SaaS hosting plan,1.00,338300.00,338300.00,4002
+II-000023,INV-00010,4,Platform subscription - annual licence (monthly billing),1.00,735200.00,735200.00,4002
+II-000024,INV-00011,1,Mobile app enhancement sprint,160.00,156.25,25000.00,4001
+II-000025,INV-00011,2,Dedicated engineering pod,80.00,10790.00,863200.00,4001
+II-000026,INV-00011,3,API integration work,160.00,4105.00,656800.00,4001
+II-000027,INV-00011,4,Application development - time & material,80.00,3406.25,272500.00,4001
+II-000028,INV-00012,1,Mobile app enhancement sprint,176.00,7048.86,1240600.00,4001
+II-000029,INV-00013,1,Dedicated engineering pod,1.00,1635600.00,1635600.00,4001
+II-000030,INV-00014,1,Digital transformation consulting,120.00,3676.67,441200.00,4003
+II-000031,INV-00014,2,Digital transformation consulting,120.00,16192.50,1943100.00,4003
+II-000032,INV-00015,1,Managed SaaS hosting plan,1.00,88600.00,88600.00,4002
+II-000033,INV-00015,2,Managed SaaS hosting plan,1.00,2278800.00,2278800.00,4002
+II-000034,INV-00015,3,Managed SaaS hosting plan,1.00,850800.00,850800.00,4002
+II-000035,INV-00015,4,Premium support add-on,1.00,150200.00,150200.00,4002
+II-000036,INV-00016,1,Mobile app enhancement sprint,160.00,2484.38,397500.00,4001
+II-000037,INV-00016,2,QA & test automation services,80.00,4447.50,355800.00,4001
+II-000038,INV-00016,3,QA & test automation services,160.00,256.88,41100.00,4001
+II-000039,INV-00017,1,Premium support add-on,1.00,106300.00,106300.00,4002
+II-000040,INV-00017,2,Platform subscription - annual licence (monthly billing),1.00,1227400.00,1227400.00,4002
+II-000041,INV-00017,3,Managed SaaS hosting plan,1.00,138800.00,138800.00,4002
+II-000042,INV-00018,1,Application development - time & material,160.00,19666.88,3146700.00,4001
+II-000043,INV-00018,2,Mobile app enhancement sprint,176.00,1860.23,327400.00,4001
+II-000044,INV-00018,3,Application development - time & material,160.00,4628.13,740500.00,4001
+II-000045,INV-00019,1,Analytics module subscription,1.00,1018400.00,1018400.00,4002
+II-000046,INV-00020,1,Data strategy workshop,120.00,580.00,69600.00,4003
+II-000047,INV-00020,2,Digital transformation consulting,1.00,100200.00,100200.00,4003
+II-000048,INV-00020,3,Digital transformation consulting,80.00,240.00,19200.00,4003
+II-000049,INV-00020,4,Digital transformation consulting,1.00,483600.00,483600.00,4003
+II-000050,INV-00021,1,Mobile app enhancement sprint,80.00,2143.75,171500.00,4001
+II-000051,INV-00021,2,Dedicated engineering pod,176.00,1254.55,220800.00,4001
+II-000052,INV-00022,1,QA & test automation services,120.00,342.50,41100.00,4001
+II-000053,INV-00022,2,QA & test automation services,1.00,413200.00,413200.00,4001
+II-000054,INV-00022,3,Dedicated engineering pod,176.00,1296.02,228100.00,4001
+II-000055,INV-00023,1,QA & test automation services,1.00,1768700.00,1768700.00,4001
+II-000056,INV-00024,1,API integration work,160.00,803.13,128500.00,4001
+II-000057,INV-00024,2,Dedicated engineering pod,1.00,79000.00,79000.00,4001
+II-000058,INV-00024,3,Dedicated engineering pod,176.00,3130.11,550900.00,4001
+II-000059,INV-00024,4,Application development - time & material,1.00,391300.00,391300.00,4001
+II-000060,INV-00025,1,QA & test automation services,120.00,6135.00,736200.00,4001
+II-000061,INV-00025,2,Mobile app enhancement sprint,1.00,543700.00,543700.00,4001
+II-000062,INV-00025,3,Mobile app enhancement sprint,1.00,679000.00,679000.00,4001
+II-000063,INV-00026,1,Dedicated engineering pod,176.00,11999.43,2111900.00,4001
+II-000064,INV-00027,1,Managed SaaS hosting plan,1.00,6094700.00,6094700.00,4002
+II-000065,INV-00027,2,Managed SaaS hosting plan,1.00,582200.00,582200.00,4002
+II-000066,INV-00027,3,Managed SaaS hosting plan,1.00,300000.00,300000.00,4002
+II-000067,INV-00028,1,Application development - time & material,120.00,11683.33,1402000.00,4001
+II-000068,INV-00028,2,Dedicated engineering pod,1.00,71800.00,71800.00,4001
+II-000069,INV-00028,3,Dedicated engineering pod,176.00,1497.16,263500.00,4001
+II-000070,INV-00029,1,QA & test automation services,120.00,11430.00,1371600.00,4001
+II-000071,INV-00030,1,Premium support add-on,1.00,1605800.00,1605800.00,4002
+II-000072,INV-00031,1,QA & test automation services,1.00,2835100.00,2835100.00,4001
+II-000073,INV-00032,1,Mobile app enhancement sprint,1.00,76600.00,76600.00,4001
+II-000074,INV-00032,2,API integration work,120.00,1110.83,133300.00,4001
+II-000075,INV-00032,3,Mobile app enhancement sprint,12.00,5841.67,70100.00,4001
+II-000076,INV-00033,1,Mobile app enhancement sprint,176.00,12479.55,2196400.00,4001
+II-000077,INV-00034,1,QA & test automation services,1.00,1575300.00,1575300.00,4001
+II-000078,INV-00035,1,Application development - time & material,160.00,126.88,20300.00,4001
+II-000079,INV-00035,2,API integration work,12.00,54666.67,656000.00,4001
+II-000080,INV-00035,3,Application development - time & material,160.00,8926.25,1428200.00,4001
+II-000081,INV-00036,1,24x7 production support retainer,1.00,521200.00,521200.00,4004
+II-000082,INV-00037,1,API integration work,160.00,29990.00,4798400.00,4001
+II-000083,INV-00038,1,Digital transformation consulting,1.00,5191900.00,5191900.00,4003
+II-000084,INV-00038,2,Process automation assessment,80.00,5427.50,434200.00,4003
+II-000085,INV-00038,3,Process automation assessment,1.00,161600.00,161600.00,4003
+II-000086,INV-00039,1,Analytics module subscription,1.00,982200.00,982200.00,4002
+II-000087,INV-00040,1,Annual maintenance contract,1.00,11300.00,11300.00,4004
+II-000088,INV-00040,2,Annual maintenance contract,176.00,5687.50,1001000.00,4004
+II-000089,INV-00040,3,Annual maintenance contract,176.00,7657.95,1347800.00,4004
+II-000090,INV-00040,4,Managed services - monitoring,12.00,105933.33,1271200.00,4004
+II-000091,INV-00041,1,Process automation assessment,1.00,604900.00,604900.00,4003
+II-000092,INV-00042,1,Managed SaaS hosting plan,1.00,182100.00,182100.00,4002
+II-000093,INV-00042,2,Premium support add-on,1.00,72200.00,72200.00,4002
+II-000094,INV-00042,3,Premium support add-on,1.00,611200.00,611200.00,4002
+II-000095,INV-00042,4,Premium support add-on,1.00,208000.00,208000.00,4002
+II-000096,INV-00043,1,Premium support add-on,1.00,754600.00,754600.00,4002
+II-000097,INV-00043,2,Analytics module subscription,1.00,67300.00,67300.00,4002
+II-000098,INV-00044,1,Application development - time & material,80.00,3200.00,256000.00,4001
+II-000099,INV-00044,2,QA & test automation services,1.00,241100.00,241100.00,4001
+II-000100,INV-00045,1,API integration work,80.00,32078.75,2566300.00,4001
+II-000101,INV-00046,1,Managed services - monitoring,176.00,3922.16,690300.00,4004
+II-000102,INV-00046,2,Annual maintenance contract,1.00,1787500.00,1787500.00,4004
+II-000103,INV-00047,1,QA & test automation services,160.00,14313.75,2290200.00,4001
+II-000104,INV-00048,1,QA & test automation services,120.00,14984.17,1798100.00,4001
+II-000105,INV-00049,1,Dedicated engineering pod,80.00,9578.75,766300.00,4001
+II-000106,INV-00049,2,Dedicated engineering pod,1.00,1274900.00,1274900.00,4001
+II-000107,INV-00050,1,Application development - time & material,1.00,856700.00,856700.00,4001
+II-000108,INV-00051,1,Mobile app enhancement sprint,1.00,173900.00,173900.00,4001
+II-000109,INV-00051,2,Application development - time & material,80.00,1371.25,109700.00,4001
+II-000110,INV-00051,3,Dedicated engineering pod,160.00,1547.50,247600.00,4001
+II-000111,INV-00051,4,QA & test automation services,120.00,1528.33,183400.00,4001
+II-000112,INV-00052,1,Annual maintenance contract,176.00,1231.25,216700.00,4004
+II-000113,INV-00052,2,Managed services - monitoring,80.00,14926.25,1194100.00,4004
+II-000114,INV-00053,1,API integration work,1.00,1555400.00,1555400.00,4001
+II-000115,INV-00054,1,Architecture review & roadmap,120.00,3461.67,415400.00,4003
+II-000116,INV-00054,2,Data strategy workshop,176.00,802.27,141200.00,4003
+II-000117,INV-00055,1,Application development - time & material,12.00,301108.33,3613300.00,4001
+II-000118,INV-00055,2,QA & test automation services,1.00,2361500.00,2361500.00,4001
+II-000119,INV-00056,1,Annual maintenance contract,80.00,560.00,44800.00,4004
+II-000120,INV-00056,2,24x7 production support retainer,1.00,83700.00,83700.00,4004
+II-000121,INV-00056,3,24x7 production support retainer,12.00,23983.33,287800.00,4004
+II-000122,INV-00056,4,Managed services - monitoring,176.00,484.09,85200.00,4004
+II-000123,INV-00057,1,Application development - time & material,160.00,4796.25,767400.00,4001
+II-000124,INV-00058,1,Data strategy workshop,120.00,9479.17,1137500.00,4003
+II-000125,INV-00058,2,Data strategy workshop,120.00,11358.33,1363000.00,4003
+II-000126,INV-00059,1,Mobile app enhancement sprint,160.00,18027.50,2884400.00,4001
+II-000127,INV-00060,1,Analytics module subscription,1.00,864400.00,864400.00,4002
+II-000128,INV-00060,2,Premium support add-on,1.00,343000.00,343000.00,4002
+II-000129,INV-00060,3,Analytics module subscription,1.00,1334400.00,1334400.00,4002
+II-000130,INV-00061,1,Architecture review & roadmap,80.00,19982.50,1598600.00,4003
+II-000131,INV-00062,1,Dedicated engineering pod,160.00,13693.75,2191000.00,4001
+II-000132,INV-00062,2,Application development - time & material,80.00,14345.00,1147600.00,4001
+II-000133,INV-00063,1,Analytics module subscription,1.00,68700.00,68700.00,4002
+II-000134,INV-00063,2,Platform subscription - annual licence (monthly billing),1.00,624200.00,624200.00,4002
+II-000135,INV-00064,1,Annual maintenance contract,160.00,3758.13,601300.00,4004
+II-000136,INV-00064,2,24x7 production support retainer,80.00,9127.50,730200.00,4004
+II-000137,INV-00064,3,Managed services - monitoring,80.00,3038.75,243100.00,4004
+II-000138,INV-00064,4,Annual maintenance contract,160.00,3265.00,522400.00,4004
+II-000139,INV-00065,1,Digital transformation consulting,1.00,477800.00,477800.00,4003
+II-000140,INV-00065,2,Digital transformation consulting,80.00,182.50,14600.00,4003
+II-000141,INV-00065,3,Process automation assessment,120.00,1317.50,158100.00,4003
+II-000142,INV-00066,1,QA & test automation services,1.00,1647400.00,1647400.00,4001
+II-000143,INV-00066,2,Application development - time & material,160.00,13842.50,2214800.00,4001
+II-000144,INV-00066,3,API integration work,12.00,47941.67,575300.00,4001
+II-000145,INV-00067,1,Application development - time & material,176.00,1928.98,339500.00,4001
+II-000146,INV-00067,2,API integration work,80.00,20812.50,1665000.00,4001
+II-000147,INV-00067,3,Application development - time & material,80.00,5743.75,459500.00,4001
+II-000148,INV-00068,1,Managed services - monitoring,160.00,5990.00,958400.00,4004
+II-000149,INV-00069,1,API integration work,120.00,5315.00,637800.00,4001
+II-000150,INV-00070,1,API integration work,176.00,5422.16,954300.00,4001
+II-000151,INV-00071,1,API integration work,176.00,18575.00,3269200.00,4001
+II-000152,INV-00072,1,Application development - time & material,80.00,1553.75,124300.00,4001
+II-000153,INV-00072,2,Dedicated engineering pod,1.00,221100.00,221100.00,4001
+II-000154,INV-00072,3,API integration work,120.00,3289.17,394700.00,4001
+II-000155,INV-00072,4,Mobile app enhancement sprint,1.00,73500.00,73500.00,4001
+II-000156,INV-00073,1,QA & test automation services,176.00,2069.32,364200.00,4001
+II-000157,INV-00073,2,QA & test automation services,160.00,10741.25,1718600.00,4001
+II-000158,INV-00074,1,Application development - time & material,1.00,184900.00,184900.00,4001
+II-000159,INV-00074,2,Dedicated engineering pod,176.00,898.30,158100.00,4001
+II-000160,INV-00074,3,Application development - time & material,1.00,17300.00,17300.00,4001
+II-000161,INV-00074,4,API integration work,1.00,457000.00,457000.00,4001
+II-000162,INV-00075,1,QA & test automation services,1.00,31300.00,31300.00,4001
+II-000163,INV-00075,2,Dedicated engineering pod,120.00,5762.50,691500.00,4001
+II-000164,INV-00076,1,Managed services - monitoring,120.00,6520.00,782400.00,4004
+II-000165,INV-00076,2,Managed services - monitoring,176.00,2189.20,385300.00,4004
+II-000166,INV-00077,1,QA & test automation services,120.00,4827.50,579300.00,4001
+II-000167,INV-00077,2,QA & test automation services,120.00,4654.17,558500.00,4001
+II-000168,INV-00078,1,API integration work,1.00,135300.00,135300.00,4001
+II-000169,INV-00078,2,Mobile app enhancement sprint,1.00,1899600.00,1899600.00,4001
+II-000170,INV-00079,1,Premium support add-on,1.00,1319300.00,1319300.00,4002
+II-000171,INV-00079,2,Analytics module subscription,1.00,38400.00,38400.00,4002
+II-000172,INV-00080,1,Mobile app enhancement sprint,120.00,7645.83,917500.00,4001
+II-000173,INV-00081,1,QA & test automation services,1.00,71400.00,71400.00,4001
+II-000174,INV-00081,2,Mobile app enhancement sprint,1.00,1996300.00,1996300.00,4001
+II-000175,INV-00082,1,Premium support add-on,1.00,1710300.00,1710300.00,4002
+II-000176,INV-00082,2,Platform subscription - annual licence (monthly billing),1.00,473100.00,473100.00,4002
+II-000177,INV-00083,1,Mobile app enhancement sprint,160.00,8725.63,1396100.00,4001
+II-000178,INV-00083,2,Dedicated engineering pod,160.00,7.50,1200.00,4001
+II-000179,INV-00084,1,Analytics module subscription,1.00,509900.00,509900.00,4002
+II-000180,INV-00084,2,Analytics module subscription,1.00,975600.00,975600.00,4002
+II-000181,INV-00084,3,Analytics module subscription,1.00,101800.00,101800.00,4002
+II-000182,INV-00084,4,Premium support add-on,1.00,75300.00,75300.00,4002
+II-000183,INV-00085,1,Analytics module subscription,1.00,232300.00,232300.00,4002
+II-000184,INV-00085,2,Analytics module subscription,1.00,560900.00,560900.00,4002
+II-000185,INV-00085,3,Premium support add-on,1.00,1422300.00,1422300.00,4002
+II-000186,INV-00086,1,Managed SaaS hosting plan,1.00,689200.00,689200.00,4002
+II-000187,INV-00086,2,Premium support add-on,1.00,3000300.00,3000300.00,4002
+II-000188,INV-00087,1,Mobile app enhancement sprint,120.00,3346.67,401600.00,4001
+II-000189,INV-00087,2,Dedicated engineering pod,80.00,3242.50,259400.00,4001
+II-000190,INV-00088,1,Architecture review & roadmap,1.00,565600.00,565600.00,4003
+II-000191,INV-00088,2,Data strategy workshop,1.00,365500.00,365500.00,4003
+II-000192,INV-00088,3,Architecture review & roadmap,1.00,805300.00,805300.00,4003
+II-000193,INV-00089,1,Mobile app enhancement sprint,1.00,457000.00,457000.00,4001
+II-000194,INV-00089,2,Dedicated engineering pod,176.00,1268.75,223300.00,4001
+II-000195,INV-00089,3,Mobile app enhancement sprint,176.00,298.86,52600.00,4001
+II-000196,INV-00089,4,API integration work,80.00,552.50,44200.00,4001
+II-000197,INV-00090,1,Application development - time & material,12.00,99983.33,1199800.00,4001
+II-000198,INV-00091,1,API integration work,160.00,1378.13,220500.00,4001
+II-000199,INV-00091,2,QA & test automation services,1.00,538900.00,538900.00,4001
+II-000200,INV-00091,3,Application development - time & material,1.00,152000.00,152000.00,4001
+II-000201,INV-00092,1,Data strategy workshop,120.00,14412.50,1729500.00,4003
+II-000202,INV-00093,1,Premium support add-on,1.00,135100.00,135100.00,4002
+II-000203,INV-00093,2,Analytics module subscription,1.00,986400.00,986400.00,4002
+II-000204,INV-00094,1,Mobile app enhancement sprint,1.00,2136800.00,2136800.00,4001
+II-000205,INV-00095,1,API integration work,120.00,7473.33,896800.00,4001
+II-000206,INV-00095,2,Dedicated engineering pod,120.00,2244.17,269300.00,4001
+II-000207,INV-00096,1,Mobile app enhancement sprint,160.00,1171.88,187500.00,4001
+II-000208,INV-00096,2,API integration work,176.00,1261.36,222000.00,4001
+II-000209,INV-00096,3,Mobile app enhancement sprint,1.00,55900.00,55900.00,4001
+II-000210,INV-00097,1,Process automation assessment,176.00,914.77,161000.00,4003
+II-000211,INV-00097,2,Data strategy workshop,80.00,5396.25,431700.00,4003
+II-000212,INV-00097,3,Data strategy workshop,12.00,35850.00,430200.00,4003
+II-000213,INV-00098,1,Mobile app enhancement sprint,176.00,9430.68,1659800.00,4001
+II-000214,INV-00099,1,Digital transformation consulting,1.00,82700.00,82700.00,4003
+II-000215,INV-00099,2,Data strategy workshop,176.00,3185.80,560700.00,4003
+II-000216,INV-00099,3,Digital transformation consulting,160.00,3266.25,522600.00,4003
+II-000217,INV-00100,1,Premium support add-on,1.00,1680800.00,1680800.00,4002
+II-000218,INV-00101,1,Premium support add-on,1.00,1023100.00,1023100.00,4002
+II-000219,INV-00101,2,Premium support add-on,1.00,245600.00,245600.00,4002
+II-000220,INV-00102,1,QA & test automation services,80.00,10896.25,871700.00,4001
+II-000221,INV-00102,2,API integration work,160.00,2881.25,461000.00,4001
+II-000222,INV-00103,1,Managed SaaS hosting plan,1.00,296700.00,296700.00,4002
+II-000223,INV-00103,2,Analytics module subscription,1.00,334300.00,334300.00,4002
+II-000224,INV-00103,3,Analytics module subscription,1.00,466200.00,466200.00,4002
+II-000225,INV-00104,1,QA & test automation services,176.00,2818.18,496000.00,4001
+II-000226,INV-00104,2,Mobile app enhancement sprint,176.00,294.32,51800.00,4001
+II-000227,INV-00105,1,24x7 production support retainer,176.00,4726.14,831800.00,4004
+II-000228,INV-00105,2,Managed services - monitoring,160.00,207.50,33200.00,4004
+II-000229,INV-00105,3,24x7 production support retainer,1.00,1111800.00,1111800.00,4004
+II-000230,INV-00106,1,Managed SaaS hosting plan,1.00,1882600.00,1882600.00,4002
+II-000231,INV-00107,1,Architecture review & roadmap,120.00,3209.17,385100.00,4003
+II-000232,INV-00107,2,Digital transformation consulting,1.00,384100.00,384100.00,4003
+II-000233,INV-00108,1,QA & test automation services,120.00,2476.67,297200.00,4001
+II-000234,INV-00108,2,API integration work,12.00,21275.00,255300.00,4001
+II-000235,INV-00108,3,QA & test automation services,12.00,19166.67,230000.00,4001
+II-000236,INV-00109,1,Application development - time & material,1.00,421700.00,421700.00,4001
+II-000237,INV-00109,2,Mobile app enhancement sprint,1.00,237400.00,237400.00,4001
+II-000238,INV-00110,1,API integration work,176.00,856.82,150800.00,4001
+II-000239,INV-00110,2,QA & test automation services,12.00,1758.33,21100.00,4001
+II-000240,INV-00110,3,Mobile app enhancement sprint,120.00,477.50,57300.00,4001
+II-000241,INV-00110,4,Dedicated engineering pod,176.00,2427.27,427200.00,4001
+II-000242,INV-00111,1,QA & test automation services,176.00,1277.84,224900.00,4001
+II-000243,INV-00111,2,QA & test automation services,1.00,204700.00,204700.00,4001
+II-000244,INV-00112,1,Annual maintenance contract,1.00,51600.00,51600.00,4004
+II-000245,INV-00112,2,Annual maintenance contract,1.00,993900.00,993900.00,4004
+II-000246,INV-00113,1,API integration work,160.00,4253.13,680500.00,4001
+II-000247,INV-00114,1,Data strategy workshop,160.00,9700.00,1552000.00,4003
+II-000248,INV-00114,2,Process automation assessment,120.00,1340.00,160800.00,4003
+II-000249,INV-00114,3,Architecture review & roadmap,120.00,10414.17,1249700.00,4003
+II-000250,INV-00114,4,Digital transformation consulting,80.00,9033.75,722700.00,4003
+II-000251,INV-00115,1,Architecture review & roadmap,12.00,116333.33,1396000.00,4003
+II-000252,INV-00116,1,Application development - time & material,80.00,11620.00,929600.00,4001
+II-000253,INV-00116,2,Dedicated engineering pod,80.00,8867.50,709400.00,4001
+II-000254,INV-00117,1,Annual maintenance contract,1.00,222300.00,222300.00,4004
+II-000255,INV-00117,2,Annual maintenance contract,176.00,978.41,172200.00,4004
+II-000256,INV-00117,3,24x7 production support retainer,160.00,1865.63,298500.00,4004
+II-000257,INV-00117,4,Annual maintenance contract,120.00,1512.50,181500.00,4004
+II-000258,INV-00118,1,Architecture review & roadmap,1.00,557100.00,557100.00,4003
+II-000259,INV-00119,1,API integration work,1.00,265000.00,265000.00,4001
+II-000260,INV-00119,2,QA & test automation services,12.00,7358.33,88300.00,4001
+II-000261,INV-00119,3,Dedicated engineering pod,1.00,2383300.00,2383300.00,4001
+II-000262,INV-00120,1,QA & test automation services,1.00,28800.00,28800.00,4001
+II-000263,INV-00120,2,Dedicated engineering pod,176.00,2965.91,522000.00,4001
+II-000264,INV-00120,3,QA & test automation services,1.00,550200.00,550200.00,4001
+II-000265,INV-00121,1,Architecture review & roadmap,176.00,7353.98,1294300.00,4003
+II-000266,INV-00122,1,API integration work,1.00,746500.00,746500.00,4001
+II-000267,INV-00123,1,Mobile app enhancement sprint,80.00,1562.50,125000.00,4001
+II-000268,INV-00123,2,Mobile app enhancement sprint,1.00,127600.00,127600.00,4001
+II-000269,INV-00123,3,Mobile app enhancement sprint,12.00,129458.33,1553500.00,4001
+II-000270,INV-00123,4,API integration work,12.00,53433.33,641200.00,4001
+II-000271,INV-00124,1,Process automation assessment,80.00,10000.00,800000.00,4003
+II-000272,INV-00124,2,Digital transformation consulting,176.00,646.02,113700.00,4003
+II-000273,INV-00125,1,Mobile app enhancement sprint,176.00,7231.25,1272700.00,4001
+II-000274,INV-00126,1,Data strategy workshop,1.00,940800.00,940800.00,4003
+II-000275,INV-00127,1,Premium support add-on,1.00,38100.00,38100.00,4002
+II-000276,INV-00127,2,Premium support add-on,1.00,117000.00,117000.00,4002
+II-000277,INV-00127,3,Premium support add-on,1.00,10800.00,10800.00,4002
+II-000278,INV-00127,4,Managed SaaS hosting plan,1.00,252800.00,252800.00,4002
+II-000279,INV-00128,1,Application development - time & material,12.00,176466.67,2117600.00,4001
+II-000280,INV-00129,1,Digital transformation consulting,12.00,59391.67,712700.00,4003
+II-000281,INV-00129,2,Architecture review & roadmap,120.00,10549.17,1265900.00,4003
+II-000282,INV-00130,1,QA & test automation services,80.00,19587.50,1567000.00,4001
+II-000283,INV-00131,1,Platform subscription - annual licence (monthly billing),1.00,174500.00,174500.00,4002
+II-000284,INV-00131,2,Managed SaaS hosting plan,1.00,2246500.00,2246500.00,4002
+II-000285,INV-00132,1,Mobile app enhancement sprint,120.00,6799.17,815900.00,4001
+II-000286,INV-00133,1,Application development - time & material,1.00,5613900.00,5613900.00,4001
+II-000287,INV-00134,1,Mobile app enhancement sprint,160.00,688.75,110200.00,4001
+II-000288,INV-00134,2,QA & test automation services,1.00,485600.00,485600.00,4001
+II-000289,INV-00135,1,Dedicated engineering pod,12.00,127825.00,1533900.00,4001
+II-000290,INV-00136,1,Application development - time & material,176.00,86.36,15200.00,4001
+II-000291,INV-00136,2,Mobile app enhancement sprint,1.00,418800.00,418800.00,4001
+II-000292,INV-00136,3,Mobile app enhancement sprint,160.00,3638.75,582200.00,4001
+II-000293,INV-00136,4,Application development - time & material,160.00,1831.88,293100.00,4001
+II-000294,INV-00137,1,Analytics module subscription,1.00,510500.00,510500.00,4002
+II-000295,INV-00138,1,API integration work,12.00,87141.67,1045700.00,4001
+II-000296,INV-00138,2,Application development - time & material,1.00,223500.00,223500.00,4001
+II-000297,INV-00138,3,QA & test automation services,176.00,2110.23,371400.00,4001
+II-000298,INV-00138,4,API integration work,1.00,267400.00,267400.00,4001
+II-000299,INV-00139,1,API integration work,1.00,1600.00,1600.00,4001
+II-000300,INV-00139,2,Application development - time & material,12.00,65091.67,781100.00,4001
+II-000301,INV-00140,1,Architecture review & roadmap,1.00,106100.00,106100.00,4003
+II-000302,INV-00140,2,Process automation assessment,160.00,1874.38,299900.00,4003
+II-000303,INV-00140,3,Architecture review & roadmap,160.00,1254.38,200700.00,4003
+II-000304,INV-00141,1,API integration work,1.00,415600.00,415600.00,4001
+II-000305,INV-00141,2,Mobile app enhancement sprint,1.00,488700.00,488700.00,4001
+II-000306,INV-00141,3,Application development - time & material,176.00,5254.55,924800.00,4001
+II-000307,INV-00142,1,Managed SaaS hosting plan,1.00,1901900.00,1901900.00,4002
+II-000308,INV-00142,2,Platform subscription - annual licence (monthly billing),1.00,986800.00,986800.00,4002
+II-000309,INV-00143,1,Annual maintenance contract,1.00,356700.00,356700.00,4004
+II-000310,INV-00143,2,Managed services - monitoring,1.00,1305700.00,1305700.00,4004
+II-000311,INV-00144,1,Managed SaaS hosting plan,1.00,19200.00,19200.00,4002
+II-000312,INV-00144,2,Analytics module subscription,1.00,1065000.00,1065000.00,4002
+II-000313,INV-00144,3,Managed SaaS hosting plan,1.00,277500.00,277500.00,4002
+II-000314,INV-00145,1,24x7 production support retainer,80.00,22241.25,1779300.00,4004
+II-000315,INV-00145,2,Managed services - monitoring,12.00,40833.33,490000.00,4004
+II-000316,INV-00146,1,Platform subscription - annual licence (monthly billing),1.00,1508200.00,1508200.00,4002
+II-000317,INV-00147,1,Platform subscription - annual licence (monthly billing),1.00,3196000.00,3196000.00,4002
+II-000318,INV-00148,1,Analytics module subscription,1.00,2086300.00,2086300.00,4002
+II-000319,INV-00149,1,Digital transformation consulting,1.00,730100.00,730100.00,4003
+II-000320,INV-00149,2,Digital transformation consulting,176.00,1938.64,341200.00,4003
+II-000321,INV-00149,3,Architecture review & roadmap,120.00,85.00,10200.00,4003
+II-000322,INV-00150,1,Managed services - monitoring,12.00,53366.67,640400.00,4004
+II-000323,INV-00151,1,Application development - time & material,80.00,22870.00,1829600.00,4001
+II-000324,INV-00152,1,Platform subscription - annual licence (monthly billing),1.00,3984200.00,3984200.00,4002
+II-000325,INV-00152,2,Analytics module subscription,1.00,1066300.00,1066300.00,4002
+II-000326,INV-00153,1,QA & test automation services,12.00,164475.00,1973700.00,4001
+II-000327,INV-00154,1,Dedicated engineering pod,1.00,2226200.00,2226200.00,4001
+II-000328,INV-00155,1,Dedicated engineering pod,176.00,309.09,54400.00,4001
+II-000329,INV-00155,2,Application development - time & material,80.00,8436.25,674900.00,4001
+II-000330,INV-00155,3,Mobile app enhancement sprint,1.00,233200.00,233200.00,4001
+II-000331,INV-00156,1,Mobile app enhancement sprint,80.00,1875.00,150000.00,4001
+II-000332,INV-00156,2,Application development - time & material,160.00,13041.88,2086700.00,4001
+II-000333,INV-00156,3,QA & test automation services,160.00,240.00,38400.00,4001
+II-000334,INV-00156,4,QA & test automation services,80.00,3772.50,301800.00,4001
+II-000335,INV-00157,1,Premium support add-on,1.00,184700.00,184700.00,4002
+II-000336,INV-00157,2,Premium support add-on,1.00,2525400.00,2525400.00,4002
+II-000337,INV-00158,1,Architecture review & roadmap,1.00,86900.00,86900.00,4003
+II-000338,INV-00158,2,Digital transformation consulting,80.00,7680.00,614400.00,4003
+II-000339,INV-00158,3,Architecture review & roadmap,1.00,904100.00,904100.00,4003
+II-000340,INV-00159,1,QA & test automation services,120.00,1198.33,143800.00,4001
+II-000341,INV-00159,2,Dedicated engineering pod,176.00,1482.39,260900.00,4001
+II-000342,INV-00159,3,Application development - time & material,1.00,21700.00,21700.00,4001
+II-000343,INV-00159,4,API integration work,160.00,5580.00,892800.00,4001
+II-000344,INV-00160,1,Process automation assessment,160.00,13843.75,2215000.00,4003
+II-000345,INV-00161,1,Managed services - monitoring,176.00,8004.55,1408800.00,4004
+II-000346,INV-00161,2,Annual maintenance contract,1.00,626100.00,626100.00,4004
+II-000347,INV-00162,1,Mobile app enhancement sprint,1.00,2094900.00,2094900.00,4001
+II-000348,INV-00162,2,API integration work,1.00,189500.00,189500.00,4001
+II-000349,INV-00162,3,API integration work,120.00,12516.67,1502000.00,4001
+II-000350,INV-00162,4,QA & test automation services,80.00,10355.00,828400.00,4001
+II-000351,INV-00163,1,Data strategy workshop,12.00,172108.33,2065300.00,4003
+II-000352,INV-00164,1,Process automation assessment,80.00,31311.25,2504900.00,4003
+II-000353,INV-00164,2,Digital transformation consulting,120.00,1346.67,161600.00,4003
+II-000354,INV-00165,1,Architecture review & roadmap,120.00,342.50,41100.00,4003
+II-000355,INV-00165,2,Process automation assessment,1.00,479800.00,479800.00,4003
+II-000356,INV-00166,1,QA & test automation services,160.00,14268.75,2283000.00,4001
+II-000357,INV-00167,1,Premium support add-on,1.00,239800.00,239800.00,4002
+II-000358,INV-00167,2,Platform subscription - annual licence (monthly billing),1.00,126800.00,126800.00,4002
+II-000359,INV-00168,1,Application development - time & material,1.00,2234900.00,2234900.00,4001
+II-000360,INV-00169,1,QA & test automation services,12.00,34000.00,408000.00,4001
+II-000361,INV-00169,2,Mobile app enhancement sprint,80.00,17023.75,1361900.00,4001
+II-000362,INV-00170,1,Managed SaaS hosting plan,1.00,3456600.00,3456600.00,4002
+II-000363,INV-00171,1,Process automation assessment,1.00,201300.00,201300.00,4003
+II-000364,INV-00171,2,Process automation assessment,80.00,27538.75,2203100.00,4003
+II-000365,INV-00172,1,Architecture review & roadmap,80.00,2398.75,191900.00,4003
+II-000366,INV-00172,2,Data strategy workshop,80.00,10041.25,803300.00,4003
+II-000367,INV-00173,1,Analytics module subscription,1.00,2601100.00,2601100.00,4002
+II-000368,INV-00174,1,Dedicated engineering pod,12.00,22941.67,275300.00,4001
+II-000369,INV-00174,2,Application development - time & material,120.00,2903.33,348400.00,4001
+II-000370,INV-00174,3,Dedicated engineering pod,120.00,8866.67,1064000.00,4001
+II-000371,INV-00175,1,Analytics module subscription,1.00,146600.00,146600.00,4002
+II-000372,INV-00175,2,Platform subscription - annual licence (monthly billing),1.00,226900.00,226900.00,4002
+II-000373,INV-00176,1,Application development - time & material,120.00,7999.17,959900.00,4001
+II-000374,INV-00176,2,Dedicated engineering pod,1.00,1772500.00,1772500.00,4001
+II-000375,INV-00177,1,Dedicated engineering pod,160.00,2937.50,470000.00,4001
+II-000376,INV-00177,2,Dedicated engineering pod,1.00,206900.00,206900.00,4001
+II-000377,INV-00177,3,Mobile app enhancement sprint,1.00,649600.00,649600.00,4001
+II-000378,INV-00178,1,QA & test automation services,1.00,1458900.00,1458900.00,4001
+II-000379,INV-00179,1,Annual maintenance contract,1.00,390000.00,390000.00,4004
+II-000380,INV-00179,2,24x7 production support retainer,12.00,50008.33,600100.00,4004
+II-000381,INV-00180,1,QA & test automation services,176.00,887.50,156200.00,4001
+II-000382,INV-00180,2,Mobile app enhancement sprint,120.00,7845.83,941500.00,4001
+II-000383,INV-00180,3,Mobile app enhancement sprint,176.00,8167.05,1437400.00,4001
+II-000384,INV-00181,1,Managed SaaS hosting plan,1.00,459600.00,459600.00,4002
+II-000385,INV-00181,2,Platform subscription - annual licence (monthly billing),1.00,86700.00,86700.00,4002
+II-000386,INV-00181,3,Premium support add-on,1.00,347600.00,347600.00,4002
+II-000387,INV-00181,4,Analytics module subscription,1.00,728000.00,728000.00,4002
+II-000388,INV-00182,1,Managed services - monitoring,120.00,4780.83,573700.00,4004
+II-000389,INV-00182,2,Annual maintenance contract,12.00,245908.33,2950900.00,4004
+II-000390,INV-00182,3,Managed services - monitoring,1.00,465700.00,465700.00,4004
+II-000391,INV-00182,4,Annual maintenance contract,12.00,22558.33,270700.00,4004
+II-000392,INV-00183,1,Process automation assessment,120.00,4671.67,560600.00,4003
+II-000393,INV-00184,1,Process automation assessment,160.00,3588.13,574100.00,4003
+II-000394,INV-00185,1,Mobile app enhancement sprint,120.00,1894.17,227300.00,4001
+II-000395,INV-00185,2,QA & test automation services,80.00,11073.75,885900.00,4001
+II-000396,INV-00185,3,API integration work,80.00,6710.00,536800.00,4001
+II-000397,INV-00186,1,Annual maintenance contract,176.00,262.50,46200.00,4004
+II-000398,INV-00186,2,Annual maintenance contract,120.00,3508.33,421000.00,4004
+II-000399,INV-00186,3,Managed services - monitoring,176.00,848.86,149400.00,4004
+II-000400,INV-00187,1,Annual maintenance contract,1.00,1929100.00,1929100.00,4004
+II-000401,INV-00187,2,24x7 production support retainer,160.00,921.88,147500.00,4004
+II-000402,INV-00188,1,Managed services - monitoring,1.00,848600.00,848600.00,4004
+II-000403,INV-00189,1,Platform subscription - annual licence (monthly billing),1.00,652300.00,652300.00,4002
+II-000404,INV-00189,2,Managed SaaS hosting plan,1.00,393800.00,393800.00,4002
+II-000405,INV-00189,3,Platform subscription - annual licence (monthly billing),1.00,742300.00,742300.00,4002
+II-000406,INV-00190,1,24x7 production support retainer,1.00,1241300.00,1241300.00,4004
+II-000407,INV-00190,2,Annual maintenance contract,120.00,3890.00,466800.00,4004
+II-000408,INV-00190,3,Managed services - monitoring,1.00,295400.00,295400.00,4004
+II-000409,INV-00191,1,Platform subscription - annual licence (monthly billing),1.00,794700.00,794700.00,4002
+II-000410,INV-00191,2,Managed SaaS hosting plan,1.00,355700.00,355700.00,4002
+II-000411,INV-00192,1,Dedicated engineering pod,1.00,116800.00,116800.00,4001
+II-000412,INV-00192,2,QA & test automation services,12.00,36225.00,434700.00,4001
+II-000413,INV-00192,3,Application development - time & material,160.00,3818.75,611000.00,4001
+II-000414,INV-00192,4,Dedicated engineering pod,120.00,5293.33,635200.00,4001
+II-000415,INV-00193,1,Application development - time & material,120.00,4554.17,546500.00,4001
+II-000416,INV-00193,2,API integration work,160.00,10972.50,1755600.00,4001
+II-000417,INV-00194,1,Dedicated engineering pod,1.00,1038400.00,1038400.00,4001
+II-000418,INV-00195,1,Dedicated engineering pod,176.00,1111.93,195700.00,4001
+II-000419,INV-00195,2,API integration work,160.00,2198.13,351700.00,4001
+II-000420,INV-00196,1,Annual maintenance contract,80.00,1187.50,95000.00,4004
+II-000421,INV-00196,2,24x7 production support retainer,160.00,3211.25,513800.00,4004
+II-000422,INV-00197,1,Analytics module subscription,1.00,12300.00,12300.00,4002
+II-000423,INV-00197,2,Managed SaaS hosting plan,1.00,408000.00,408000.00,4002
+II-000424,INV-00197,3,Analytics module subscription,1.00,6200.00,6200.00,4002
+II-000425,INV-00198,1,QA & test automation services,1.00,112500.00,112500.00,4001
+II-000426,INV-00198,2,API integration work,80.00,2106.25,168500.00,4001
+II-000427,INV-00198,3,API integration work,1.00,193100.00,193100.00,4001
+II-000428,INV-00198,4,Dedicated engineering pod,160.00,2794.38,447100.00,4001
+II-000429,INV-00199,1,Analytics module subscription,1.00,792100.00,792100.00,4002
+II-000430,INV-00200,1,Annual maintenance contract,1.00,1206400.00,1206400.00,4004
+II-000431,INV-00200,2,Annual maintenance contract,12.00,114300.00,1371600.00,4004
+II-000432,INV-00201,1,Mobile app enhancement sprint,176.00,2615.34,460300.00,4001
+II-000433,INV-00202,1,Platform subscription - annual licence (monthly billing),1.00,210500.00,210500.00,4002
+II-000434,INV-00202,2,Premium support add-on,1.00,1222700.00,1222700.00,4002
+II-000435,INV-00203,1,Platform subscription - annual licence (monthly billing),1.00,1019800.00,1019800.00,4002
+II-000436,INV-00204,1,Dedicated engineering pod,1.00,732100.00,732100.00,4001
+II-000437,INV-00204,2,Dedicated engineering pod,80.00,8087.50,647000.00,4001
+II-000438,INV-00205,1,Managed SaaS hosting plan,1.00,14900.00,14900.00,4002
+II-000439,INV-00205,2,Premium support add-on,1.00,454000.00,454000.00,4002
+II-000440,INV-00206,1,Digital transformation consulting,176.00,4152.27,730800.00,4003
+II-000441,INV-00207,1,Managed SaaS hosting plan,1.00,607500.00,607500.00,4002
+II-000442,INV-00207,2,Managed SaaS hosting plan,1.00,1808400.00,1808400.00,4002
+II-000443,INV-00207,3,Platform subscription - annual licence (monthly billing),1.00,510100.00,510100.00,4002
+II-000444,INV-00208,1,Dedicated engineering pod,120.00,1112.50,133500.00,4001
+II-000445,INV-00208,2,Dedicated engineering pod,80.00,15960.00,1276800.00,4001
+II-000446,INV-00208,3,QA & test automation services,1.00,1327500.00,1327500.00,4001
+II-000447,INV-00209,1,Application development - time & material,80.00,13165.00,1053200.00,4001
+II-000448,INV-00210,1,API integration work,12.00,20800.00,249600.00,4001
+II-000449,INV-00210,2,QA & test automation services,160.00,386.88,61900.00,4001
+II-000450,INV-00210,3,Application development - time & material,1.00,445000.00,445000.00,4001
+II-000451,INV-00210,4,Application development - time & material,176.00,1314.20,231300.00,4001
+II-000452,INV-00211,1,Dedicated engineering pod,160.00,1231.88,197100.00,4001
+II-000453,INV-00211,2,Mobile app enhancement sprint,176.00,1641.48,288900.00,4001
+II-000454,INV-00211,3,Mobile app enhancement sprint,12.00,1175.00,14100.00,4001
+II-000455,INV-00212,1,API integration work,12.00,13866.67,166400.00,4001
+II-000456,INV-00212,2,Dedicated engineering pod,176.00,1447.16,254700.00,4001
+II-000457,INV-00212,3,Mobile app enhancement sprint,12.00,8500.00,102000.00,4001
+II-000458,INV-00212,4,Dedicated engineering pod,12.00,3000.00,36000.00,4001
+II-000459,INV-00213,1,Mobile app enhancement sprint,160.00,2061.88,329900.00,4001
+II-000460,INV-00213,2,Dedicated engineering pod,176.00,1865.91,328400.00,4001
+II-000461,INV-00213,3,QA & test automation services,120.00,690.83,82900.00,4001
+II-000462,INV-00213,4,API integration work,80.00,7150.00,572000.00,4001
+II-000463,INV-00214,1,Digital transformation consulting,176.00,140.91,24800.00,4003
+II-000464,INV-00214,2,Data strategy workshop,1.00,1168500.00,1168500.00,4003
+II-000465,INV-00214,3,Architecture review & roadmap,120.00,1097.50,131700.00,4003
+II-000466,INV-00215,1,Application development - time & material,1.00,457700.00,457700.00,4001
+II-000467,INV-00215,2,QA & test automation services,120.00,14.17,1700.00,4001
+II-000468,INV-00215,3,Application development - time & material,160.00,422.50,67600.00,4001
+II-000469,INV-00215,4,Mobile app enhancement sprint,12.00,27233.33,326800.00,4001
+II-000470,INV-00216,1,Analytics module subscription,1.00,420300.00,420300.00,4002
+II-000471,INV-00217,1,Dedicated engineering pod,80.00,10255.00,820400.00,4001
+II-000472,INV-00217,2,Dedicated engineering pod,1.00,96500.00,96500.00,4001
+II-000473,INV-00218,1,Platform subscription - annual licence (monthly billing),1.00,206700.00,206700.00,4002
+II-000474,INV-00218,2,Managed SaaS hosting plan,1.00,833800.00,833800.00,4002
+II-000475,INV-00219,1,Analytics module subscription,1.00,1408400.00,1408400.00,4002
+II-000476,INV-00220,1,Application development - time & material,1.00,126400.00,126400.00,4001
+II-000477,INV-00220,2,QA & test automation services,176.00,1303.41,229400.00,4001
+II-000478,INV-00220,3,API integration work,120.00,3086.67,370400.00,4001
+II-000479,INV-00220,4,Application development - time & material,80.00,5490.00,439200.00,4001
+II-000480,INV-00221,1,Mobile app enhancement sprint,12.00,348308.33,4179700.00,4001
+II-000481,INV-00221,2,Dedicated engineering pod,12.00,80291.67,963500.00,4001
+II-000482,INV-00221,3,QA & test automation services,12.00,133775.00,1605300.00,4001
+II-000483,INV-00222,1,Managed SaaS hosting plan,1.00,665000.00,665000.00,4002
+II-000484,INV-00222,2,Managed SaaS hosting plan,1.00,25200.00,25200.00,4002
+II-000485,INV-00223,1,Analytics module subscription,1.00,107400.00,107400.00,4002
+II-000486,INV-00223,2,Analytics module subscription,1.00,71000.00,71000.00,4002
+II-000487,INV-00223,3,Platform subscription - annual licence (monthly billing),1.00,901100.00,901100.00,4002
+II-000488,INV-00223,4,Platform subscription - annual licence (monthly billing),1.00,272900.00,272900.00,4002
+II-000489,INV-00224,1,Platform subscription - annual licence (monthly billing),1.00,1523500.00,1523500.00,4002
+II-000490,INV-00225,1,Premium support add-on,1.00,1133900.00,1133900.00,4002
+II-000491,INV-00225,2,Analytics module subscription,1.00,513700.00,513700.00,4002
+II-000492,INV-00226,1,QA & test automation services,160.00,14648.75,2343800.00,4001
+II-000493,INV-00227,1,Analytics module subscription,1.00,1378000.00,1378000.00,4002
+II-000494,INV-00228,1,Managed services - monitoring,80.00,9612.50,769000.00,4004
+II-000495,INV-00229,1,API integration work,176.00,13533.52,2381900.00,4001
+II-000496,INV-00230,1,24x7 production support retainer,120.00,18766.67,2252000.00,4004
+II-000497,INV-00231,1,Platform subscription - annual licence (monthly billing),1.00,493800.00,493800.00,4002
+II-000498,INV-00232,1,QA & test automation services,1.00,1362900.00,1362900.00,4001
+II-000499,INV-00233,1,API integration work,160.00,1329.38,212700.00,4001
+II-000500,INV-00233,2,Dedicated engineering pod,1.00,16200.00,16200.00,4001
+II-000501,INV-00233,3,Dedicated engineering pod,120.00,968.33,116200.00,4001
+II-000502,INV-00234,1,Managed SaaS hosting plan,1.00,25100.00,25100.00,4002
+II-000503,INV-00234,2,Premium support add-on,1.00,1117400.00,1117400.00,4002
+II-000504,INV-00235,1,Architecture review & roadmap,80.00,2477.50,198200.00,4003
+II-000505,INV-00235,2,Architecture review & roadmap,12.00,28000.00,336000.00,4003
+II-000506,INV-00236,1,Premium support add-on,1.00,87000.00,87000.00,4002
+II-000507,INV-00236,2,Platform subscription - annual licence (monthly billing),1.00,1226200.00,1226200.00,4002
+II-000508,INV-00237,1,Dedicated engineering pod,160.00,9299.38,1487900.00,4001
+II-000509,INV-00237,2,Dedicated engineering pod,1.00,774900.00,774900.00,4001
+II-000510,INV-00237,3,Dedicated engineering pod,120.00,6600.00,792000.00,4001
+II-000511,INV-00238,1,Analytics module subscription,1.00,2016400.00,2016400.00,4002
+II-000512,INV-00239,1,Managed services - monitoring,120.00,1565.83,187900.00,4004
+II-000513,INV-00239,2,24x7 production support retainer,120.00,3952.50,474300.00,4004
+II-000514,INV-00239,3,Managed services - monitoring,80.00,8007.50,640600.00,4004
+II-000515,INV-00240,1,24x7 production support retainer,80.00,510.00,40800.00,4004
+II-000516,INV-00240,2,24x7 production support retainer,120.00,1920.83,230500.00,4004
+II-000517,INV-00240,3,Managed services - monitoring,1.00,426400.00,426400.00,4004
+II-000518,INV-00241,1,Mobile app enhancement sprint,160.00,5700.63,912100.00,4001
+II-000519,INV-00241,2,API integration work,12.00,5608.33,67300.00,4001
+II-000520,INV-00242,1,Dedicated engineering pod,1.00,891100.00,891100.00,4001
+II-000521,INV-00243,1,Dedicated engineering pod,176.00,3877.84,682500.00,4001
+II-000522,INV-00243,2,Application development - time & material,1.00,276100.00,276100.00,4001
+II-000523,INV-00244,1,Data strategy workshop,120.00,1421.67,170600.00,4003
+II-000524,INV-00244,2,Process automation assessment,12.00,82583.33,991000.00,4003
+II-000525,INV-00245,1,Process automation assessment,120.00,1027.50,123300.00,4003
+II-000526,INV-00245,2,Data strategy workshop,120.00,5534.17,664100.00,4003
+II-000527,INV-00246,1,Managed SaaS hosting plan,1.00,3188300.00,3188300.00,4002
+II-000528,INV-00247,1,Managed SaaS hosting plan,1.00,94200.00,94200.00,4002
+II-000529,INV-00247,2,Platform subscription - annual licence (monthly billing),1.00,353700.00,353700.00,4002
+II-000530,INV-00247,3,Analytics module subscription,1.00,49400.00,49400.00,4002
+II-000531,INV-00248,1,Managed SaaS hosting plan,1.00,458300.00,458300.00,4002
+II-000532,INV-00248,2,Platform subscription - annual licence (monthly billing),1.00,350300.00,350300.00,4002
+II-000533,INV-00249,1,API integration work,1.00,1436700.00,1436700.00,4001
+II-000534,INV-00249,2,API integration work,12.00,138950.00,1667400.00,4001
+II-000535,INV-00249,3,Dedicated engineering pod,1.00,1734900.00,1734900.00,4001
+II-000536,INV-00250,1,QA & test automation services,120.00,2327.50,279300.00,4001
+II-000537,INV-00250,2,QA & test automation services,160.00,9197.50,1471600.00,4001
+II-000538,INV-00250,3,Dedicated engineering pod,120.00,3618.33,434200.00,4001
+II-000539,INV-00251,1,Analytics module subscription,1.00,753900.00,753900.00,4002
+II-000540,INV-00252,1,Managed SaaS hosting plan,1.00,362900.00,362900.00,4002
+II-000541,INV-00252,2,Platform subscription - annual licence (monthly billing),1.00,985800.00,985800.00,4002
+II-000542,INV-00252,3,Analytics module subscription,1.00,873700.00,873700.00,4002
+II-000543,INV-00253,1,QA & test automation services,160.00,4660.63,745700.00,4001
+II-000544,INV-00254,1,Platform subscription - annual licence (monthly billing),1.00,187200.00,187200.00,4002
+II-000545,INV-00254,2,Analytics module subscription,1.00,105000.00,105000.00,4002
+II-000546,INV-00254,3,Premium support add-on,1.00,1130800.00,1130800.00,4002
+II-000547,INV-00255,1,QA & test automation services,1.00,969500.00,969500.00,4001
+II-000548,INV-00255,2,Application development - time & material,12.00,8975.00,107700.00,4001
+II-000549,INV-00255,3,Mobile app enhancement sprint,176.00,2702.84,475700.00,4001
+II-000550,INV-00256,1,Dedicated engineering pod,12.00,26158.33,313900.00,4001
+II-000551,INV-00256,2,QA & test automation services,176.00,3644.32,641400.00,4001
+II-000552,INV-00257,1,Mobile app enhancement sprint,1.00,2571100.00,2571100.00,4001
+II-000553,INV-00257,2,Mobile app enhancement sprint,12.00,58808.33,705700.00,4001
+II-000554,INV-00258,1,Mobile app enhancement sprint,1.00,2562100.00,2562100.00,4001
+II-000555,INV-00259,1,Platform subscription - annual licence (monthly billing),1.00,1277700.00,1277700.00,4002
+II-000556,INV-00259,2,Premium support add-on,1.00,477800.00,477800.00,4002
+II-000557,INV-00259,3,Managed SaaS hosting plan,1.00,522900.00,522900.00,4002
+II-000558,INV-00260,1,Annual maintenance contract,1.00,1052200.00,1052200.00,4004
+II-000559,INV-00261,1,QA & test automation services,176.00,9042.05,1591400.00,4001
+II-000560,INV-00262,1,QA & test automation services,176.00,2721.59,479000.00,4001
+II-000561,INV-00262,2,API integration work,176.00,1973.86,347400.00,4001
+II-000562,INV-00263,1,Analytics module subscription,1.00,208200.00,208200.00,4002
+II-000563,INV-00263,2,Analytics module subscription,1.00,295700.00,295700.00,4002
+II-000564,INV-00264,1,API integration work,12.00,341266.67,4095200.00,4001
+II-000565,INV-00265,1,Application development - time & material,80.00,16756.25,1340500.00,4001
+II-000566,INV-00265,2,Application development - time & material,176.00,4265.34,750700.00,4001
+II-000567,INV-00265,3,Application development - time & material,120.00,2268.33,272200.00,4001
+II-000568,INV-00266,1,Managed SaaS hosting plan,1.00,747800.00,747800.00,4002
+II-000569,INV-00266,2,Platform subscription - annual licence (monthly billing),1.00,743000.00,743000.00,4002
+II-000570,INV-00267,1,Analytics module subscription,1.00,423300.00,423300.00,4002
+II-000571,INV-00267,2,Analytics module subscription,1.00,122600.00,122600.00,4002
+II-000572,INV-00267,3,Platform subscription - annual licence (monthly billing),1.00,128400.00,128400.00,4002
+II-000573,INV-00267,4,Premium support add-on,1.00,448600.00,448600.00,4002
+II-000574,INV-00268,1,Dedicated engineering pod,160.00,9911.25,1585800.00,4001
+II-000575,INV-00269,1,API integration work,120.00,5942.50,713100.00,4001
+II-000576,INV-00270,1,Premium support add-on,1.00,4042600.00,4042600.00,4002
+II-000577,INV-00270,2,Managed SaaS hosting plan,1.00,799000.00,799000.00,4002
+II-000578,INV-00271,1,Dedicated engineering pod,12.00,246666.67,2960000.00,4001
+II-000579,INV-00272,1,Annual maintenance contract,1.00,1123500.00,1123500.00,4004
+II-000580,INV-00273,1,Mobile app enhancement sprint,1.00,497400.00,497400.00,4001
+II-000581,INV-00273,2,Mobile app enhancement sprint,160.00,4713.13,754100.00,4001
+II-000582,INV-00273,3,QA & test automation services,1.00,1193800.00,1193800.00,4001
+II-000583,INV-00273,4,QA & test automation services,176.00,4644.32,817400.00,4001
+II-000584,INV-00274,1,Managed services - monitoring,160.00,845.00,135200.00,4004
+II-000585,INV-00274,2,Managed services - monitoring,160.00,1660.63,265700.00,4004
+II-000586,INV-00274,3,Annual maintenance contract,120.00,4674.17,560900.00,4004
+II-000587,INV-00275,1,Analytics module subscription,1.00,774400.00,774400.00,4002
+II-000588,INV-00275,2,Premium support add-on,1.00,856900.00,856900.00,4002
+II-000589,INV-00275,3,Platform subscription - annual licence (monthly billing),1.00,85400.00,85400.00,4002
+II-000590,INV-00276,1,Platform subscription - annual licence (monthly billing),1.00,887000.00,887000.00,4002
+II-000591,INV-00277,1,Dedicated engineering pod,120.00,8529.17,1023500.00,4001
+II-000592,INV-00278,1,Dedicated engineering pod,176.00,9528.98,1677100.00,4001
+II-000593,INV-00279,1,Analytics module subscription,1.00,723800.00,723800.00,4002
+II-000594,INV-00280,1,Dedicated engineering pod,1.00,67400.00,67400.00,4001
+II-000595,INV-00280,2,API integration work,12.00,26241.67,314900.00,4001
+II-000596,INV-00280,3,Application development - time & material,120.00,990.00,118800.00,4001
+II-000597,INV-00281,1,Platform subscription - annual licence (monthly billing),1.00,103400.00,103400.00,4002
+II-000598,INV-00281,2,Managed SaaS hosting plan,1.00,618600.00,618600.00,4002
+II-000599,INV-00281,3,Premium support add-on,1.00,1218100.00,1218100.00,4002
+II-000600,INV-00281,4,Managed SaaS hosting plan,1.00,910000.00,910000.00,4002
+II-000601,INV-00282,1,Application development - time & material,120.00,854.17,102500.00,4001
+II-000602,INV-00282,2,API integration work,1.00,182300.00,182300.00,4001
+II-000603,INV-00283,1,Managed SaaS hosting plan,1.00,1845700.00,1845700.00,4002
+II-000604,INV-00284,1,Dedicated engineering pod,80.00,14633.75,1170700.00,4001
+II-000605,INV-00284,2,Dedicated engineering pod,1.00,137900.00,137900.00,4001
+II-000606,INV-00284,3,API integration work,176.00,3789.77,667000.00,4001
+II-000607,INV-00285,1,Application development - time & material,12.00,42233.33,506800.00,4001
+II-000608,INV-00285,2,Mobile app enhancement sprint,160.00,56.25,9000.00,4001
+II-000609,INV-00285,3,Application development - time & material,12.00,24908.33,298900.00,4001
+II-000610,INV-00286,1,Analytics module subscription,1.00,5354100.00,5354100.00,4002
+II-000611,INV-00287,1,QA & test automation services,80.00,8761.25,700900.00,4001
+II-000612,INV-00287,2,Dedicated engineering pod,160.00,971.88,155500.00,4001
+II-000613,INV-00288,1,Process automation assessment,80.00,7930.00,634400.00,4003
+II-000614,INV-00288,2,Digital transformation consulting,120.00,2417.50,290100.00,4003
+II-000615,INV-00288,3,Architecture review & roadmap,1.00,913200.00,913200.00,4003
+II-000616,INV-00289,1,Mobile app enhancement sprint,80.00,12400.00,992000.00,4001
+II-000617,INV-00290,1,Application development - time & material,176.00,556.82,98000.00,4001
+II-000618,INV-00290,2,QA & test automation services,120.00,2219.17,266300.00,4001
+II-000619,INV-00290,3,QA & test automation services,1.00,447800.00,447800.00,4001
+II-000620,INV-00291,1,Process automation assessment,1.00,2535300.00,2535300.00,4003
+II-000621,INV-00292,1,Premium support add-on,1.00,978700.00,978700.00,4002
+II-000622,INV-00292,2,Analytics module subscription,1.00,2717100.00,2717100.00,4002
+II-000623,INV-00293,1,Mobile app enhancement sprint,160.00,8316.88,1330700.00,4001
+II-000624,INV-00294,1,Architecture review & roadmap,1.00,929700.00,929700.00,4003
+II-000625,INV-00295,1,QA & test automation services,80.00,8773.75,701900.00,4001
+II-000626,INV-00295,2,API integration work,12.00,243641.67,2923700.00,4001
+II-000627,INV-00295,3,API integration work,12.00,10058.33,120700.00,4001
+II-000628,INV-00296,1,API integration work,120.00,848.33,101800.00,4001
+II-000629,INV-00296,2,Application development - time & material,1.00,1095600.00,1095600.00,4001
+II-000630,INV-00297,1,QA & test automation services,160.00,6629.38,1060700.00,4001
+II-000631,INV-00298,1,Dedicated engineering pod,120.00,12307.50,1476900.00,4001
+II-000632,INV-00298,2,QA & test automation services,176.00,9508.52,1673500.00,4001
+II-000633,INV-00299,1,Platform subscription - annual licence (monthly billing),1.00,6356700.00,6356700.00,4002
+II-000634,INV-00300,1,Premium support add-on,1.00,1230200.00,1230200.00,4002
+II-000635,INV-00301,1,QA & test automation services,160.00,1631.25,261000.00,4001
+II-000636,INV-00301,2,Mobile app enhancement sprint,1.00,1650600.00,1650600.00,4001
+II-000637,INV-00301,3,Dedicated engineering pod,176.00,6926.14,1219000.00,4001
+II-000638,INV-00302,1,Premium support add-on,1.00,1467800.00,1467800.00,4002
+II-000639,INV-00302,2,Premium support add-on,1.00,1344900.00,1344900.00,4002
+II-000640,INV-00303,1,Process automation assessment,1.00,2315800.00,2315800.00,4003
+II-000641,INV-00304,1,24x7 production support retainer,1.00,332700.00,332700.00,4004
+II-000642,INV-00304,2,24x7 production support retainer,80.00,4027.50,322200.00,4004
+II-000643,INV-00304,3,Managed services - monitoring,12.00,19316.67,231800.00,4004
+II-000644,INV-00304,4,Managed services - monitoring,80.00,627.50,50200.00,4004
+II-000645,INV-00305,1,Mobile app enhancement sprint,1.00,145800.00,145800.00,4001
+II-000646,INV-00305,2,Dedicated engineering pod,1.00,192600.00,192600.00,4001
+II-000647,INV-00306,1,Digital transformation consulting,1.00,217000.00,217000.00,4003
+II-000648,INV-00306,2,Architecture review & roadmap,1.00,1941900.00,1941900.00,4003
+II-000649,INV-00306,3,Digital transformation consulting,1.00,1107900.00,1107900.00,4003
+II-000650,INV-00307,1,Process automation assessment,80.00,13017.50,1041400.00,4003
+II-000651,INV-00308,1,Premium support add-on,1.00,836100.00,836100.00,4002
+II-000652,INV-00308,2,Platform subscription - annual licence (monthly billing),1.00,974200.00,974200.00,4002
+II-000653,INV-00309,1,API integration work,80.00,36180.00,2894400.00,4001
+II-000654,INV-00309,2,API integration work,1.00,785700.00,785700.00,4001
+II-000655,INV-00310,1,Dedicated engineering pod,12.00,146633.33,1759600.00,4001
+II-000656,INV-00311,1,Digital transformation consulting,160.00,80.00,12800.00,4003
+II-000657,INV-00311,2,Digital transformation consulting,1.00,1588500.00,1588500.00,4003
+II-000658,INV-00311,3,Data strategy workshop,120.00,1387.50,166500.00,4003
+II-000659,INV-00312,1,Premium support add-on,1.00,933800.00,933800.00,4002
+II-000660,INV-00312,2,Managed SaaS hosting plan,1.00,45600.00,45600.00,4002
+II-000661,INV-00312,3,Analytics module subscription,1.00,327100.00,327100.00,4002
+II-000662,INV-00312,4,Premium support add-on,1.00,138600.00,138600.00,4002
+II-000663,INV-00313,1,Managed SaaS hosting plan,1.00,655500.00,655500.00,4002
+II-000664,INV-00313,2,Managed SaaS hosting plan,1.00,33800.00,33800.00,4002
+II-000665,INV-00314,1,Application development - time & material,12.00,42550.00,510600.00,4001
+II-000666,INV-00315,1,Process automation assessment,12.00,67533.33,810400.00,4003
+II-000667,INV-00316,1,24x7 production support retainer,176.00,4194.89,738300.00,4004
+II-000668,INV-00316,2,Managed services - monitoring,1.00,93200.00,93200.00,4004
+II-000669,INV-00317,1,API integration work,1.00,1584300.00,1584300.00,4001
+II-000670,INV-00318,1,Application development - time & material,1.00,139500.00,139500.00,4001
+II-000671,INV-00318,2,Application development - time & material,1.00,347000.00,347000.00,4001
+II-000672,INV-00318,3,QA & test automation services,1.00,1477900.00,1477900.00,4001
+II-000673,INV-00318,4,Application development - time & material,160.00,14200.63,2272100.00,4001
+II-000674,INV-00319,1,Application development - time & material,1.00,304500.00,304500.00,4001
+II-000675,INV-00319,2,QA & test automation services,160.00,525.00,84000.00,4001
+II-000676,INV-00320,1,Dedicated engineering pod,160.00,876.25,140200.00,4001
+II-000677,INV-00320,2,API integration work,160.00,2394.38,383100.00,4001
+II-000678,INV-00321,1,Premium support add-on,1.00,14700.00,14700.00,4002
+II-000679,INV-00321,2,Analytics module subscription,1.00,4200.00,4200.00,4002
+II-000680,INV-00321,3,Premium support add-on,1.00,323500.00,323500.00,4002
+II-000681,INV-00321,4,Premium support add-on,1.00,8700.00,8700.00,4002
+II-000682,INV-00322,1,Platform subscription - annual licence (monthly billing),1.00,2151500.00,2151500.00,4002
+II-000683,INV-00323,1,Application development - time & material,80.00,8643.75,691500.00,4001
+II-000684,INV-00323,2,Mobile app enhancement sprint,80.00,3025.00,242000.00,4001
+II-000685,INV-00324,1,Mobile app enhancement sprint,120.00,6394.17,767300.00,4001
+II-000686,INV-00325,1,Platform subscription - annual licence (monthly billing),1.00,271100.00,271100.00,4002
+II-000687,INV-00325,2,Platform subscription - annual licence (monthly billing),1.00,1067000.00,1067000.00,4002
+II-000688,INV-00326,1,Annual maintenance contract,12.00,258758.33,3105100.00,4004
+II-000689,INV-00327,1,Application development - time & material,160.00,821.88,131500.00,4001
+II-000690,INV-00327,2,QA & test automation services,12.00,82083.33,985000.00,4001
+II-000691,INV-00328,1,API integration work,1.00,269000.00,269000.00,4001
+II-000692,INV-00328,2,Application development - time & material,1.00,392200.00,392200.00,4001
+II-000693,INV-00329,1,Dedicated engineering pod,120.00,17893.33,2147200.00,4001
+II-000694,INV-00330,1,Application development - time & material,1.00,563200.00,563200.00,4001
+II-000695,INV-00330,2,Mobile app enhancement sprint,1.00,27600.00,27600.00,4001
+II-000696,INV-00330,3,Mobile app enhancement sprint,80.00,5183.75,414700.00,4001
+II-000697,INV-00331,1,API integration work,160.00,2668.75,427000.00,4001
+II-000698,INV-00331,2,Application development - time & material,12.00,119283.33,1431400.00,4001
+II-000699,INV-00331,3,Mobile app enhancement sprint,120.00,522.50,62700.00,4001
+II-000700,INV-00332,1,API integration work,1.00,132600.00,132600.00,4001
+II-000701,INV-00332,2,Dedicated engineering pod,1.00,861200.00,861200.00,4001
+II-000702,INV-00333,1,QA & test automation services,80.00,23331.25,1866500.00,4001
+II-000703,INV-00333,2,Mobile app enhancement sprint,176.00,1180.68,207800.00,4001
+II-000704,INV-00334,1,Premium support add-on,1.00,464100.00,464100.00,4002
+II-000705,INV-00334,2,Platform subscription - annual licence (monthly billing),1.00,534200.00,534200.00,4002
+II-000706,INV-00335,1,Premium support add-on,1.00,401000.00,401000.00,4002
+II-000707,INV-00335,2,Premium support add-on,1.00,14200.00,14200.00,4002
+II-000708,INV-00335,3,Premium support add-on,1.00,228900.00,228900.00,4002
+II-000709,INV-00336,1,24x7 production support retainer,1.00,3819800.00,3819800.00,4004
+II-000710,INV-00337,1,Managed SaaS hosting plan,1.00,171200.00,171200.00,4002
+II-000711,INV-00337,2,Premium support add-on,1.00,178600.00,178600.00,4002
+II-000712,INV-00337,3,Platform subscription - annual licence (monthly billing),1.00,929000.00,929000.00,4002
+II-000713,INV-00338,1,Mobile app enhancement sprint,160.00,646.88,103500.00,4001
+II-000714,INV-00338,2,API integration work,1.00,48200.00,48200.00,4001
+II-000715,INV-00338,3,API integration work,1.00,178500.00,178500.00,4001
+II-000716,INV-00338,4,Mobile app enhancement sprint,160.00,2711.88,433900.00,4001
+II-000717,INV-00339,1,API integration work,12.00,47108.33,565300.00,4001
+II-000718,INV-00340,1,Platform subscription - annual licence (monthly billing),1.00,1803000.00,1803000.00,4002
+II-000719,INV-00341,1,Mobile app enhancement sprint,120.00,3132.50,375900.00,4001
+II-000720,INV-00341,2,Dedicated engineering pod,12.00,8383.33,100600.00,4001
+II-000721,INV-00342,1,QA & test automation services,176.00,7822.73,1376800.00,4001
+II-000722,INV-00343,1,Premium support add-on,1.00,400900.00,400900.00,4002
+II-000723,INV-00343,2,Premium support add-on,1.00,237200.00,237200.00,4002
+II-000724,INV-00343,3,Analytics module subscription,1.00,389400.00,389400.00,4002
+II-000725,INV-00344,1,Data strategy workshop,1.00,292500.00,292500.00,4003
+II-000726,INV-00344,2,Architecture review & roadmap,1.00,3726400.00,3726400.00,4003
+II-000727,INV-00345,1,QA & test automation services,160.00,15875.00,2540000.00,4001
+II-000728,INV-00345,2,API integration work,1.00,124300.00,124300.00,4001
+II-000729,INV-00345,3,Application development - time & material,1.00,509000.00,509000.00,4001
+II-000730,INV-00345,4,Mobile app enhancement sprint,160.00,7000.63,1120100.00,4001
+II-000731,INV-00346,1,Application development - time & material,120.00,4200.00,504000.00,4001
+II-000732,INV-00347,1,Analytics module subscription,1.00,175900.00,175900.00,4002
+II-000733,INV-00347,2,Platform subscription - annual licence (monthly billing),1.00,30400.00,30400.00,4002
+II-000734,INV-00347,3,Platform subscription - annual licence (monthly billing),1.00,432400.00,432400.00,4002
+II-000735,INV-00347,4,Premium support add-on,1.00,38500.00,38500.00,4002
+II-000736,INV-00348,1,Application development - time & material,1.00,404200.00,404200.00,4001
+II-000737,INV-00348,2,API integration work,120.00,4742.50,569100.00,4001
+II-000738,INV-00348,3,Application development - time & material,1.00,893200.00,893200.00,4001
+II-000739,INV-00349,1,Premium support add-on,1.00,1834200.00,1834200.00,4002
+II-000740,INV-00350,1,Dedicated engineering pod,160.00,19661.88,3145900.00,4001
+II-000741,INV-00351,1,Managed services - monitoring,120.00,67.50,8100.00,4004
+II-000742,INV-00351,2,24x7 production support retainer,160.00,425.00,68000.00,4004
+II-000743,INV-00351,3,24x7 production support retainer,80.00,7011.25,560900.00,4004
+II-000744,INV-00352,1,Analytics module subscription,1.00,993000.00,993000.00,4002
+II-000745,INV-00352,2,Premium support add-on,1.00,620900.00,620900.00,4002
+II-000746,INV-00352,3,Platform subscription - annual licence (monthly billing),1.00,23700.00,23700.00,4002
+II-000747,INV-00353,1,Managed SaaS hosting plan,1.00,3847100.00,3847100.00,4002
+II-000748,INV-00353,2,Platform subscription - annual licence (monthly billing),1.00,1356700.00,1356700.00,4002
+II-000749,INV-00353,3,Platform subscription - annual licence (monthly billing),1.00,71200.00,71200.00,4002
+II-000750,INV-00354,1,QA & test automation services,176.00,750.00,132000.00,4001
+II-000751,INV-00354,2,API integration work,12.00,61458.33,737500.00,4001
+II-000752,INV-00354,3,Dedicated engineering pod,1.00,44700.00,44700.00,4001
+II-000753,INV-00354,4,API integration work,80.00,15402.50,1232200.00,4001
+II-000754,INV-00355,1,Architecture review & roadmap,80.00,37987.50,3039000.00,4003
+II-000755,INV-00356,1,Managed SaaS hosting plan,1.00,1568800.00,1568800.00,4002
+II-000756,INV-00356,2,Managed SaaS hosting plan,1.00,1398500.00,1398500.00,4002
+II-000757,INV-00357,1,Dedicated engineering pod,1.00,499500.00,499500.00,4001
+II-000758,INV-00357,2,API integration work,120.00,1215.83,145900.00,4001
+II-000759,INV-00357,3,Mobile app enhancement sprint,176.00,1414.77,249000.00,4001
+II-000760,INV-00358,1,QA & test automation services,160.00,3835.63,613700.00,4001
+II-000761,INV-00359,1,Process automation assessment,120.00,4035.00,484200.00,4003
+II-000762,INV-00359,2,Digital transformation consulting,12.00,21708.33,260500.00,4003
+II-000763,INV-00360,1,Mobile app enhancement sprint,80.00,4345.00,347600.00,4001
+II-000764,INV-00360,2,Dedicated engineering pod,160.00,3383.13,541300.00,4001
+II-000765,INV-00360,3,Mobile app enhancement sprint,120.00,2120.00,254400.00,4001
+II-000766,INV-00361,1,Application development - time & material,1.00,1617500.00,1617500.00,4001
+II-000767,INV-00361,2,Dedicated engineering pod,176.00,2905.68,511400.00,4001
+II-000768,INV-00362,1,24x7 production support retainer,176.00,4699.43,827100.00,4004
+II-000769,INV-00363,1,Platform subscription - annual licence (monthly billing),1.00,668900.00,668900.00,4002
+II-000770,INV-00364,1,QA & test automation services,12.00,8575.00,102900.00,4001
+II-000771,INV-00364,2,QA & test automation services,80.00,21153.75,1692300.00,4001
+II-000772,INV-00364,3,API integration work,1.00,561300.00,561300.00,4001
+II-000773,INV-00365,1,Mobile app enhancement sprint,1.00,886300.00,886300.00,4001
+II-000774,INV-00366,1,Process automation assessment,176.00,247.73,43600.00,4003
+II-000775,INV-00366,2,Architecture review & roadmap,1.00,545200.00,545200.00,4003
+II-000776,INV-00366,3,Digital transformation consulting,1.00,269500.00,269500.00,4003
+II-000777,INV-00366,4,Data strategy workshop,176.00,657.95,115800.00,4003
+II-000778,INV-00367,1,QA & test automation services,160.00,530.00,84800.00,4001
+II-000779,INV-00367,2,QA & test automation services,160.00,987.50,158000.00,4001
+II-000780,INV-00368,1,Process automation assessment,120.00,8294.17,995300.00,4003
+II-000781,INV-00369,1,Annual maintenance contract,176.00,6238.64,1098000.00,4004
+II-000782,INV-00369,2,24x7 production support retainer,160.00,3894.38,623100.00,4004
+II-000783,INV-00369,3,Annual maintenance contract,176.00,2466.48,434100.00,4004
+II-000784,INV-00370,1,Managed SaaS hosting plan,1.00,182400.00,182400.00,4002
+II-000785,INV-00370,2,Premium support add-on,1.00,367400.00,367400.00,4002
+II-000786,INV-00370,3,Premium support add-on,1.00,1089200.00,1089200.00,4002
+II-000787,INV-00370,4,Premium support add-on,1.00,63400.00,63400.00,4002
+II-000788,INV-00371,1,Dedicated engineering pod,120.00,68879.17,8265500.00,4001
+II-000789,INV-00371,2,API integration work,160.00,978.13,156500.00,4001
+II-000790,INV-00371,3,QA & test automation services,160.00,14416.88,2306700.00,4001
+II-000791,INV-00372,1,QA & test automation services,12.00,100658.33,1207900.00,4001
+II-000792,INV-00373,1,Mobile app enhancement sprint,176.00,1647.73,290000.00,4001
+II-000793,INV-00373,2,QA & test automation services,1.00,720700.00,720700.00,4001
+II-000794,INV-00373,3,API integration work,12.00,24550.00,294600.00,4001
+II-000795,INV-00374,1,Dedicated engineering pod,1.00,49300.00,49300.00,4001
+II-000796,INV-00374,2,QA & test automation services,160.00,3784.38,605500.00,4001
+II-000797,INV-00374,3,API integration work,1.00,910800.00,910800.00,4001
+II-000798,INV-00375,1,Premium support add-on,1.00,1956800.00,1956800.00,4002
+II-000799,INV-00375,2,Managed SaaS hosting plan,1.00,1024400.00,1024400.00,4002
+II-000800,INV-00375,3,Platform subscription - annual licence (monthly billing),1.00,557900.00,557900.00,4002
+II-000801,INV-00375,4,Platform subscription - annual licence (monthly billing),1.00,1425100.00,1425100.00,4002
+II-000802,INV-00376,1,Architecture review & roadmap,120.00,1790.83,214900.00,4003
+II-000803,INV-00376,2,Process automation assessment,1.00,2166700.00,2166700.00,4003
+II-000804,INV-00377,1,Dedicated engineering pod,1.00,1487700.00,1487700.00,4001
+II-000805,INV-00378,1,Process automation assessment,80.00,7925.00,634000.00,4003
+II-000806,INV-00378,2,Data strategy workshop,160.00,43.13,6900.00,4003
+II-000807,INV-00379,1,Mobile app enhancement sprint,1.00,1020900.00,1020900.00,4001
+II-000808,INV-00380,1,Application development - time & material,12.00,97725.00,1172700.00,4001
+II-000809,INV-00380,2,Dedicated engineering pod,1.00,100900.00,100900.00,4001
+II-000810,INV-00381,1,QA & test automation services,80.00,17683.75,1414700.00,4001
+II-000811,INV-00382,1,API integration work,160.00,1929.38,308700.00,4001
+II-000812,INV-00382,2,Application development - time & material,120.00,3348.33,401800.00,4001
+II-000813,INV-00383,1,Managed SaaS hosting plan,1.00,283800.00,283800.00,4002
+II-000814,INV-00383,2,Managed SaaS hosting plan,1.00,539300.00,539300.00,4002
+II-000815,INV-00383,3,Analytics module subscription,1.00,109200.00,109200.00,4002
+II-000816,INV-00383,4,Premium support add-on,1.00,226500.00,226500.00,4002
+II-000817,INV-00384,1,Platform subscription - annual licence (monthly billing),1.00,1238500.00,1238500.00,4002
+II-000818,INV-00385,1,Architecture review & roadmap,120.00,6935.83,832300.00,4003
+II-000819,INV-00385,2,Architecture review & roadmap,1.00,57300.00,57300.00,4003
+II-000820,INV-00386,1,Mobile app enhancement sprint,1.00,77000.00,77000.00,4001
+II-000821,INV-00386,2,API integration work,176.00,193.75,34100.00,4001
+II-000822,INV-00386,3,API integration work,1.00,193100.00,193100.00,4001
+II-000823,INV-00387,1,Data strategy workshop,120.00,4160.00,499200.00,4003
+II-000824,INV-00387,2,Process automation assessment,160.00,6465.00,1034400.00,4003
+II-000825,INV-00388,1,Premium support add-on,1.00,562200.00,562200.00,4002
+II-000826,INV-00388,2,Managed SaaS hosting plan,1.00,105000.00,105000.00,4002
+II-000827,INV-00388,3,Premium support add-on,1.00,752200.00,752200.00,4002
+II-000828,INV-00389,1,Analytics module subscription,1.00,516200.00,516200.00,4002
+II-000829,INV-00389,2,Premium support add-on,1.00,615100.00,615100.00,4002
+II-000830,INV-00389,3,Premium support add-on,1.00,86600.00,86600.00,4002
+II-000831,INV-00390,1,API integration work,80.00,11026.25,882100.00,4001
+II-000832,INV-00390,2,Mobile app enhancement sprint,1.00,200000.00,200000.00,4001
+II-000833,INV-00391,1,API integration work,1.00,8342200.00,8342200.00,4001
+II-000834,INV-00392,1,Mobile app enhancement sprint,12.00,81616.67,979400.00,4001
+II-000835,INV-00392,2,API integration work,12.00,173933.33,2087200.00,4001
+II-000836,INV-00393,1,Process automation assessment,120.00,20357.50,2442900.00,4003
+II-000837,INV-00394,1,Managed SaaS hosting plan,1.00,71600.00,71600.00,4002
+II-000838,INV-00394,2,Premium support add-on,1.00,964500.00,964500.00,4002
+II-000839,INV-00394,3,Managed SaaS hosting plan,1.00,38400.00,38400.00,4002
+II-000840,INV-00394,4,Analytics module subscription,1.00,557200.00,557200.00,4002
+II-000841,INV-00395,1,Premium support add-on,1.00,676100.00,676100.00,4002
+II-000842,INV-00395,2,Platform subscription - annual licence (monthly billing),1.00,386400.00,386400.00,4002
+II-000843,INV-00396,1,Analytics module subscription,1.00,571400.00,571400.00,4002
+II-000844,INV-00396,2,Analytics module subscription,1.00,1189900.00,1189900.00,4002
+II-000845,INV-00397,1,Application development - time & material,1.00,3168000.00,3168000.00,4001
+II-000846,INV-00398,1,Digital transformation consulting,160.00,1608.13,257300.00,4003
+II-000847,INV-00398,2,Process automation assessment,176.00,1719.89,302700.00,4003
+II-000848,INV-00398,3,Digital transformation consulting,1.00,247800.00,247800.00,4003
+II-000849,INV-00398,4,Data strategy workshop,80.00,791.25,63300.00,4003
+II-000850,INV-00399,1,Data strategy workshop,176.00,3636.93,640100.00,4003
+II-000851,INV-00399,2,Process automation assessment,12.00,12658.33,151900.00,4003
+II-000852,INV-00400,1,Platform subscription - annual licence (monthly billing),1.00,377600.00,377600.00,4002
+II-000853,INV-00401,1,Analytics module subscription,1.00,567400.00,567400.00,4002
+II-000854,INV-00401,2,Managed SaaS hosting plan,1.00,208700.00,208700.00,4002
+II-000855,INV-00402,1,Platform subscription - annual licence (monthly billing),1.00,1538500.00,1538500.00,4002
+II-000856,INV-00403,1,Digital transformation consulting,176.00,302.84,53300.00,4003
+II-000857,INV-00403,2,Data strategy workshop,120.00,11561.67,1387400.00,4003
+II-000858,INV-00404,1,API integration work,80.00,6693.75,535500.00,4001
+II-000859,INV-00404,2,Application development - time & material,12.00,30825.00,369900.00,4001
+II-000860,INV-00405,1,Analytics module subscription,1.00,290100.00,290100.00,4002
+II-000861,INV-00405,2,Managed SaaS hosting plan,1.00,380800.00,380800.00,4002
+II-000862,INV-00406,1,QA & test automation services,160.00,8367.50,1338800.00,4001
+II-000863,INV-00407,1,QA & test automation services,1.00,1928600.00,1928600.00,4001
+II-000864,INV-00408,1,API integration work,80.00,3387.50,271000.00,4001
+II-000865,INV-00408,2,Dedicated engineering pod,80.00,1703.75,136300.00,4001
+II-000866,INV-00408,3,API integration work,120.00,1551.67,186200.00,4001
+II-000867,INV-00408,4,API integration work,160.00,576.88,92300.00,4001
+II-000868,INV-00409,1,Managed services - monitoring,80.00,10076.25,806100.00,4004
+II-000869,INV-00410,1,Mobile app enhancement sprint,160.00,9686.88,1549900.00,4001
+II-000870,INV-00410,2,Dedicated engineering pod,1.00,670900.00,670900.00,4001
+II-000871,INV-00411,1,Mobile app enhancement sprint,160.00,301.25,48200.00,4001
+II-000872,INV-00411,2,Mobile app enhancement sprint,12.00,3250.00,39000.00,4001
+II-000873,INV-00411,3,API integration work,176.00,3938.64,693200.00,4001
+II-000874,INV-00411,4,API integration work,160.00,4290.63,686500.00,4001
+II-000875,INV-00412,1,Mobile app enhancement sprint,1.00,1385500.00,1385500.00,4001
+II-000876,INV-00413,1,Application development - time & material,80.00,3538.75,283100.00,4001
+II-000877,INV-00413,2,Application development - time & material,120.00,41.67,5000.00,4001
+II-000878,INV-00413,3,QA & test automation services,120.00,20010.00,2401200.00,4001
+II-000879,INV-00413,4,Dedicated engineering pod,1.00,1501600.00,1501600.00,4001
+II-000880,INV-00414,1,Managed services - monitoring,120.00,3970.00,476400.00,4004
+II-000881,INV-00414,2,Managed services - monitoring,1.00,181000.00,181000.00,4004
+II-000882,INV-00414,3,Annual maintenance contract,1.00,442100.00,442100.00,4004
+II-000883,INV-00415,1,Application development - time & material,120.00,8622.50,1034700.00,4001
+II-000884,INV-00415,2,Mobile app enhancement sprint,120.00,3735.83,448300.00,4001
+II-000885,INV-00416,1,Application development - time & material,1.00,189300.00,189300.00,4001
+II-000886,INV-00416,2,Dedicated engineering pod,160.00,5427.50,868400.00,4001
+II-000887,INV-00416,3,Application development - time & material,176.00,2488.64,438000.00,4001
+II-000888,INV-00416,4,Application development - time & material,1.00,78800.00,78800.00,4001
+II-000889,INV-00417,1,Data strategy workshop,1.00,1876100.00,1876100.00,4003
+II-000890,INV-00418,1,API integration work,80.00,1176.25,94100.00,4001
+II-000891,INV-00418,2,Dedicated engineering pod,176.00,5853.98,1030300.00,4001
+II-000892,INV-00419,1,Managed services - monitoring,160.00,16560.00,2649600.00,4004
+II-000893,INV-00419,2,24x7 production support retainer,1.00,249300.00,249300.00,4004
+II-000894,INV-00420,1,Premium support add-on,1.00,75400.00,75400.00,4002
+II-000895,INV-00420,2,Platform subscription - annual licence (monthly billing),1.00,505900.00,505900.00,4002
+II-000896,INV-00420,3,Managed SaaS hosting plan,1.00,691700.00,691700.00,4002
+II-000897,INV-00421,1,Architecture review & roadmap,12.00,14200.00,170400.00,4003
+II-000898,INV-00421,2,Data strategy workshop,160.00,3303.75,528600.00,4003
+II-000899,INV-00422,1,Annual maintenance contract,176.00,15897.16,2797900.00,4004
+II-000900,INV-00423,1,Architecture review & roadmap,1.00,923500.00,923500.00,4003
+II-000901,INV-00424,1,API integration work,176.00,1015.91,178800.00,4001
+II-000902,INV-00424,2,Dedicated engineering pod,80.00,220.00,17600.00,4001
+II-000903,INV-00424,3,Mobile app enhancement sprint,1.00,627400.00,627400.00,4001
+II-000904,INV-00425,1,Managed services - monitoring,12.00,48358.33,580300.00,4004
+II-000905,INV-00425,2,24x7 production support retainer,160.00,1521.25,243400.00,4004
+II-000906,INV-00425,3,Managed services - monitoring,80.00,732.50,58600.00,4004
+II-000907,INV-00426,1,QA & test automation services,1.00,1391400.00,1391400.00,4001
+II-000908,INV-00426,2,Mobile app enhancement sprint,160.00,7136.25,1141800.00,4001
+II-000909,INV-00427,1,API integration work,12.00,196041.67,2352500.00,4001
+II-000910,INV-00427,2,Mobile app enhancement sprint,160.00,741.25,118600.00,4001
+II-000911,INV-00428,1,Premium support add-on,1.00,92600.00,92600.00,4002
+II-000912,INV-00428,2,Managed SaaS hosting plan,1.00,186000.00,186000.00,4002
+II-000913,INV-00428,3,Premium support add-on,1.00,380100.00,380100.00,4002
+II-000914,INV-00429,1,Application development - time & material,1.00,1126300.00,1126300.00,4001
+II-000915,INV-00429,2,Application development - time & material,176.00,3372.16,593500.00,4001
+II-000916,INV-00429,3,Mobile app enhancement sprint,160.00,1001.25,160200.00,4001
+II-000917,INV-00430,1,Annual maintenance contract,176.00,2840.91,500000.00,4004
+II-000918,INV-00431,1,Annual maintenance contract,12.00,24458.33,293500.00,4004
+II-000919,INV-00431,2,Managed services - monitoring,1.00,489000.00,489000.00,4004
+II-000920,INV-00432,1,Process automation assessment,1.00,1369000.00,1369000.00,4003
+II-000921,INV-00432,2,Process automation assessment,1.00,113900.00,113900.00,4003
+II-000922,INV-00433,1,Digital transformation consulting,160.00,4578.13,732500.00,4003
+II-000923,INV-00434,1,Dedicated engineering pod,1.00,707100.00,707100.00,4001
+II-000924,INV-00434,2,Application development - time & material,1.00,253400.00,253400.00,4001
+II-000925,INV-00435,1,Mobile app enhancement sprint,12.00,58550.00,702600.00,4001
+II-000926,INV-00435,2,API integration work,120.00,3652.50,438300.00,4001
+II-000927,INV-00435,3,QA & test automation services,120.00,25176.67,3021200.00,4001
+II-000928,INV-00436,1,Dedicated engineering pod,1.00,56400.00,56400.00,4001
+II-000929,INV-00436,2,Application development - time & material,12.00,11466.67,137600.00,4001
+II-000930,INV-00436,3,Application development - time & material,160.00,13198.75,2111800.00,4001
+II-000931,INV-00437,1,QA & test automation services,80.00,6328.75,506300.00,4001
+II-000932,INV-00437,2,API integration work,1.00,45000.00,45000.00,4001
+II-000933,INV-00437,3,Dedicated engineering pod,80.00,5788.75,463100.00,4001
+II-000934,INV-00438,1,QA & test automation services,80.00,3948.75,315900.00,4001
+II-000935,INV-00438,2,Application development - time & material,80.00,16220.00,1297600.00,4001
+II-000936,INV-00439,1,Analytics module subscription,1.00,2424400.00,2424400.00,4002
+II-000937,INV-00440,1,API integration work,12.00,44400.00,532800.00,4001
+II-000938,INV-00440,2,Dedicated engineering pod,160.00,1376.25,220200.00,4001
+II-000939,INV-00441,1,Dedicated engineering pod,120.00,11905.00,1428600.00,4001
+II-000940,INV-00442,1,Data strategy workshop,1.00,1078400.00,1078400.00,4003
+II-000941,INV-00442,2,Digital transformation consulting,160.00,5990.00,958400.00,4003
+II-000942,INV-00443,1,Architecture review & roadmap,80.00,3365.00,269200.00,4003
+II-000943,INV-00443,2,Process automation assessment,12.00,172333.33,2068000.00,4003
+II-000944,INV-00444,1,API integration work,1.00,1018200.00,1018200.00,4001
+II-000945,INV-00444,2,Mobile app enhancement sprint,160.00,5723.75,915800.00,4001
+II-000946,INV-00445,1,Platform subscription - annual licence (monthly billing),1.00,319100.00,319100.00,4002
+II-000947,INV-00445,2,Premium support add-on,1.00,2372200.00,2372200.00,4002
+II-000948,INV-00446,1,QA & test automation services,160.00,6766.25,1082600.00,4001
+II-000949,INV-00446,2,QA & test automation services,1.00,279500.00,279500.00,4001
+II-000950,INV-00447,1,Digital transformation consulting,80.00,16172.50,1293800.00,4003
+II-000951,INV-00447,2,Digital transformation consulting,176.00,5743.75,1010900.00,4003
+II-000952,INV-00448,1,Managed services - monitoring,12.00,44908.33,538900.00,4004
+II-000953,INV-00449,1,Architecture review & roadmap,1.00,120900.00,120900.00,4003
+II-000954,INV-00449,2,Architecture review & roadmap,1.00,150700.00,150700.00,4003
+II-000955,INV-00449,3,Data strategy workshop,1.00,140200.00,140200.00,4003
+II-000956,INV-00449,4,Digital transformation consulting,160.00,3028.13,484500.00,4003
+II-000957,INV-00450,1,Application development - time & material,1.00,111300.00,111300.00,4001
+II-000958,INV-00450,2,Dedicated engineering pod,176.00,4652.27,818800.00,4001
+II-000959,INV-00451,1,Managed SaaS hosting plan,1.00,2648200.00,2648200.00,4002
+II-000960,INV-00452,1,API integration work,80.00,420.00,33600.00,4001
+II-000961,INV-00452,2,Mobile app enhancement sprint,1.00,572300.00,572300.00,4001
+II-000962,INV-00452,3,Dedicated engineering pod,120.00,2109.17,253100.00,4001
+II-000963,INV-00453,1,Platform subscription - annual licence (monthly billing),1.00,499300.00,499300.00,4002
+II-000964,INV-00453,2,Analytics module subscription,1.00,604100.00,604100.00,4002
+II-000965,INV-00454,1,Managed services - monitoring,12.00,48875.00,586500.00,4004
+II-000966,INV-00454,2,24x7 production support retainer,176.00,269.32,47400.00,4004
+II-000967,INV-00455,1,API integration work,160.00,9668.75,1547000.00,4001
+II-000968,INV-00456,1,Digital transformation consulting,120.00,10530.83,1263700.00,4003
+II-000969,INV-00456,2,Data strategy workshop,12.00,29075.00,348900.00,4003
+II-000970,INV-00457,1,Application development - time & material,176.00,12327.27,2169600.00,4001
+II-000971,INV-00458,1,Managed services - monitoring,1.00,1080800.00,1080800.00,4004
+II-000972,INV-00459,1,API integration work,176.00,4314.20,759300.00,4001
+II-000973,INV-00459,2,Mobile app enhancement sprint,1.00,499700.00,499700.00,4001
+II-000974,INV-00459,3,QA & test automation services,1.00,474500.00,474500.00,4001
+II-000975,INV-00460,1,Dedicated engineering pod,176.00,1724.43,303500.00,4001
+II-000976,INV-00460,2,QA & test automation services,12.00,62058.33,744700.00,4001
+II-000977,INV-00461,1,API integration work,12.00,15841.67,190100.00,4001
+II-000978,INV-00461,2,QA & test automation services,176.00,533.52,93900.00,4001
+II-000979,INV-00461,3,QA & test automation services,160.00,701.25,112200.00,4001
+II-000980,INV-00461,4,QA & test automation services,176.00,340.91,60000.00,4001
+II-000981,INV-00462,1,API integration work,120.00,8083.33,970000.00,4001
+II-000982,INV-00463,1,Application development - time & material,1.00,760500.00,760500.00,4001
+II-000983,INV-00464,1,Premium support add-on,1.00,1532100.00,1532100.00,4002
+II-000984,INV-00464,2,Analytics module subscription,1.00,214400.00,214400.00,4002
+II-000985,INV-00464,3,Platform subscription - annual licence (monthly billing),1.00,105400.00,105400.00,4002
+II-000986,INV-00465,1,Platform subscription - annual licence (monthly billing),1.00,499100.00,499100.00,4002
+II-000987,INV-00465,2,Managed SaaS hosting plan,1.00,163300.00,163300.00,4002
+II-000988,INV-00466,1,24x7 production support retainer,176.00,1338.64,235600.00,4004
+II-000989,INV-00466,2,24x7 production support retainer,12.00,7266.67,87200.00,4004
+II-000990,INV-00466,3,Annual maintenance contract,80.00,17083.75,1366700.00,4004
+II-000991,INV-00467,1,Mobile app enhancement sprint,160.00,2421.88,387500.00,4001
+II-000992,INV-00467,2,QA & test automation services,160.00,4192.50,670800.00,4001
+II-000993,INV-00467,3,API integration work,120.00,103.33,12400.00,4001
+II-000994,INV-00468,1,QA & test automation services,1.00,84400.00,84400.00,4001
+II-000995,INV-00468,2,API integration work,1.00,36100.00,36100.00,4001
+II-000996,INV-00468,3,Dedicated engineering pod,12.00,47666.67,572000.00,4001
+II-000997,INV-00469,1,QA & test automation services,1.00,1217700.00,1217700.00,4001
+II-000998,INV-00469,2,Application development - time & material,80.00,323.75,25900.00,4001
+II-000999,INV-00470,1,API integration work,120.00,37063.33,4447600.00,4001
+II-001000,INV-00471,1,Managed SaaS hosting plan,1.00,938200.00,938200.00,4002
+II-001001,INV-00471,2,Managed SaaS hosting plan,1.00,176600.00,176600.00,4002
+II-001002,INV-00472,1,API integration work,1.00,4139000.00,4139000.00,4001
+II-001003,INV-00473,1,Mobile app enhancement sprint,12.00,20750.00,249000.00,4001
+II-001004,INV-00473,2,API integration work,12.00,144708.33,1736500.00,4001
+II-001005,INV-00474,1,Dedicated engineering pod,1.00,394500.00,394500.00,4001
+II-001006,INV-00474,2,Mobile app enhancement sprint,80.00,1331.25,106500.00,4001
+II-001007,INV-00475,1,Process automation assessment,12.00,182125.00,2185500.00,4003
+II-001008,INV-00476,1,Application development - time & material,120.00,13240.83,1588900.00,4001
+II-001009,INV-00476,2,API integration work,12.00,62041.67,744500.00,4001
+II-001010,INV-00477,1,Mobile app enhancement sprint,176.00,2883.52,507500.00,4001
+II-001011,INV-00477,2,Dedicated engineering pod,1.00,141300.00,141300.00,4001
+II-001012,INV-00478,1,QA & test automation services,120.00,4169.17,500300.00,4001
+II-001013,INV-00478,2,Application development - time & material,12.00,31741.67,380900.00,4001
+II-001014,INV-00479,1,API integration work,80.00,3256.25,260500.00,4001
+II-001015,INV-00479,2,API integration work,80.00,4786.25,382900.00,4001
+II-001016,INV-00480,1,Mobile app enhancement sprint,1.00,666000.00,666000.00,4001
+II-001017,INV-00481,1,QA & test automation services,80.00,277.50,22200.00,4001
+II-001018,INV-00481,2,Dedicated engineering pod,1.00,119000.00,119000.00,4001
+II-001019,INV-00481,3,Dedicated engineering pod,1.00,597700.00,597700.00,4001
+II-001020,INV-00481,4,Mobile app enhancement sprint,80.00,1691.25,135300.00,4001
+II-001021,INV-00482,1,Application development - time & material,176.00,8816.48,1551700.00,4001
+II-001022,INV-00482,2,API integration work,1.00,5859600.00,5859600.00,4001
+II-001023,INV-00483,1,Application development - time & material,1.00,3064100.00,3064100.00,4001
+II-001024,INV-00484,1,Platform subscription - annual licence (monthly billing),1.00,857800.00,857800.00,4002
+II-001025,INV-00484,2,Platform subscription - annual licence (monthly billing),1.00,137800.00,137800.00,4002
+II-001026,INV-00484,3,Analytics module subscription,1.00,351300.00,351300.00,4002
+II-001027,INV-00484,4,Platform subscription - annual licence (monthly billing),1.00,41100.00,41100.00,4002
+II-001028,INV-00485,1,Digital transformation consulting,1.00,2924000.00,2924000.00,4003
+II-001029,INV-00486,1,QA & test automation services,120.00,2910.83,349300.00,4001
+II-001030,INV-00486,2,API integration work,176.00,4146.02,729700.00,4001
+II-001031,INV-00486,3,Mobile app enhancement sprint,1.00,114300.00,114300.00,4001
+II-001032,INV-00487,1,API integration work,160.00,6724.38,1075900.00,4001
+II-001033,INV-00487,2,Mobile app enhancement sprint,12.00,340550.00,4086600.00,4001
+II-001034,INV-00488,1,API integration work,1.00,3524500.00,3524500.00,4001
+II-001035,INV-00488,2,Dedicated engineering pod,120.00,20475.00,2457000.00,4001
+II-001036,INV-00489,1,Premium support add-on,1.00,995800.00,995800.00,4002
+II-001037,INV-00490,1,Mobile app enhancement sprint,1.00,886500.00,886500.00,4001
+II-001038,INV-00491,1,Dedicated engineering pod,1.00,1442200.00,1442200.00,4001
+II-001039,INV-00491,2,Application development - time & material,120.00,278.33,33400.00,4001
+II-001040,INV-00492,1,Mobile app enhancement sprint,176.00,239.20,42100.00,4001
+II-001041,INV-00492,2,API integration work,176.00,2594.32,456600.00,4001
+II-001042,INV-00492,3,Application development - time & material,160.00,864.38,138300.00,4001
+II-001043,INV-00493,1,Mobile app enhancement sprint,12.00,30708.33,368500.00,4001
+II-001044,INV-00494,1,Dedicated engineering pod,80.00,1922.50,153800.00,4001
+II-001045,INV-00494,2,Application development - time & material,1.00,1062500.00,1062500.00,4001
+II-001046,INV-00495,1,Managed SaaS hosting plan,1.00,2313400.00,2313400.00,4002
+II-001047,INV-00495,2,Premium support add-on,1.00,10200.00,10200.00,4002
+II-001048,INV-00496,1,Analytics module subscription,1.00,1159300.00,1159300.00,4002
+II-001049,INV-00496,2,Platform subscription - annual licence (monthly billing),1.00,64100.00,64100.00,4002
+II-001050,INV-00496,3,Premium support add-on,1.00,181000.00,181000.00,4002
+II-001051,INV-00497,1,Dedicated engineering pod,120.00,614.17,73700.00,4001
+II-001052,INV-00497,2,Mobile app enhancement sprint,80.00,2182.50,174600.00,4001
+II-001053,INV-00497,3,API integration work,12.00,38158.33,457900.00,4001
+II-001054,INV-00497,4,Mobile app enhancement sprint,1.00,23100.00,23100.00,4001
+II-001055,INV-00498,1,QA & test automation services,12.00,137908.33,1654900.00,4001
+II-001056,INV-00498,2,Mobile app enhancement sprint,176.00,1373.30,241700.00,4001
+II-001057,INV-00498,3,QA & test automation services,12.00,10066.67,120800.00,4001
+II-001058,INV-00499,1,API integration work,1.00,5256700.00,5256700.00,4001
+II-001059,INV-00500,1,Annual maintenance contract,1.00,302800.00,302800.00,4004
+II-001060,INV-00500,2,Managed services - monitoring,1.00,892700.00,892700.00,4004
+II-001061,INV-00501,1,Managed SaaS hosting plan,1.00,793100.00,793100.00,4002
+II-001062,INV-00501,2,Managed SaaS hosting plan,1.00,1431200.00,1431200.00,4002
+II-001063,INV-00502,1,Mobile app enhancement sprint,120.00,1130.83,135700.00,4001
+II-001064,INV-00502,2,Dedicated engineering pod,1.00,1646300.00,1646300.00,4001
+II-001065,INV-00503,1,Mobile app enhancement sprint,1.00,1702500.00,1702500.00,4001
+II-001066,INV-00503,2,API integration work,120.00,523.33,62800.00,4001
+II-001067,INV-00504,1,Process automation assessment,176.00,2548.86,448600.00,4003
+II-001068,INV-00504,2,Process automation assessment,80.00,348.75,27900.00,4003
+II-001069,INV-00505,1,Platform subscription - annual licence (monthly billing),1.00,1065000.00,1065000.00,4002
+II-001070,INV-00506,1,Premium support add-on,1.00,2015600.00,2015600.00,4002
+II-001071,INV-00507,1,QA & test automation services,80.00,4316.25,345300.00,4001
+II-001072,INV-00507,2,QA & test automation services,80.00,9538.75,763100.00,4001
+II-001073,INV-00508,1,Application development - time & material,1.00,906200.00,906200.00,4001
+II-001074,INV-00508,2,API integration work,12.00,243266.67,2919200.00,4001
+II-001075,INV-00509,1,Application development - time & material,1.00,1398800.00,1398800.00,4001
+II-001076,INV-00509,2,Dedicated engineering pod,120.00,14047.50,1685700.00,4001
+II-001077,INV-00510,1,Application development - time & material,1.00,1039700.00,1039700.00,4001
+II-001078,INV-00511,1,API integration work,1.00,403000.00,403000.00,4001
+II-001079,INV-00511,2,Dedicated engineering pod,176.00,3132.95,551400.00,4001
+II-001080,INV-00512,1,Analytics module subscription,1.00,2391900.00,2391900.00,4002
+II-001081,INV-00513,1,Digital transformation consulting,12.00,4091.67,49100.00,4003
+II-001082,INV-00513,2,Data strategy workshop,80.00,5142.50,411400.00,4003
+II-001083,INV-00514,1,Platform subscription - annual licence (monthly billing),1.00,3373500.00,3373500.00,4002
+II-001084,INV-00514,2,Platform subscription - annual licence (monthly billing),1.00,855800.00,855800.00,4002
+II-001085,INV-00515,1,Managed services - monitoring,80.00,7711.25,616900.00,4004
+II-001086,INV-00516,1,Mobile app enhancement sprint,12.00,192733.33,2312800.00,4001
+II-001087,INV-00517,1,Premium support add-on,1.00,238800.00,238800.00,4002
+II-001088,INV-00517,2,Platform subscription - annual licence (monthly billing),1.00,938000.00,938000.00,4002
+II-001089,INV-00517,3,Platform subscription - annual licence (monthly billing),1.00,796000.00,796000.00,4002
+II-001090,INV-00518,1,Architecture review & roadmap,120.00,24434.17,2932100.00,4003
+II-001091,INV-00518,2,Data strategy workshop,1.00,205500.00,205500.00,4003
+II-001092,INV-00519,1,Annual maintenance contract,80.00,5753.75,460300.00,4004
+II-001093,INV-00519,2,24x7 production support retainer,12.00,558.33,6700.00,4004
+II-001094,INV-00520,1,Dedicated engineering pod,80.00,14753.75,1180300.00,4001
+II-001095,INV-00520,2,QA & test automation services,1.00,1229200.00,1229200.00,4001
+II-001096,INV-00521,1,Architecture review & roadmap,1.00,402300.00,402300.00,4003
+II-001097,INV-00521,2,Data strategy workshop,1.00,117500.00,117500.00,4003
+II-001098,INV-00521,3,Data strategy workshop,1.00,376800.00,376800.00,4003
+II-001099,INV-00522,1,API integration work,176.00,5915.34,1041100.00,4001
+II-001100,INV-00523,1,Premium support add-on,1.00,905300.00,905300.00,4002
+II-001101,INV-00523,2,Premium support add-on,1.00,933500.00,933500.00,4002
+II-001102,INV-00524,1,Platform subscription - annual licence (monthly billing),1.00,1719900.00,1719900.00,4002
+II-001103,INV-00525,1,Mobile app enhancement sprint,1.00,1213300.00,1213300.00,4001
+II-001104,INV-00526,1,24x7 production support retainer,1.00,688600.00,688600.00,4004
+II-001105,INV-00526,2,Managed services - monitoring,12.00,15291.67,183500.00,4004
+II-001106,INV-00527,1,Dedicated engineering pod,80.00,18342.50,1467400.00,4001
+II-001107,INV-00528,1,Application development - time & material,176.00,18164.77,3197000.00,4001
+II-001108,INV-00529,1,Process automation assessment,120.00,6806.67,816800.00,4003
+II-001109,INV-00530,1,Managed services - monitoring,1.00,4856400.00,4856400.00,4004
+II-001110,INV-00530,2,24x7 production support retainer,1.00,729500.00,729500.00,4004
+II-001111,INV-00530,3,Annual maintenance contract,80.00,8537.50,683000.00,4004
+II-001112,INV-00531,1,Mobile app enhancement sprint,80.00,35948.75,2875900.00,4001
+II-001113,INV-00531,2,QA & test automation services,1.00,509700.00,509700.00,4001
+II-001114,INV-00532,1,Managed SaaS hosting plan,1.00,1500900.00,1500900.00,4002
+II-001115,INV-00533,1,Process automation assessment,1.00,6139100.00,6139100.00,4003
+II-001116,INV-00534,1,Analytics module subscription,1.00,1242800.00,1242800.00,4002
+II-001117,INV-00535,1,Digital transformation consulting,1.00,819300.00,819300.00,4003
+II-001118,INV-00535,2,Digital transformation consulting,176.00,7464.20,1313700.00,4003
+II-001119,INV-00535,3,Process automation assessment,12.00,29058.33,348700.00,4003
+II-001120,INV-00536,1,Dedicated engineering pod,80.00,79626.25,6370100.00,4001
+II-001121,INV-00537,1,Application development - time & material,120.00,10198.33,1223800.00,4001
+II-001122,INV-00537,2,Mobile app enhancement sprint,176.00,8214.77,1445800.00,4001
+II-001123,INV-00537,3,QA & test automation services,1.00,920100.00,920100.00,4001
+II-001124,INV-00538,1,Annual maintenance contract,80.00,19595.00,1567600.00,4004
+II-001125,INV-00539,1,Mobile app enhancement sprint,120.00,35920.83,4310500.00,4001
+II-001126,INV-00539,2,Mobile app enhancement sprint,1.00,606900.00,606900.00,4001
+II-001127,INV-00539,3,QA & test automation services,1.00,286400.00,286400.00,4001
+II-001128,INV-00540,1,Premium support add-on,1.00,1983800.00,1983800.00,4002
+II-001129,INV-00540,2,Managed SaaS hosting plan,1.00,184100.00,184100.00,4002
+II-001130,INV-00541,1,API integration work,80.00,18986.25,1518900.00,4001
+II-001131,INV-00541,2,QA & test automation services,160.00,876.88,140300.00,4001
+II-001132,INV-00542,1,Analytics module subscription,1.00,2041600.00,2041600.00,4002
+II-001133,INV-00542,2,Analytics module subscription,1.00,1970400.00,1970400.00,4002
+II-001134,INV-00543,1,Mobile app enhancement sprint,1.00,286000.00,286000.00,4001
+II-001135,INV-00543,2,API integration work,1.00,439800.00,439800.00,4001
+II-001136,INV-00543,3,Application development - time & material,160.00,1657.50,265200.00,4001
+II-001137,INV-00544,1,Dedicated engineering pod,12.00,27758.33,333100.00,4001
+II-001138,INV-00544,2,Application development - time & material,160.00,9605.63,1536900.00,4001
+II-001139,INV-00545,1,API integration work,1.00,70700.00,70700.00,4001
+II-001140,INV-00545,2,Application development - time & material,12.00,96666.67,1160000.00,4001
+II-001141,INV-00546,1,Application development - time & material,12.00,80258.33,963100.00,4001
+II-001142,INV-00546,2,Application development - time & material,1.00,650600.00,650600.00,4001
+II-001143,INV-00547,1,Mobile app enhancement sprint,176.00,6593.75,1160500.00,4001
+II-001144,INV-00547,2,API integration work,1.00,1294900.00,1294900.00,4001
+II-001145,INV-00548,1,Application development - time & material,80.00,3467.50,277400.00,4001
+II-001146,INV-00548,2,Dedicated engineering pod,176.00,365.91,64400.00,4001
+II-001147,INV-00548,3,Application development - time & material,1.00,22500.00,22500.00,4001
+II-001148,INV-00549,1,Analytics module subscription,1.00,1041100.00,1041100.00,4002
+II-001149,INV-00549,2,Premium support add-on,1.00,45000.00,45000.00,4002
+II-001150,INV-00550,1,Premium support add-on,1.00,1531700.00,1531700.00,4002
+II-001151,INV-00550,2,Premium support add-on,1.00,844800.00,844800.00,4002
+II-001152,INV-00550,3,Platform subscription - annual licence (monthly billing),1.00,217300.00,217300.00,4002
+II-001153,INV-00551,1,Process automation assessment,160.00,33362.50,5338000.00,4003
+II-001154,INV-00552,1,Architecture review & roadmap,120.00,3961.67,475400.00,4003
+II-001155,INV-00552,2,Process automation assessment,1.00,128800.00,128800.00,4003
+II-001156,INV-00553,1,Dedicated engineering pod,80.00,7521.25,601700.00,4001
+II-001157,INV-00553,2,Dedicated engineering pod,176.00,2318.18,408000.00,4001
+II-001158,INV-00553,3,QA & test automation services,160.00,3083.75,493400.00,4001
+II-001159,INV-00554,1,Premium support add-on,1.00,1298200.00,1298200.00,4002
+II-001160,INV-00555,1,QA & test automation services,80.00,28896.25,2311700.00,4001
+II-001161,INV-00555,2,API integration work,12.00,201183.33,2414200.00,4001
+II-001162,INV-00556,1,Platform subscription - annual licence (monthly billing),1.00,177000.00,177000.00,4002
+II-001163,INV-00556,2,Platform subscription - annual licence (monthly billing),1.00,877900.00,877900.00,4002
+II-001164,INV-00556,3,Platform subscription - annual licence (monthly billing),1.00,449500.00,449500.00,4002
+II-001165,INV-00556,4,Managed SaaS hosting plan,1.00,1393100.00,1393100.00,4002
+II-001166,INV-00557,1,Premium support add-on,1.00,1284200.00,1284200.00,4002
+II-001167,INV-00558,1,Dedicated engineering pod,12.00,385791.67,4629500.00,4001
+II-001168,INV-00559,1,Process automation assessment,1.00,1409000.00,1409000.00,4003
+II-001169,INV-00560,1,Application development - time & material,80.00,12046.25,963700.00,4001
+II-001170,INV-00561,1,Platform subscription - annual licence (monthly billing),1.00,2553900.00,2553900.00,4002
+II-001171,INV-00562,1,Application development - time & material,176.00,6407.95,1127800.00,4001
+II-001172,INV-00563,1,Mobile app enhancement sprint,120.00,5646.67,677600.00,4001
+II-001173,INV-00563,2,QA & test automation services,160.00,1778.13,284500.00,4001
+II-001174,INV-00564,1,Architecture review & roadmap,1.00,384700.00,384700.00,4003
+II-001175,INV-00564,2,Architecture review & roadmap,160.00,45.00,7200.00,4003
+II-001176,INV-00564,3,Architecture review & roadmap,1.00,565200.00,565200.00,4003
+II-001177,INV-00565,1,QA & test automation services,1.00,198400.00,198400.00,4001
+II-001178,INV-00565,2,Mobile app enhancement sprint,160.00,11320.00,1811200.00,4001
+II-001179,INV-00566,1,Process automation assessment,12.00,92775.00,1113300.00,4003
+II-001180,INV-00567,1,QA & test automation services,1.00,489200.00,489200.00,4001
+II-001181,INV-00567,2,API integration work,1.00,569500.00,569500.00,4001
+II-001182,INV-00568,1,Analytics module subscription,1.00,1245500.00,1245500.00,4002
+II-001183,INV-00569,1,Mobile app enhancement sprint,80.00,1790.00,143200.00,4001
+II-001184,INV-00569,2,API integration work,160.00,652.50,104400.00,4001
+II-001185,INV-00569,3,Dedicated engineering pod,12.00,258125.00,3097500.00,4001
+II-001186,INV-00570,1,QA & test automation services,176.00,7385.80,1299900.00,4001
+II-001187,INV-00570,2,QA & test automation services,160.00,7860.00,1257600.00,4001
+II-001188,INV-00571,1,Process automation assessment,160.00,3324.38,531900.00,4003
+II-001189,INV-00571,2,Data strategy workshop,176.00,14080.11,2478100.00,4003
+II-001190,INV-00571,3,Digital transformation consulting,1.00,2503400.00,2503400.00,4003
+II-001191,INV-00572,1,24x7 production support retainer,176.00,5314.77,935400.00,4004
+II-001192,INV-00572,2,Annual maintenance contract,1.00,409400.00,409400.00,4004
+II-001193,INV-00573,1,Platform subscription - annual licence (monthly billing),1.00,203700.00,203700.00,4002
+II-001194,INV-00573,2,Premium support add-on,1.00,758400.00,758400.00,4002
+II-001195,INV-00573,3,Platform subscription - annual licence (monthly billing),1.00,105700.00,105700.00,4002
+II-001196,INV-00574,1,Premium support add-on,1.00,3288600.00,3288600.00,4002
+II-001197,INV-00575,1,Mobile app enhancement sprint,1.00,3224700.00,3224700.00,4001
+II-001198,INV-00576,1,Mobile app enhancement sprint,1.00,20800.00,20800.00,4001
+II-001199,INV-00576,2,Application development - time & material,1.00,2372200.00,2372200.00,4001
+II-001200,INV-00577,1,Application development - time & material,160.00,14178.75,2268600.00,4001
+II-001201,INV-00578,1,Dedicated engineering pod,1.00,1309200.00,1309200.00,4001
+II-001202,INV-00579,1,Mobile app enhancement sprint,176.00,21251.14,3740200.00,4001
+II-001203,INV-00579,2,Mobile app enhancement sprint,12.00,39900.00,478800.00,4001
+II-001204,INV-00579,3,QA & test automation services,1.00,359500.00,359500.00,4001
+II-001205,INV-00580,1,Dedicated engineering pod,1.00,34600.00,34600.00,4001
+II-001206,INV-00580,2,API integration work,12.00,43408.33,520900.00,4001
+II-001207,INV-00580,3,API integration work,176.00,1418.75,249700.00,4001
+II-001208,INV-00581,1,24x7 production support retainer,1.00,5324300.00,5324300.00,4004
+II-001209,INV-00582,1,Process automation assessment,176.00,8763.07,1542300.00,4003
+II-001210,INV-00582,2,Architecture review & roadmap,1.00,103500.00,103500.00,4003
+II-001211,INV-00582,3,Digital transformation consulting,80.00,11612.50,929000.00,4003
+II-001212,INV-00583,1,Digital transformation consulting,1.00,2250700.00,2250700.00,4003
+II-001213,INV-00584,1,Mobile app enhancement sprint,120.00,8003.33,960400.00,4001
+II-001214,INV-00585,1,Managed services - monitoring,12.00,17583.33,211000.00,4004
+II-001215,INV-00585,2,Managed services - monitoring,12.00,84475.00,1013700.00,4004
+II-001216,INV-00586,1,QA & test automation services,80.00,12560.00,1004800.00,4001
+II-001217,INV-00586,2,API integration work,1.00,2012400.00,2012400.00,4001
+II-001218,INV-00587,1,Data strategy workshop,176.00,4016.48,706900.00,4003
+II-001219,INV-00588,1,Digital transformation consulting,12.00,217141.67,2605700.00,4003
+II-001220,INV-00589,1,Application development - time & material,120.00,8142.50,977100.00,4001
+II-001221,INV-00590,1,Platform subscription - annual licence (monthly billing),1.00,1105000.00,1105000.00,4002
+II-001222,INV-00591,1,Application development - time & material,120.00,4613.33,553600.00,4001
+II-001223,INV-00591,2,Mobile app enhancement sprint,120.00,1022.50,122700.00,4001
+II-001224,INV-00591,3,Mobile app enhancement sprint,160.00,3783.13,605300.00,4001
+II-001225,INV-00592,1,Mobile app enhancement sprint,12.00,16566.67,198800.00,4001
+II-001226,INV-00592,2,QA & test automation services,12.00,20425.00,245100.00,4001
+II-001227,INV-00592,3,QA & test automation services,160.00,6332.50,1013200.00,4001
+II-001228,INV-00592,4,Dedicated engineering pod,120.00,4641.67,557000.00,4001
+II-001229,INV-00593,1,24x7 production support retainer,1.00,755100.00,755100.00,4004
+II-001230,INV-00593,2,24x7 production support retainer,120.00,6939.17,832700.00,4004
+II-001231,INV-00593,3,Managed services - monitoring,160.00,2628.13,420500.00,4004
+II-001232,INV-00594,1,Premium support add-on,1.00,454900.00,454900.00,4002
+II-001233,INV-00594,2,Managed SaaS hosting plan,1.00,1504400.00,1504400.00,4002
+II-001234,INV-00594,3,Platform subscription - annual licence (monthly billing),1.00,1447700.00,1447700.00,4002
+II-001235,INV-00595,1,QA & test automation services,1.00,29700.00,29700.00,4001
+II-001236,INV-00595,2,Application development - time & material,176.00,3243.18,570800.00,4001
+II-001237,INV-00595,3,QA & test automation services,120.00,1397.50,167700.00,4001
+II-001238,INV-00595,4,API integration work,12.00,54875.00,658500.00,4001
+II-001239,INV-00596,1,Mobile app enhancement sprint,80.00,12222.50,977800.00,4001
+II-001240,INV-00597,1,Application development - time & material,160.00,3028.13,484500.00,4001
+II-001241,INV-00597,2,QA & test automation services,176.00,2646.02,465700.00,4001
+II-001242,INV-00597,3,Dedicated engineering pod,120.00,445.00,53400.00,4001
+II-001243,INV-00597,4,API integration work,1.00,84300.00,84300.00,4001
+II-001244,INV-00598,1,Mobile app enhancement sprint,12.00,20308.33,243700.00,4001
+II-001245,INV-00598,2,Application development - time & material,12.00,123833.33,1486000.00,4001
+II-001246,INV-00598,3,API integration work,1.00,986700.00,986700.00,4001
+II-001247,INV-00599,1,QA & test automation services,1.00,210500.00,210500.00,4001
+II-001248,INV-00599,2,Mobile app enhancement sprint,1.00,480000.00,480000.00,4001
+II-001249,INV-00599,3,API integration work,120.00,4505.83,540700.00,4001
+II-001250,INV-00600,1,Platform subscription - annual licence (monthly billing),1.00,3770400.00,3770400.00,4002
+II-001251,INV-00601,1,Application development - time & material,12.00,66341.67,796100.00,4001
+II-001252,INV-00601,2,API integration work,160.00,29092.50,4654800.00,4001
+II-001253,INV-00601,3,QA & test automation services,120.00,547.50,65700.00,4001
+II-001254,INV-00602,1,API integration work,80.00,30246.25,2419700.00,4001
+II-001255,INV-00602,2,QA & test automation services,176.00,3784.66,666100.00,4001
+II-001256,INV-00603,1,Mobile app enhancement sprint,160.00,16246.88,2599500.00,4001
+II-001257,INV-00604,1,Managed SaaS hosting plan,1.00,1605900.00,1605900.00,4002
+II-001258,INV-00605,1,Analytics module subscription,1.00,1522700.00,1522700.00,4002
+II-001259,INV-00606,1,QA & test automation services,1.00,236400.00,236400.00,4001
+II-001260,INV-00606,2,Dedicated engineering pod,176.00,6642.05,1169000.00,4001
+II-001261,INV-00606,3,Mobile app enhancement sprint,1.00,956800.00,956800.00,4001
+II-001262,INV-00607,1,Analytics module subscription,1.00,2024000.00,2024000.00,4002
+II-001263,INV-00608,1,QA & test automation services,176.00,211.93,37300.00,4001
+II-001264,INV-00608,2,API integration work,80.00,3692.50,295400.00,4001
+II-001265,INV-00608,3,API integration work,176.00,3683.52,648300.00,4001
+II-001266,INV-00609,1,Managed services - monitoring,176.00,2773.86,488200.00,4004
+II-001267,INV-00609,2,Annual maintenance contract,176.00,1005.11,176900.00,4004
+II-001268,INV-00609,3,24x7 production support retainer,12.00,128108.33,1537300.00,4004
+II-001269,INV-00609,4,Managed services - monitoring,80.00,10126.25,810100.00,4004
+II-001270,INV-00610,1,API integration work,80.00,26520.00,2121600.00,4001
+II-001271,INV-00611,1,24x7 production support retainer,1.00,1644900.00,1644900.00,4004
+II-001272,INV-00612,1,QA & test automation services,160.00,24349.38,3895900.00,4001
+II-001273,INV-00613,1,Application development - time & material,160.00,2879.38,460700.00,4001
+II-001274,INV-00613,2,API integration work,120.00,1000.00,120000.00,4001
+II-001275,INV-00613,3,QA & test automation services,1.00,327300.00,327300.00,4001
+II-001276,INV-00613,4,QA & test automation services,1.00,708400.00,708400.00,4001
+II-001277,INV-00614,1,Premium support add-on,1.00,342400.00,342400.00,4002
+II-001278,INV-00614,2,Premium support add-on,1.00,2197800.00,2197800.00,4002
+II-001279,INV-00614,3,Analytics module subscription,1.00,301600.00,301600.00,4002
+II-001280,INV-00615,1,Mobile app enhancement sprint,1.00,609400.00,609400.00,4001
+II-001281,INV-00615,2,Application development - time & material,160.00,399.38,63900.00,4001
+II-001282,INV-00615,3,API integration work,12.00,34033.33,408400.00,4001
+II-001283,INV-00615,4,API integration work,1.00,99500.00,99500.00,4001
+II-001284,INV-00616,1,API integration work,176.00,18247.16,3211500.00,4001
+II-001285,INV-00617,1,API integration work,1.00,355100.00,355100.00,4001
+II-001286,INV-00617,2,QA & test automation services,1.00,14900.00,14900.00,4001
+II-001287,INV-00618,1,Annual maintenance contract,1.00,468800.00,468800.00,4004
+II-001288,INV-00618,2,Annual maintenance contract,1.00,72000.00,72000.00,4004
+II-001289,INV-00618,3,Annual maintenance contract,12.00,37441.67,449300.00,4004
+II-001290,INV-00619,1,Data strategy workshop,80.00,3092.50,247400.00,4003
+II-001291,INV-00619,2,Digital transformation consulting,176.00,5371.59,945400.00,4003
+II-001292,INV-00620,1,Data strategy workshop,176.00,10123.86,1781800.00,4003
+II-001293,INV-00620,2,Architecture review & roadmap,120.00,4618.33,554200.00,4003
+II-001294,INV-00620,3,Process automation assessment,176.00,992.05,174600.00,4003
+II-001295,INV-00621,1,QA & test automation services,80.00,14023.75,1121900.00,4001
+II-001296,INV-00622,1,24x7 production support retainer,80.00,396.25,31700.00,4004
+II-001297,INV-00622,2,Managed services - monitoring,160.00,5108.75,817400.00,4004
+II-001298,INV-00622,3,24x7 production support retainer,12.00,29200.00,350400.00,4004
+II-001299,INV-00622,4,24x7 production support retainer,1.00,452800.00,452800.00,4004
+II-001300,INV-00623,1,API integration work,12.00,8425.00,101100.00,4001
+II-001301,INV-00623,2,Dedicated engineering pod,160.00,3046.88,487500.00,4001
+II-001302,INV-00623,3,Mobile app enhancement sprint,160.00,4036.88,645900.00,4001
+II-001303,INV-00623,4,Dedicated engineering pod,12.00,28350.00,340200.00,4001
+II-001304,INV-00624,1,API integration work,12.00,182658.33,2191900.00,4001
+II-001305,INV-00625,1,API integration work,176.00,9311.36,1638800.00,4001
+II-001306,INV-00625,2,QA & test automation services,160.00,2381.25,381000.00,4001
+II-001307,INV-00625,3,Mobile app enhancement sprint,160.00,6214.38,994300.00,4001
+II-001308,INV-00626,1,Mobile app enhancement sprint,12.00,55325.00,663900.00,4001
+II-001309,INV-00626,2,Dedicated engineering pod,120.00,16790.83,2014900.00,4001
+II-001310,INV-00627,1,Mobile app enhancement sprint,12.00,73258.33,879100.00,4001
+II-001311,INV-00627,2,Dedicated engineering pod,12.00,7341.67,88100.00,4001
+II-001312,INV-00627,3,Dedicated engineering pod,12.00,16558.33,198700.00,4001
+II-001313,INV-00627,4,Dedicated engineering pod,160.00,12245.63,1959300.00,4001
+II-001314,INV-00628,1,Mobile app enhancement sprint,160.00,10602.50,1696400.00,4001
+II-001315,INV-00628,2,QA & test automation services,176.00,10256.25,1805100.00,4001
+II-001316,INV-00629,1,QA & test automation services,1.00,817600.00,817600.00,4001
+II-001317,INV-00629,2,API integration work,1.00,83600.00,83600.00,4001
+II-001318,INV-00630,1,Application development - time & material,80.00,10108.75,808700.00,4001
+II-001319,INV-00631,1,Dedicated engineering pod,120.00,9620.00,1154400.00,4001
+II-001320,INV-00632,1,QA & test automation services,160.00,3970.63,635300.00,4001
+II-001321,INV-00632,2,Application development - time & material,160.00,836.25,133800.00,4001
+II-001322,INV-00632,3,Dedicated engineering pod,120.00,6381.67,765800.00,4001
+II-001323,INV-00632,4,Mobile app enhancement sprint,1.00,4469700.00,4469700.00,4001
+II-001324,INV-00633,1,QA & test automation services,1.00,1252200.00,1252200.00,4001
+II-001325,INV-00633,2,Application development - time & material,80.00,30700.00,2456000.00,4001
+II-001326,INV-00633,3,API integration work,1.00,69200.00,69200.00,4001
+II-001327,INV-00634,1,API integration work,12.00,26791.67,321500.00,4001
+II-001328,INV-00634,2,Mobile app enhancement sprint,1.00,25500.00,25500.00,4001
+II-001329,INV-00634,3,Application development - time & material,12.00,29575.00,354900.00,4001
+II-001330,INV-00634,4,Mobile app enhancement sprint,176.00,205.11,36100.00,4001
+II-001331,INV-00635,1,Premium support add-on,1.00,374600.00,374600.00,4002
+II-001332,INV-00635,2,Premium support add-on,1.00,4439400.00,4439400.00,4002
+II-001333,INV-00635,3,Analytics module subscription,1.00,3198000.00,3198000.00,4002
+II-001334,INV-00636,1,Data strategy workshop,176.00,5654.55,995200.00,4003
+II-001335,INV-00637,1,Data strategy workshop,1.00,545800.00,545800.00,4003
+II-001336,INV-00638,1,Application development - time & material,12.00,184133.33,2209600.00,4001
+II-001337,INV-00638,2,Application development - time & material,80.00,31177.50,2494200.00,4001
+II-001338,INV-00638,3,Application development - time & material,1.00,883100.00,883100.00,4001
+II-001339,INV-00639,1,Premium support add-on,1.00,2120200.00,2120200.00,4002
+II-001340,INV-00640,1,Annual maintenance contract,80.00,16212.50,1297000.00,4004
+II-001341,INV-00640,2,Managed services - monitoring,80.00,773.75,61900.00,4004
+II-001342,INV-00641,1,Mobile app enhancement sprint,120.00,5277.50,633300.00,4001
+II-001343,INV-00641,2,QA & test automation services,1.00,1428000.00,1428000.00,4001
+II-001344,INV-00642,1,QA & test automation services,1.00,1442700.00,1442700.00,4001
+II-001345,INV-00642,2,Mobile app enhancement sprint,160.00,154.38,24700.00,4001
+II-001346,INV-00643,1,Dedicated engineering pod,12.00,185233.33,2222800.00,4001
+II-001347,INV-00644,1,Managed SaaS hosting plan,1.00,242600.00,242600.00,4002
+II-001348,INV-00644,2,Platform subscription - annual licence (monthly billing),1.00,713500.00,713500.00,4002
+II-001349,INV-00645,1,Mobile app enhancement sprint,80.00,9613.75,769100.00,4001
+II-001350,INV-00646,1,QA & test automation services,176.00,4642.05,817000.00,4001
+II-001351,INV-00646,2,Application development - time & material,12.00,25766.67,309200.00,4001
+II-001352,INV-00647,1,Managed SaaS hosting plan,1.00,825500.00,825500.00,4002
+II-001353,INV-00647,2,Managed SaaS hosting plan,1.00,1454000.00,1454000.00,4002
+II-001354,INV-00647,3,Managed SaaS hosting plan,1.00,263700.00,263700.00,4002
+II-001355,INV-00647,4,Platform subscription - annual licence (monthly billing),1.00,1626700.00,1626700.00,4002
+II-001356,INV-00648,1,Data strategy workshop,120.00,788.33,94600.00,4003
+II-001357,INV-00648,2,Process automation assessment,1.00,606400.00,606400.00,4003
+II-001358,INV-00649,1,Analytics module subscription,1.00,2500.00,2500.00,4002
+II-001359,INV-00649,2,Premium support add-on,1.00,262300.00,262300.00,4002
+II-001360,INV-00649,3,Premium support add-on,1.00,213100.00,213100.00,4002
+II-001361,INV-00650,1,API integration work,1.00,1708700.00,1708700.00,4001
+II-001362,INV-00650,2,QA & test automation services,160.00,9895.00,1583200.00,4001
+II-001363,INV-00651,1,Dedicated engineering pod,80.00,15433.75,1234700.00,4001
+II-001364,INV-00652,1,Dedicated engineering pod,120.00,22737.50,2728500.00,4001
+II-001365,INV-00653,1,Platform subscription - annual licence (monthly billing),1.00,2344500.00,2344500.00,4002
+II-001366,INV-00654,1,Application development - time & material,1.00,736000.00,736000.00,4001
+II-001367,INV-00655,1,QA & test automation services,80.00,6958.75,556700.00,4001
+II-001368,INV-00655,2,Dedicated engineering pod,120.00,1474.17,176900.00,4001
+II-001369,INV-00656,1,Process automation assessment,12.00,306683.33,3680200.00,4003
+II-001370,INV-00656,2,Architecture review & roadmap,1.00,1101100.00,1101100.00,4003
+II-001371,INV-00657,1,Managed SaaS hosting plan,1.00,1683200.00,1683200.00,4002
+II-001372,INV-00658,1,Annual maintenance contract,80.00,26883.75,2150700.00,4004
+II-001373,INV-00658,2,24x7 production support retainer,80.00,2431.25,194500.00,4004
+II-001374,INV-00659,1,API integration work,80.00,34420.00,2753600.00,4001
+II-001375,INV-00660,1,Managed SaaS hosting plan,1.00,187900.00,187900.00,4002
+II-001376,INV-00660,2,Analytics module subscription,1.00,1258600.00,1258600.00,4002
+II-001377,INV-00661,1,QA & test automation services,176.00,209.09,36800.00,4001
+II-001378,INV-00661,2,QA & test automation services,12.00,21783.33,261400.00,4001
+II-001379,INV-00661,3,Application development - time & material,12.00,8966.67,107600.00,4001
+II-001380,INV-00662,1,Managed services - monitoring,160.00,13125.00,2100000.00,4004
+II-001381,INV-00662,2,Managed services - monitoring,160.00,19337.50,3094000.00,4004
+II-001382,INV-00663,1,Platform subscription - annual licence (monthly billing),1.00,2662900.00,2662900.00,4002
+II-001383,INV-00664,1,Dedicated engineering pod,80.00,27976.25,2238100.00,4001
+II-001384,INV-00665,1,API integration work,120.00,4090.00,490800.00,4001
+II-001385,INV-00665,2,Dedicated engineering pod,1.00,837600.00,837600.00,4001
+II-001386,INV-00666,1,Premium support add-on,1.00,304800.00,304800.00,4002
+II-001387,INV-00667,1,Analytics module subscription,1.00,530100.00,530100.00,4002
+II-001388,INV-00667,2,Analytics module subscription,1.00,216000.00,216000.00,4002
+II-001389,INV-00667,3,Analytics module subscription,1.00,1070900.00,1070900.00,4002
+II-001390,INV-00667,4,Managed SaaS hosting plan,1.00,584600.00,584600.00,4002
+II-001391,INV-00668,1,Dedicated engineering pod,176.00,153.41,27000.00,4001
+II-001392,INV-00668,2,API integration work,176.00,3853.98,678300.00,4001
+II-001393,INV-00668,3,QA & test automation services,80.00,4167.50,333400.00,4001
+II-001394,INV-00669,1,Architecture review & roadmap,120.00,4140.00,496800.00,4003
+II-001395,INV-00669,2,Architecture review & roadmap,1.00,472400.00,472400.00,4003
+II-001396,INV-00670,1,Application development - time & material,120.00,34512.50,4141500.00,4001
+II-001397,INV-00670,2,Application development - time & material,80.00,7581.25,606500.00,4001
+II-001398,INV-00671,1,QA & test automation services,80.00,14085.00,1126800.00,4001
+II-001399,INV-00672,1,Mobile app enhancement sprint,1.00,637200.00,637200.00,4001
+II-001400,INV-00672,2,Dedicated engineering pod,1.00,357700.00,357700.00,4001
+II-001401,INV-00673,1,Platform subscription - annual licence (monthly billing),1.00,895400.00,895400.00,4002
+II-001402,INV-00674,1,Dedicated engineering pod,120.00,2575.83,309100.00,4001
+II-001403,INV-00674,2,QA & test automation services,1.00,511800.00,511800.00,4001
+II-001404,INV-00675,1,Application development - time & material,176.00,3738.07,657900.00,4001
+II-001405,INV-00675,2,Application development - time & material,176.00,6289.20,1106900.00,4001
+II-001406,INV-00675,3,QA & test automation services,160.00,1390.00,222400.00,4001
+II-001407,INV-00676,1,Managed SaaS hosting plan,1.00,202100.00,202100.00,4002
+II-001408,INV-00676,2,Platform subscription - annual licence (monthly billing),1.00,277400.00,277400.00,4002
+II-001409,INV-00676,3,Analytics module subscription,1.00,543200.00,543200.00,4002
+II-001410,INV-00677,1,Managed services - monitoring,176.00,5224.43,919500.00,4004
+II-001411,INV-00678,1,24x7 production support retainer,160.00,5154.38,824700.00,4004
+II-001412,INV-00678,2,Annual maintenance contract,80.00,16328.75,1306300.00,4004
+II-001413,INV-00678,3,Managed services - monitoring,1.00,775200.00,775200.00,4004
+II-001414,INV-00679,1,Analytics module subscription,1.00,1920500.00,1920500.00,4002
+II-001415,INV-00679,2,Premium support add-on,1.00,3516000.00,3516000.00,4002
+II-001416,INV-00680,1,Analytics module subscription,1.00,373100.00,373100.00,4002
+II-001417,INV-00680,2,Managed SaaS hosting plan,1.00,410900.00,410900.00,4002
+II-001418,INV-00680,3,Premium support add-on,1.00,1356600.00,1356600.00,4002
+II-001419,INV-00681,1,Digital transformation consulting,160.00,1086.25,173800.00,4003
+II-001420,INV-00681,2,Digital transformation consulting,12.00,31541.67,378500.00,4003
+II-001421,INV-00681,3,Process automation assessment,80.00,218.75,17500.00,4003
+II-001422,INV-00682,1,Mobile app enhancement sprint,12.00,40791.67,489500.00,4001
+II-001423,INV-00683,1,Premium support add-on,1.00,1900900.00,1900900.00,4002
+II-001424,INV-00683,2,Platform subscription - annual licence (monthly billing),1.00,766500.00,766500.00,4002
+II-001425,INV-00684,1,API integration work,1.00,3588100.00,3588100.00,4001
+II-001426,INV-00685,1,Managed SaaS hosting plan,1.00,5006600.00,5006600.00,4002
+II-001427,INV-00686,1,Analytics module subscription,1.00,88700.00,88700.00,4002
+II-001428,INV-00686,2,Analytics module subscription,1.00,1168200.00,1168200.00,4002
+II-001429,INV-00687,1,Analytics module subscription,1.00,2833200.00,2833200.00,4002
+II-001430,INV-00687,2,Premium support add-on,1.00,828200.00,828200.00,4002
+II-001431,INV-00688,1,Managed SaaS hosting plan,1.00,1459600.00,1459600.00,4002
+II-001432,INV-00688,2,Analytics module subscription,1.00,137000.00,137000.00,4002
+II-001433,INV-00689,1,API integration work,120.00,10976.67,1317200.00,4001
+II-001434,INV-00690,1,Analytics module subscription,1.00,446100.00,446100.00,4002
+II-001435,INV-00690,2,Analytics module subscription,1.00,109000.00,109000.00,4002
+II-001436,INV-00690,3,Managed SaaS hosting plan,1.00,33700.00,33700.00,4002
+II-001437,INV-00690,4,Managed SaaS hosting plan,1.00,27700.00,27700.00,4002
+II-001438,INV-00691,1,Digital transformation consulting,80.00,21270.00,1701600.00,4003
+II-001439,INV-00692,1,Mobile app enhancement sprint,1.00,1317500.00,1317500.00,4001
+II-001440,INV-00693,1,API integration work,1.00,91200.00,91200.00,4001
+II-001441,INV-00693,2,QA & test automation services,176.00,5201.14,915400.00,4001
+II-001442,INV-00694,1,Dedicated engineering pod,1.00,1688500.00,1688500.00,4001
+II-001443,INV-00695,1,Premium support add-on,1.00,3218500.00,3218500.00,4002
+II-001444,INV-00696,1,Premium support add-on,1.00,674400.00,674400.00,4002
+II-001445,INV-00696,2,Platform subscription - annual licence (monthly billing),1.00,1689800.00,1689800.00,4002
+II-001446,INV-00697,1,API integration work,176.00,3079.55,542000.00,4001
+II-001447,INV-00697,2,Application development - time & material,12.00,6908.33,82900.00,4001
+II-001448,INV-00697,3,API integration work,1.00,1397600.00,1397600.00,4001
+II-001449,INV-00698,1,Managed SaaS hosting plan,1.00,980700.00,980700.00,4002
+II-001450,INV-00698,2,Analytics module subscription,1.00,110100.00,110100.00,4002
+II-001451,INV-00698,3,Platform subscription - annual licence (monthly billing),1.00,292100.00,292100.00,4002
+II-001452,INV-00699,1,Mobile app enhancement sprint,120.00,6762.50,811500.00,4001
+II-001453,INV-00700,1,API integration work,12.00,3375.00,40500.00,4001
+II-001454,INV-00700,2,Application development - time & material,160.00,1030.63,164900.00,4001
+II-001455,INV-00700,3,Application development - time & material,1.00,1738200.00,1738200.00,4001
+II-001456,INV-00701,1,Platform subscription - annual licence (monthly billing),1.00,927200.00,927200.00,4002
+II-001457,INV-00702,1,Architecture review & roadmap,12.00,131441.67,1577300.00,4003
+II-001458,INV-00702,2,Process automation assessment,120.00,9877.50,1185300.00,4003
+II-001459,INV-00703,1,Managed services - monitoring,80.00,10305.00,824400.00,4004
+II-001460,INV-00704,1,Architecture review & roadmap,12.00,2133.33,25600.00,4003
+II-001461,INV-00704,2,Process automation assessment,80.00,5212.50,417000.00,4003
+II-001462,INV-00704,3,Process automation assessment,80.00,1108.75,88700.00,4003
+II-001463,INV-00705,1,Dedicated engineering pod,1.00,1032900.00,1032900.00,4001
+II-001464,INV-00706,1,Managed services - monitoring,176.00,28019.32,4931400.00,4004
+II-001465,INV-00707,1,Dedicated engineering pod,80.00,986.25,78900.00,4001
+II-001466,INV-00707,2,Dedicated engineering pod,160.00,2928.13,468500.00,4001
+II-001467,INV-00708,1,Analytics module subscription,1.00,200900.00,200900.00,4002
+II-001468,INV-00708,2,Premium support add-on,1.00,482700.00,482700.00,4002
+II-001469,INV-00709,1,Premium support add-on,1.00,2336100.00,2336100.00,4002
+II-001470,INV-00709,2,Analytics module subscription,1.00,485600.00,485600.00,4002
+II-001471,INV-00710,1,Annual maintenance contract,1.00,4846100.00,4846100.00,4004
+II-001472,INV-00711,1,API integration work,80.00,8443.75,675500.00,4001
+II-001473,INV-00711,2,QA & test automation services,1.00,467200.00,467200.00,4001
+II-001474,INV-00711,3,Application development - time & material,80.00,7691.25,615300.00,4001
+II-001475,INV-00712,1,Premium support add-on,1.00,1526000.00,1526000.00,4002
+II-001476,INV-00712,2,Managed SaaS hosting plan,1.00,733100.00,733100.00,4002
+II-001477,INV-00713,1,Platform subscription - annual licence (monthly billing),1.00,1123000.00,1123000.00,4002
+II-001478,INV-00714,1,Managed SaaS hosting plan,1.00,1300400.00,1300400.00,4002
+II-001479,INV-00715,1,Mobile app enhancement sprint,120.00,3168.33,380200.00,4001
+II-001480,INV-00715,2,API integration work,160.00,1112.50,178000.00,4001
+II-001481,INV-00716,1,Architecture review & roadmap,80.00,40563.75,3245100.00,4003
+II-001482,INV-00717,1,Annual maintenance contract,12.00,29525.00,354300.00,4004
+II-001483,INV-00717,2,Managed services - monitoring,120.00,479.17,57500.00,4004
+II-001484,INV-00717,3,Managed services - monitoring,1.00,275300.00,275300.00,4004
+II-001485,INV-00717,4,Managed services - monitoring,1.00,239700.00,239700.00,4004
+II-001486,INV-00718,1,QA & test automation services,12.00,23716.67,284600.00,4001
+II-001487,INV-00718,2,QA & test automation services,1.00,1062000.00,1062000.00,4001
+II-001488,INV-00718,3,Dedicated engineering pod,80.00,5398.75,431900.00,4001
+II-001489,INV-00719,1,QA & test automation services,176.00,13719.89,2414700.00,4001
+II-001490,INV-00720,1,Dedicated engineering pod,1.00,970000.00,970000.00,4001
+II-001491,INV-00720,2,Dedicated engineering pod,1.00,1644700.00,1644700.00,4001
+II-001492,INV-00720,3,Application development - time & material,160.00,15733.13,2517300.00,4001
+II-001493,INV-00721,1,Dedicated engineering pod,120.00,2406.67,288800.00,4001
+II-001494,INV-00721,2,Dedicated engineering pod,176.00,24866.48,4376500.00,4001
+II-001495,INV-00722,1,Dedicated engineering pod,160.00,3103.13,496500.00,4001
+II-001496,INV-00722,2,Mobile app enhancement sprint,1.00,476600.00,476600.00,4001
+II-001497,INV-00722,3,Mobile app enhancement sprint,1.00,820200.00,820200.00,4001
+II-001498,INV-00723,1,Application development - time & material,176.00,1836.36,323200.00,4001
+II-001499,INV-00723,2,API integration work,80.00,1951.25,156100.00,4001
+II-001500,INV-00723,3,QA & test automation services,1.00,274500.00,274500.00,4001
+II-001501,INV-00724,1,API integration work,1.00,1084300.00,1084300.00,4001
+II-001502,INV-00725,1,Mobile app enhancement sprint,160.00,1588.75,254200.00,4001
+II-001503,INV-00725,2,Dedicated engineering pod,1.00,220900.00,220900.00,4001
+II-001504,INV-00725,3,API integration work,160.00,2179.38,348700.00,4001
+II-001505,INV-00726,1,Mobile app enhancement sprint,1.00,1336000.00,1336000.00,4001
+II-001506,INV-00726,2,Dedicated engineering pod,80.00,4593.75,367500.00,4001
+II-001507,INV-00727,1,Mobile app enhancement sprint,176.00,1796.02,316100.00,4001
+II-001508,INV-00727,2,Dedicated engineering pod,80.00,14810.00,1184800.00,4001
+II-001509,INV-00728,1,Managed services - monitoring,120.00,4341.67,521000.00,4004
+II-001510,INV-00728,2,Managed services - monitoring,80.00,1847.50,147800.00,4004
+II-001511,INV-00728,3,Annual maintenance contract,12.00,9475.00,113700.00,4004
+II-001512,INV-00729,1,Dedicated engineering pod,12.00,156925.00,1883100.00,4001
+II-001513,INV-00730,1,Dedicated engineering pod,120.00,3536.67,424400.00,4001
+II-001514,INV-00730,2,Dedicated engineering pod,160.00,2015.63,322500.00,4001
+II-001515,INV-00731,1,Mobile app enhancement sprint,120.00,19764.17,2371700.00,4001
+II-001516,INV-00731,2,Dedicated engineering pod,120.00,7041.67,845000.00,4001
+II-001517,INV-00732,1,API integration work,176.00,544.32,95800.00,4001
+II-001518,INV-00732,2,API integration work,1.00,490400.00,490400.00,4001
+II-001519,INV-00732,3,Application development - time & material,1.00,210800.00,210800.00,4001
+II-001520,INV-00733,1,Annual maintenance contract,12.00,43150.00,517800.00,4004
+II-001521,INV-00733,2,Annual maintenance contract,80.00,3035.00,242800.00,4004
+II-001522,INV-00734,1,Application development - time & material,160.00,11293.13,1806900.00,4001
+II-001523,INV-00734,2,Mobile app enhancement sprint,176.00,3711.36,653200.00,4001
+II-001524,INV-00735,1,24x7 production support retainer,120.00,11200.00,1344000.00,4004
+II-001525,INV-00736,1,Annual maintenance contract,160.00,2753.75,440600.00,4004
+II-001526,INV-00736,2,24x7 production support retainer,1.00,409600.00,409600.00,4004
+II-001527,INV-00736,3,Annual maintenance contract,80.00,2720.00,217600.00,4004
+II-001528,INV-00737,1,Architecture review & roadmap,1.00,1388100.00,1388100.00,4003
+II-001529,INV-00737,2,Architecture review & roadmap,80.00,10080.00,806400.00,4003
+II-001530,INV-00738,1,Mobile app enhancement sprint,160.00,4037.50,646000.00,4001
+II-001531,INV-00738,2,QA & test automation services,80.00,10635.00,850800.00,4001
+II-001532,INV-00738,3,Dedicated engineering pod,80.00,4051.25,324100.00,4001
+II-001533,INV-00738,4,Mobile app enhancement sprint,1.00,1091600.00,1091600.00,4001
+II-001534,INV-00739,1,Mobile app enhancement sprint,1.00,2026500.00,2026500.00,4001
+II-001535,INV-00739,2,Dedicated engineering pod,1.00,952500.00,952500.00,4001
+II-001536,INV-00739,3,QA & test automation services,1.00,476000.00,476000.00,4001
+II-001537,INV-00740,1,Managed SaaS hosting plan,1.00,368200.00,368200.00,4002
+II-001538,INV-00740,2,Analytics module subscription,1.00,503600.00,503600.00,4002
+II-001539,INV-00741,1,Managed SaaS hosting plan,1.00,1839200.00,1839200.00,4002
+II-001540,INV-00741,2,Premium support add-on,1.00,1215800.00,1215800.00,4002
+II-001541,INV-00742,1,Application development - time & material,12.00,98350.00,1180200.00,4001
+II-001542,INV-00743,1,Application development - time & material,80.00,67160.00,5372800.00,4001
