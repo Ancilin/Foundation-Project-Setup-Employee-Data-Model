@@ -5,6 +5,7 @@ from app.models.attendance import Attendance
 from app.models.base import Base
 from app.models.department import Department
 from app.models.employee import Employee
+from app.models.expense import Expense, Vendor
 from app.models.invoice import Client, Invoice, InvoiceItem, InvoicePayment
 from app.models.leave import Holiday, LeaveBalance, LeaveRequest, LeaveType
 from app.models.ledger import ChartOfAccount, JournalEntry, JournalLine
@@ -22,6 +23,7 @@ from app.models.salary import (
     SalaryRevision,
     SalaryStructure,
 )
+from app.models.user import User
 
 __all__ = [
     "Attendance",
@@ -31,6 +33,7 @@ __all__ = [
     "Department",
     "Employee",
     "EmployeeAssignment",
+    "Expense",
     "Holiday",
     "Invoice",
     "InvoiceItem",
@@ -50,4 +53,6 @@ __all__ = [
     "StatutoryRate",
     "TaxParameter",
     "TaxSlab",
+    "User",
+    "Vendor",
 ]

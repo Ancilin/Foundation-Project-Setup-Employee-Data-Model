@@ -1,10 +1,12 @@
-"""HTTP route endpoints for employees."""
+"""HTTP route endpoints for employees with JWT & RBAC protection (LF-04, LF-13)."""
 
 import math
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
+from app.core.security import ensure_self_or_hr_admin, require_role
 from app.db.session import get_db
+from app.models.user import User
 from app.schemas.common import PaginatedResponse
 from app.schemas.employee import EmployeeCreate, EmployeeResponse, EmployeeUpdate
 from app.services import employee_service
@@ -15,6 +17,7 @@ router = APIRouter(prefix="/employees", tags=["employees"])
 @router.post("", response_model=EmployeeResponse, status_code=status.HTTP_201_CREATED, summary="Create a new employee")
 def create_employee(
     payload: EmployeeCreate,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ) -> EmployeeResponse:
     return employee_service.create_employee(db, payload)
@@ -28,6 +31,7 @@ def list_employees(
     status: str | None = Query(None, description="Filter by employment status (e.g. Active, Resigned)"),
     q: str | None = Query(None, description="Search term in name, email, or employee ID"),
     include_inactive: bool = Query(False, description="Include soft-deleted inactive employees"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ) -> PaginatedResponse[EmployeeResponse]:
     items, total = employee_service.list_employees(
@@ -52,8 +56,10 @@ def list_employees(
 @router.get("/{employee_id}", response_model=EmployeeResponse, summary="Get employee details by ID")
 def get_employee(
     employee_id: str,
+    current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ) -> EmployeeResponse:
+    ensure_self_or_hr_admin(current_user, employee_id)
     return employee_service.get_employee(db, employee_id)
 
 
@@ -61,6 +67,7 @@ def get_employee(
 def update_employee(
     employee_id: str,
     payload: EmployeeUpdate,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ) -> EmployeeResponse:
     return employee_service.update_employee(db, employee_id, payload)
@@ -69,6 +76,7 @@ def update_employee(
 @router.delete("/{employee_id}", response_model=EmployeeResponse, summary="Soft delete employee")
 def delete_employee(
     employee_id: str,
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ) -> EmployeeResponse:
     return employee_service.delete_employee(db, employee_id)
@@ -78,6 +86,8 @@ def delete_employee(
 def get_employee_team(
     employee_id: str,
     include_inactive: bool = Query(False, description="Include soft-deleted team members"),
+    current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ) -> list[EmployeeResponse]:
+    ensure_self_or_hr_admin(current_user, employee_id)
     return employee_service.get_direct_reports(db, employee_id, include_inactive=include_inactive)

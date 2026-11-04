@@ -1,4 +1,4 @@
-"""Double-Entry Accounting Ledger HTTP routes (LF-09):
+"""Double-Entry Accounting Ledger HTTP routes (LF-09, LF-13):
 Chart of accounts, balanced journal entries, read-only posted entries, reversals, account balances, and payroll posting.
 """
 
@@ -6,7 +6,9 @@ from datetime import date
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
+from app.core.security import require_role
 from app.db.session import get_db
+from app.models.user import User
 from app.schemas.ledger import (
     AccountBalanceRead,
     ChartOfAccountRead,
@@ -21,7 +23,10 @@ router = APIRouter(prefix="/ledger", tags=["Ledger"])
 
 
 @router.get("/accounts", response_model=list[ChartOfAccountRead])
-def get_chart_of_accounts(db: Session = Depends(get_db)):
+def get_chart_of_accounts(
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
     """List the full Chart of Accounts (Assets, Liabilities, Equity, Income, Expenses)."""
     return ledger_service.list_chart_of_accounts(db)
 
@@ -30,6 +35,7 @@ def get_chart_of_accounts(db: Session = Depends(get_db)):
 def get_account_balance(
     account_code: int,
     as_of_date: date | None = Query(default=None, description="Balance as of date (YYYY-MM-DD), defaults to today"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Calculate the balance of an account on or before a given date."""
@@ -39,6 +45,7 @@ def get_account_balance(
 @router.post("/entries", response_model=JournalEntryRead, status_code=status.HTTP_201_CREATED)
 def create_entry(
     payload: JournalEntryCreateRequest,
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ):
     """Create and post a double-entry journal entry. Refuses any entry where debits != credits."""
@@ -58,6 +65,7 @@ def create_entry(
 @router.get("/entries/{entry_id}", response_model=JournalEntryRead)
 def get_entry(
     entry_id: str,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Retrieve a journal entry and all its lines by entry_id."""
@@ -68,6 +76,7 @@ def get_entry(
 def update_entry(
     entry_id: str,
     payload: JournalEntryUpdateRequest,
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ):
     """Attempt to update a journal entry. Posted entries are read-only and refuse edits (409 Conflict)."""
@@ -82,6 +91,7 @@ def update_entry(
 @router.delete("/entries/{entry_id}")
 def delete_entry(
     entry_id: str,
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ):
     """Attempt to delete a journal entry. Posted entries are read-only and refuse deletion (409 Conflict)."""
@@ -93,25 +103,32 @@ def delete_entry(
 def reverse_entry(
     entry_id: str,
     payload: JournalEntryReverseRequest | None = None,
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ):
     """Create and post a reversing entry that swaps debits and credits of a posted entry."""
     rev_date = payload.reversal_date if payload else None
     desc = payload.description if payload else None
-    created_by = payload.created_by if payload else "U-0099"
+    c_by = payload.created_by if payload else "U-0099"
     return ledger_service.reverse_journal_entry(
         session=db,
         entry_id=entry_id,
         reversal_date=rev_date,
         description=desc,
-        created_by=created_by,
+        created_by=c_by,
     )
 
 
-@router.post("/post-payroll/{run_id}", response_model=JournalEntryRead, status_code=status.HTTP_201_CREATED)
+@router.post("/payroll/{run_id}/post", response_model=JournalEntryRead, status_code=status.HTTP_201_CREATED)
 def post_payroll_run(
     run_id: str,
+    entry_id: str | None = Query(default=None),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
-    """Post a payroll run's totals to employer-cost accounts (5001..5005) and payables (2100..2140, 1300)."""
-    return ledger_service.post_payroll_run_to_ledger(session=db, run_id=run_id)
+    """Post a payroll run into the double-entry ledger (accounts 5001..5005 and 2100..2140, 1300)."""
+    return ledger_service.post_payroll_run_to_ledger(
+        session=db,
+        run_id=run_id,
+        entry_id=entry_id,
+    )

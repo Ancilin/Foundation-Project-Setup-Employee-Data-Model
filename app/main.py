@@ -11,7 +11,12 @@ from app.core.exceptions import AppException
 
 def create_app() -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title=settings.app_name, version=settings.app_version, debug=settings.debug)
+    app = FastAPI(
+        title=settings.app_name,
+        version=settings.app_version,
+        debug=settings.debug,
+        swagger_ui_parameters={"persistAuthorization": True},
+    )
 
     @app.exception_handler(AppException)
     async def app_exception_handler(_request: Request, exc: AppException):

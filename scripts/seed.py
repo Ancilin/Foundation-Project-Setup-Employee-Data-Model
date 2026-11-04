@@ -21,6 +21,7 @@ from sqlalchemy.orm import Session
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from app.core.security import DEFAULT_DEMO_PASSWORD, hash_password  # noqa: E402
 from app.db.session import get_engine  # noqa: E402
 from app.models import (  # noqa: E402
     Attendance,
@@ -30,6 +31,7 @@ from app.models import (  # noqa: E402
     Department,
     Employee,
     EmployeeAssignment,
+    Expense,
     Holiday,
     Invoice,
     InvoiceItem,
@@ -49,6 +51,8 @@ from app.models import (  # noqa: E402
     StatutoryRate,
     TaxParameter,
     TaxSlab,
+    User,
+    Vendor,
 )
 from app.services.ledger_service import post_payroll_run_to_ledger  # noqa: E402
 from scripts.export_csv import export_all_to_csv  # noqa: E402
@@ -905,11 +909,17 @@ def seed_master_dataset(
             existing_je = set(session.scalars(select(JournalEntry.entry_id)).all())
             new_je = 0
             je_records = []
-            # When seeding the full dataset, we let post_payroll_run_to_ledger("PR-2025-04") post JE-000105 directly
-            skip_je_for_engine = "JE-000105" if employee_limit is None else None
+            # When seeding the full dataset, let post_payroll_run_to_ledger() post all 18 PAYROLL_RUN entries directly
+            payroll_je_map: dict[str, str] = {}
+            if employee_limit is None:
+                for row in df_je.to_dict(orient="records"):
+                    if str(row["source_type"]).strip() == "PAYROLL_RUN":
+                        payroll_je_map[str(row["source_id"]).strip()] = str(row["entry_id"]).strip()
+            skip_je_ids = set(payroll_je_map.values())
+
             for row in df_je.to_dict(orient="records"):
                 eid = str(row["entry_id"]).strip()
-                if eid == skip_je_for_engine:
+                if eid in skip_je_ids:
                     continue
                 if eid not in existing_je:
                     je_records.append(
@@ -942,7 +952,7 @@ def seed_master_dataset(
             for row in df_jl.to_dict(orient="records"):
                 lid = str(row["line_id"]).strip()
                 eid = str(row["entry_id"]).strip()
-                if eid == skip_je_for_engine:
+                if eid in skip_je_ids:
                     continue
                 if lid not in existing_jl and eid in existing_je:
                     jl_records.append(
@@ -967,12 +977,14 @@ def seed_master_dataset(
                 session.execute(insert(JournalLine), jl_records)
                 session.commit()
 
-            # Post PR-2025-04 (JE-000105) via our own double-entry ledger engine when full payroll items exist
-            if employee_limit is None and "JE-000105" not in existing_je:
-                posted = post_payroll_run_to_ledger(session, "PR-2025-04", entry_id="JE-000105")
-                existing_je.add(posted["entry_id"])
-                new_je += 1
-                new_jl += len(posted["lines"])
+            # Post all 18 payroll runs via our own double-entry ledger engine when full payroll items exist
+            if employee_limit is None:
+                for run_id_key, target_eid in sorted(payroll_je_map.items()):
+                    if target_eid not in existing_je:
+                        posted = post_payroll_run_to_ledger(session, run_id_key, entry_id=target_eid)
+                        existing_je.add(posted["entry_id"])
+                        new_je += 1
+                        new_jl += len(posted["lines"])
 
             total_jl = session.scalar(select(func.count(JournalLine.line_id))) or 0
             counts["journal_entries"] = len(existing_je)
@@ -1114,6 +1126,122 @@ def seed_master_dataset(
             counts["invoice_payments"] = len(existing_ip)
             print(f"[Invoice Payments] {new_ip} inserted, total in DB: {len(existing_ip)}")
 
+        # -------------------------------------------------------------
+        # 16. Vendors & Expenses (LF-11)
+        # -------------------------------------------------------------
+        csv_v_path = csv_dir / "vendors.csv"
+        if csv_v_path.exists():
+            df_v = pd.read_csv(csv_v_path)
+            existing_v = set(session.scalars(select(Vendor.vendor_id)).all())
+            new_v = 0
+            for _, row in df_v.iterrows():
+                vid = str(row["vendor_id"]).strip()
+                if vid not in existing_v:
+                    session.add(
+                        Vendor(
+                            vendor_id=vid,
+                            vendor_name=str(row["vendor_name"]).strip(),
+                            primary_expense_account=int(row["primary_expense_account"]),
+                            payment_terms_days=int(row["payment_terms_days"]),
+                            city=str(row["city"]).strip(),
+                            gst_registration=_clean_str(row.get("gst_registration")),
+                            is_active=str(row["is_active"]).strip(),
+                        )
+                    )
+                    existing_v.add(vid)
+                    new_v += 1
+            session.commit()
+            counts["vendors"] = len(existing_v)
+            print(f"[Vendors] {new_v} inserted, total in DB: {len(existing_v)}")
+
+        csv_exp_path = csv_dir / "expenses.csv"
+        if csv_exp_path.exists():
+            df_exp = pd.read_csv(csv_exp_path)
+            existing_exp = set(session.scalars(select(Expense.expense_id)).all())
+            new_exp = 0
+            exp_records = []
+            for row in df_exp.to_dict(orient="records"):
+                eid = str(row["expense_id"]).strip()
+                if eid not in existing_exp:
+                    exp_records.append(
+                        {
+                            "expense_id": eid,
+                            "expense_date": _to_date(row["expense_date"]),
+                            "category_account": int(row["category_account"]),
+                            "vendor_id": str(row["vendor_id"]).strip(),
+                            "bill_reference": str(row["bill_reference"]).strip(),
+                            "description": str(row["description"]).strip(),
+                            "department_id": str(row["department_id"]).strip(),
+                            "amount_excl_gst": Decimal(str(row["amount_excl_gst"])),
+                            "gst_rate_percent": Decimal(str(row["gst_rate_percent"])),
+                            "gst_amount": Decimal(str(row["gst_amount"])),
+                            "total_amount": Decimal(str(row["total_amount"])),
+                            "due_date": _to_date(row["due_date"]),
+                            "paid_date": _to_date(row.get("paid_date")),
+                            "status": str(row["status"]).strip(),
+                            "payment_mode": _clean_str(row.get("payment_mode")),
+                            "submitted_by": str(row["submitted_by"]).strip(),
+                            "approved_by": _clean_str(row.get("approved_by")),
+                            "ledger_entry_id": _clean_str(row.get("ledger_entry_id")),
+                            "payment_ledger_entry_id": _clean_str(row.get("payment_ledger_entry_id")),
+                        }
+                    )
+                    existing_exp.add(eid)
+                    new_exp += 1
+            if exp_records:
+                session.execute(insert(Expense), exp_records)
+                session.commit()
+            counts["expenses"] = len(existing_exp)
+            print(f"[Expenses] {new_exp} inserted, total in DB: {len(existing_exp)}")
+
+        # -------------------------------------------------------------
+        # 17. Users (LF-13: Role-Based Access Control & Bcrypt Hashing)
+        # -------------------------------------------------------------
+        csv_u_path = csv_dir / "users.csv"
+        if csv_u_path.exists():
+            df_u = pd.read_csv(csv_u_path)
+            existing_u = set(session.scalars(select(User.user_id)).all())
+            new_u = 0
+            u_records = []
+            # Precompute real 12-round bcrypt hashes per role plus unique salts for primary demo accounts
+            role_hashes = {
+                "ADMIN": hash_password(DEFAULT_DEMO_PASSWORD, rounds=12),
+                "HR": hash_password(DEFAULT_DEMO_PASSWORD, rounds=12),
+                "EMPLOYEE": hash_password(DEFAULT_DEMO_PASSWORD, rounds=12),
+            }
+            unique_demo_ids = {"U-0001", "U-0002", "U-0004", "U-0011", "U-0099", "U-0107", "U-0126", "U-0237"}
+            for row in df_u.to_dict(orient="records"):
+                uid = str(row["user_id"]).strip()
+                eid = str(row["employee_id"]).strip()
+                if uid not in existing_u and eid in existing_emps:
+                    role_str = str(row["role"]).strip().upper()
+                    pw_hash = (
+                        hash_password(DEFAULT_DEMO_PASSWORD, rounds=10)
+                        if uid in unique_demo_ids
+                        else role_hashes.get(role_str, role_hashes["EMPLOYEE"])
+                    )
+                    u_records.append(
+                        {
+                            "user_id": uid,
+                            "employee_id": eid,
+                            "username": str(row["username"]).strip(),
+                            "role": role_str,
+                            "password_hash": pw_hash,
+                            "is_active": str(row["is_active"]).strip().upper(),
+                            "mfa_enabled": str(row.get("mfa_enabled", "N")).strip().upper(),
+                            "last_login_at": _clean_str(row.get("last_login_at")),
+                            "created_at": _clean_str(row.get("created_at")),
+                            "password_policy_note": _clean_str(row.get("password_policy_note")),
+                        }
+                    )
+                    existing_u.add(uid)
+                    new_u += 1
+            if u_records:
+                session.execute(insert(User), u_records)
+                session.commit()
+            counts["users"] = len(existing_u)
+            print(f"[Users] {new_u} inserted (bcrypt hashed), total in DB: {len(existing_u)}")
+
     if session is not None:
         _run_seed(session)
     else:
@@ -1153,6 +1281,9 @@ def main():
         Base.metadata.create_all(engine)
         with Session(engine) as s:
             print("Resetting existing tables...")
+            s.query(User).delete()
+            s.query(Expense).delete()
+            s.query(Vendor).delete()
             s.query(InvoicePayment).delete()
             s.query(InvoiceItem).delete()
             s.query(Invoice).delete()

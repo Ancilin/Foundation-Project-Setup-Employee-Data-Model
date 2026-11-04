@@ -1,9 +1,11 @@
-"""Attendance HTTP routes: record, list by employee/month, and monthly summary (LF-06)."""
+"""Attendance HTTP routes: record, list by employee/month, and monthly summary (LF-06, LF-13)."""
 
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
+from app.core.security import ensure_self_or_hr_admin, require_role
 from app.db.session import get_db
+from app.models.user import User
 from app.schemas.attendance import AttendanceCreate, AttendanceRead, MonthlySummaryRead
 from app.services import attendance_service
 
@@ -13,9 +15,10 @@ router = APIRouter(prefix="/attendance", tags=["Attendance"])
 @router.post("", response_model=AttendanceRead, status_code=status.HTTP_201_CREATED)
 def create_attendance_record(
     payload: AttendanceCreate,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
-    """Record a daily attendance entry for an employee."""
+    """Record a daily attendance entry for an employee (HR and Admin only)."""
     return attendance_service.record_attendance(db, payload)
 
 
@@ -23,9 +26,11 @@ def create_attendance_record(
 def get_employee_attendance(
     employee_id: str,
     month: str | None = Query(None, description="Optional month filter in YYYY-MM format"),
+    current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ):
-    """List attendance records for an employee, optionally filtered by month (YYYY-MM)."""
+    """List attendance records for an employee (employees may read only their own)."""
+    ensure_self_or_hr_admin(current_user, employee_id)
     return attendance_service.list_employee_attendance(db, employee_id, month=month)
 
 
@@ -33,9 +38,11 @@ def get_employee_attendance(
 def get_employee_monthly_summary_query(
     employee_id: str,
     month: str = Query(..., description="Target month in YYYY-MM format"),
+    current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ):
     """Compute monthly attendance summary for an employee and month (via query param)."""
+    ensure_self_or_hr_admin(current_user, employee_id)
     return attendance_service.monthly_summary(db, employee_id, month)
 
 
@@ -43,7 +50,9 @@ def get_employee_monthly_summary_query(
 def get_employee_monthly_summary_path(
     employee_id: str,
     month: str,
+    current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ):
     """Compute monthly attendance summary for an employee and month (via path param)."""
+    ensure_self_or_hr_admin(current_user, employee_id)
     return attendance_service.monthly_summary(db, employee_id, month)

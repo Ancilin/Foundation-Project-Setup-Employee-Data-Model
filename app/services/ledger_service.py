@@ -529,6 +529,9 @@ def post_payroll_run_to_ledger(
     """Post a month's payroll run totals into the double-entry ledger (accounts 5001..5005 and 2100..2140, 1300).
     If already posted and present in journal_entries, returns the existing entry (idempotent).
     """
+    pr_run = session.get(PayrollRun, run_id)
+
+    # Check if an active (non-reversed) PAYROLL_RUN journal entry already exists for this run_id
     existing = session.scalar(
         select(JournalEntry).where(
             JournalEntry.source_type == "PAYROLL_RUN",
@@ -537,9 +540,20 @@ def post_payroll_run_to_ledger(
         )
     )
     if existing:
-        return get_journal_entry_with_lines(session, existing.entry_id)
+        # Check whether this entry was reversed
+        rev = session.scalar(
+            select(JournalEntry).where(
+                JournalEntry.reversal_of_source_id == run_id,
+                JournalEntry.source_id == f"REV-{existing.entry_id}",
+                JournalEntry.status == "POSTED",
+            )
+        )
+        if not rev:
+            if pr_run and pr_run.journal_entry_id != existing.entry_id:
+                pr_run.journal_entry_id = existing.entry_id
+                session.commit()
+            return get_journal_entry_with_lines(session, existing.entry_id)
 
-    pr_run = session.get(PayrollRun, run_id)
     items = list(
         session.scalars(
             select(PayrollItem).where(PayrollItem.run_id == run_id)
@@ -550,15 +564,24 @@ def post_payroll_run_to_ledger(
 
     entry_date = pr_run.period_end if pr_run else items[0].period_end
     eff_created_by = (pr_run.run_by if pr_run and pr_run.run_by else created_by) or "U-0237"
+    eff_entry_id = entry_id or (
+        pr_run.journal_entry_id
+        if pr_run and pr_run.journal_entry_id and session.get(JournalEntry, pr_run.journal_entry_id) is None
+        else None
+    )
     lines = build_payroll_journal_lines(items)
 
-    return create_journal_entry(
+    je = create_journal_entry(
         session=session,
         lines=lines,
         entry_date=entry_date,
         description=f"Payroll posting {run_id}",
         source_type="PAYROLL_RUN",
         source_id=run_id,
-        entry_id=entry_id,
+        entry_id=eff_entry_id,
         created_by=eff_created_by,
     )
+    if pr_run:
+        pr_run.journal_entry_id = je["entry_id"]
+        session.commit()
+    return je

@@ -1,0 +1,15 @@
+slab_id,regime,financial_year,income_from,income_to,rate_percent,effective_from,note
+TS-001,NEW,FY2025-26,0.00,400000.00,0.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-002,NEW,FY2025-26,400000.00,800000.00,5.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-003,NEW,FY2025-26,800000.00,1200000.00,10.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-004,NEW,FY2025-26,1200000.00,1600000.00,15.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-005,NEW,FY2025-26,1600000.00,2000000.00,20.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-006,NEW,FY2025-26,2000000.00,2400000.00,25.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-007,NEW,FY2025-26,2400000.00,,30.00,2025-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-008,NEW,FY2026-27,0.00,400000.00,0.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-009,NEW,FY2026-27,400000.00,800000.00,5.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-010,NEW,FY2026-27,800000.00,1200000.00,10.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-011,NEW,FY2026-27,1200000.00,1600000.00,15.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-012,NEW,FY2026-27,1600000.00,2000000.00,20.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-013,NEW,FY2026-27,2000000.00,2400000.00,25.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use
+TS-014,NEW,FY2026-27,2400000.00,,30.00,2026-04-01,SAMPLE slabs for training only - confirm against current law before real use

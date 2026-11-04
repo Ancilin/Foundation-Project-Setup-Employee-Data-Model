@@ -1,10 +1,12 @@
-"""Client, Invoice, Payment, and Accounts Receivable HTTP routes (LF-10)."""
+"""Client, Invoice, Payment, and Accounts Receivable HTTP routes with RBAC (LF-10, LF-13)."""
 
 from datetime import date
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
+from app.core.security import require_role
 from app.db.session import get_db
+from app.models.user import User
 from app.schemas.invoice import (
     ClientRead,
     InvoiceCreateRequest,
@@ -18,7 +20,10 @@ router = APIRouter(prefix="/invoices", tags=["Invoices & Receivables"])
 
 
 @router.get("/clients", response_model=list[ClientRead])
-def get_clients(db: Session = Depends(get_db)):
+def get_clients(
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
     """List all domestic and export clients."""
     return invoice_service.list_clients(db)
 
@@ -26,6 +31,7 @@ def get_clients(db: Session = Depends(get_db)):
 @router.get("/receivables", response_model=ReceivablesReportRead)
 def get_receivables(
     as_of_date: date | None = Query(default=None, description="Reconciliation date (defaults to 2026-09-30)"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Return the Accounts Receivable list (who owes what) reconciled against ledger account 1100."""
@@ -35,6 +41,7 @@ def get_receivables(
 @router.post("", response_model=InvoiceRead, status_code=status.HTTP_201_CREATED)
 def create_draft_invoice(
     payload: InvoiceCreateRequest,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Create a new invoice in DRAFT status (never posts to the ledger while in DRAFT)."""
@@ -56,6 +63,7 @@ def create_draft_invoice(
 @router.get("/{invoice_id}", response_model=InvoiceRead)
 def get_invoice(
     invoice_id: str,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Retrieve an invoice with its line items and payments."""
@@ -65,6 +73,7 @@ def get_invoice(
 @router.post("/{invoice_id}/send", response_model=InvoiceRead)
 def send_draft_invoice(
     invoice_id: str,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Transition a DRAFT invoice to SENT and post Receivable (1100), Revenue (400x), and GST (2200) to the ledger."""
@@ -74,6 +83,7 @@ def send_draft_invoice(
 @router.post("/{invoice_id}/post", response_model=InvoiceRead)
 def post_invoice(
     invoice_id: str,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Attempt to post an invoice to the ledger. Refuses DRAFT and CANCELLED invoices."""
@@ -84,6 +94,7 @@ def post_invoice(
 def record_invoice_payment(
     invoice_id: str,
     payload: InvoicePaymentCreateRequest,
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Record a payment against an open invoice, reducing balance_due and debiting Bank (1001) / crediting Receivable (1100)."""
@@ -103,6 +114,7 @@ def record_invoice_payment(
 def mark_overdue(
     invoice_id: str,
     as_of_date: date | None = Query(default=None),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
     """Mark a past-due open invoice as OVERDUE."""
@@ -113,6 +125,7 @@ def mark_overdue(
 def cancel_existing_invoice(
     invoice_id: str,
     cancel_date: date | None = Query(default=None),
+    _current_user: User = Depends(require_role("ADMIN")),
     db: Session = Depends(get_db),
 ):
     """Cancel a DRAFT or unpaid SENT/OVERDUE invoice (reversing its ledger posting if already sent)."""

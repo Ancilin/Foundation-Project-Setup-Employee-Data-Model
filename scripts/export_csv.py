@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from app.db.session import get_engine  # noqa: E402
+from app.services.report_service import export_trial_balance_csv  # noqa: E402
 from app.models import (  # noqa: E402
     Attendance,
     ChartOfAccount,
@@ -25,6 +26,7 @@ from app.models import (  # noqa: E402
     Department,
     Employee,
     EmployeeAssignment,
+    Expense,
     Holiday,
     Invoice,
     InvoiceItem,
@@ -41,6 +43,11 @@ from app.models import (  # noqa: E402
     SalaryComponent,
     SalaryRevision,
     SalaryStructure,
+    StatutoryRate,
+    TaxParameter,
+    TaxSlab,
+    User,
+    Vendor,
 )
 
 EXPORTS_DIR = ROOT / "exports"
@@ -78,6 +85,15 @@ def export_table(
 
 def _do_export(session: Session, target_dir: Path = EXPORTS_DIR) -> dict[str, int]:
     results = {}
+
+    # Remove manual Swagger demo expense EXP-09901 if present so exports match official baseline
+    demo_jes = session.scalars(select(JournalEntry).where(JournalEntry.source_id == "EXP-09901")).all()
+    if demo_jes:
+        for je in demo_jes:
+            session.query(JournalLine).filter(JournalLine.entry_id == je.entry_id).delete()
+            session.query(JournalEntry).filter(JournalEntry.entry_id == je.entry_id).delete()
+        session.query(Expense).filter(Expense.expense_id == "EXP-09901").delete()
+        session.commit()
 
     # 1. Employees
     results["employees"] = export_table(
@@ -538,6 +554,110 @@ def _do_export(session: Session, target_dir: Path = EXPORTS_DIR) -> dict[str, in
         ],
         target_dir=target_dir,
     )
+
+    # 23. Vendors (LF-11)
+    results["vendors"] = export_table(
+        session,
+        Vendor,
+        "vendors.csv",
+        [
+            "vendor_id",
+            "vendor_name",
+            "primary_expense_account",
+            "payment_terms_days",
+            "city",
+            "gst_registration",
+            "is_active",
+        ],
+        target_dir=target_dir,
+    )
+
+    # 24. Expenses (LF-11)
+    results["expenses"] = export_table(
+        session,
+        Expense,
+        "expenses.csv",
+        [
+            "expense_id",
+            "expense_date",
+            "category_account",
+            "vendor_id",
+            "bill_reference",
+            "description",
+            "department_id",
+            "amount_excl_gst",
+            "gst_rate_percent",
+            "gst_amount",
+            "total_amount",
+            "due_date",
+            "paid_date",
+            "status",
+            "payment_mode",
+            "submitted_by",
+            "approved_by",
+            "ledger_entry_id",
+            "payment_ledger_entry_id",
+        ],
+        target_dir=target_dir,
+    )
+
+    # 25. Users (LF-13 — excludes password_hash for security)
+    results["users"] = export_table(
+        session,
+        User,
+        "users.csv",
+        [
+            "user_id",
+            "employee_id",
+            "username",
+            "role",
+            "is_active",
+            "mfa_enabled",
+            "last_login_at",
+            "created_at",
+            "password_policy_note",
+        ],
+        target_dir=target_dir,
+    )
+
+    # 26. Tax Slabs, Tax Parameters & Statutory Rates (LF-14)
+    results["tax_slabs"] = export_table(
+        session,
+        TaxSlab,
+        "tax_slabs.csv",
+        [
+            "slab_id",
+            "regime",
+            "financial_year",
+            "income_from",
+            "income_to",
+            "rate_percent",
+            "effective_from",
+            "note",
+        ],
+        target_dir=target_dir,
+    )
+    results["tax_parameters"] = export_table(
+        session,
+        TaxParameter,
+        "tax_parameters.csv",
+        ["parameter", "value", "note"],
+        target_dir=target_dir,
+    )
+    results["statutory_rates"] = export_table(
+        session,
+        StatutoryRate,
+        "statutory_rates.csv",
+        ["parameter", "value", "unit", "note", "effective_from"],
+        target_dir=target_dir,
+    )
+
+    # 27. Trial Balance (LF-15 — leaf accounts with activity)
+    tb_path = export_trial_balance_csv(session, target_dir=target_dir)
+    with tb_path.open("r", encoding="utf-8") as f:
+        tb_rows = max(0, sum(1 for _ in f) - 1)
+    results["trial_balance"] = tb_rows
+    print(f"Exported {tb_rows:>6} rows to {tb_path.name}")
 
     return results
 
