@@ -1,0 +1,11 @@
+employee_id,first_name,last_name,work_email,gender,date_of_birth,hire_date,exit_date,employment_status,employment_type,department_id,role_id,manager_id,work_location,work_mode
+EMP-0001,Ganesh,Murthy,ganesh.murthy@znova-demo.example,Male,1989-10-08,2012-01-19,2020-01-24,Resigned,Permanent,D01,R002,EMP-0002,Pune,Hybrid
+EMP-0002,Jatin,Jayaraman,jatin.jayaraman@znova-demo.example,Male,1973-06-25,2012-01-31,,Active,Permanent,D08,R047,EMP-0361,Pune,Remote
+EMP-0003,Uday,Naik,uday.naik@znova-demo.example,Male,1985-05-21,2012-03-08,2021-12-09,Resigned,Permanent,D09,R051,EMP-0196,Coimbatore,Hybrid
+EMP-0004,Zaid,Selvam,zaid.selvam@znova-demo.example,Male,1984-06-05,2012-03-20,,Active,Permanent,D03,R017,EMP-0246,Erode,Hybrid
+EMP-0006,Tejas,Chowdhury,tejas.chowdhury@znova-demo.example,Male,1965-04-28,2012-04-02,,Active,Permanent,D00,R001,,Coimbatore,Onsite
+EMP-0011,Hemant,Mathew,hemant.mathew@znova-demo.example,Male,1991-05-13,2012-11-16,,Active,Permanent,D07,R039,EMP-0107,Kochi,Hybrid
+EMP-0013,Mohan,Annamalai,mohan.annamalai@znova-demo.example,Male,1986-06-02,2013-01-21,,Active,Permanent,D04,R023,EMP-0212,Chennai,Onsite
+EMP-0015,Jatin,Sharma,jatin.sharma@znova-demo.example,Male,1987-11-10,2013-01-28,,Active,Permanent,D01,R005,EMP-0161,Coimbatore,Remote
+EMP-0016,Tanvi,Thomas,tanvi.thomas@znova-demo.example,Female,1988-06-11,2013-01-29,,Active,Permanent,D01,R003,EMP-0149,Chennai,Remote
+EMP-0019,Madhavi,Karthikeyan,madhavi.karthikeyan@znova-demo.example,Female,1988-01-06,2013-06-27,,Active,Permanent,D03,R015,EMP-0048,Bengaluru,Hybrid

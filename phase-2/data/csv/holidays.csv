@@ -1,0 +1,20 @@
+holiday_date,holiday_name,holiday_type,weekday,falls_on_weekend,calendar_note
+2025-04-14,Dr. Ambedkar Jayanti / Tamil New Year,Regional,Monday,N,Sample calendar for demo purposes
+2025-04-18,Good Friday,National,Friday,N,Sample calendar for demo purposes
+2025-05-01,Labour Day,National,Thursday,N,Sample calendar for demo purposes
+2025-08-15,Independence Day,National,Friday,N,Sample calendar for demo purposes
+2025-08-27,Ganesh Chaturthi,Regional,Wednesday,N,Sample calendar for demo purposes
+2025-10-02,Gandhi Jayanti / Dussehra,National,Thursday,N,Sample calendar for demo purposes
+2025-10-20,Diwali,National,Monday,N,Sample calendar for demo purposes
+2025-10-21,Diwali (Day 2),Regional,Tuesday,N,Sample calendar for demo purposes
+2025-12-25,Christmas,National,Thursday,N,Sample calendar for demo purposes
+2026-01-01,New Year's Day,Optional,Thursday,N,Sample calendar for demo purposes
+2026-01-14,Pongal / Makar Sankranti,Regional,Wednesday,N,Sample calendar for demo purposes
+2026-01-26,Republic Day,National,Monday,N,Sample calendar for demo purposes
+2026-03-04,Holi,Regional,Wednesday,N,Sample calendar for demo purposes
+2026-03-20,Eid-ul-Fitr,National,Friday,N,Sample calendar for demo purposes
+2026-04-03,Good Friday,National,Friday,N,Sample calendar for demo purposes
+2026-04-14,Dr. Ambedkar Jayanti / Tamil New Year,Regional,Tuesday,N,Sample calendar for demo purposes
+2026-05-01,Labour Day,National,Friday,N,Sample calendar for demo purposes
+2026-08-15,Independence Day,National,Saturday,Y,Sample calendar for demo purposes
+2026-09-14,Ganesh Chaturthi,Regional,Monday,N,Sample calendar for demo purposes

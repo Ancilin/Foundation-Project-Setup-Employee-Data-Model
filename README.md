@@ -1,4 +1,34 @@
-# LedgerForge API
+# LedgerForge API — Consolidated Project Repository (Phases 1 to 3)
+
+**Candidate:** Ancillin P G | **Track:** Python Developer | **Project:** Aura Workforce / LedgerForge
+
+This single consolidated GitHub repository contains the complete LedgerForge project across **Phase 1 (Days 1–5)**, **Phase 2 (Days 6–10)**, and **Phase 3 (Days 11–15)** — organized both as dedicated phase folders (`phase-1/`, `phase-2/`, `phase-3/`), tagged releases (`phase-1`, `phase-2`, `phase-3`), and the unified runnable codebase at the repository root.
+
+## Consolidated Repository Structure
+
+```text
+Foundation-Project-Setup-Employee-Data-Model/
+├── README.md                              # Project overview & 10-step setup guide
+├── phase-1/                               # Phase 1: Foundation (Days 1–5 / Tasks LF-01 to LF-05)
+├── phase-2/                               # Phase 2: Core Development (Days 6–10 / Tasks LF-06 to LF-10)
+├── phase-3/                               # Phase 3: Connected System (Days 11–15 / Tasks LF-11 to LF-15)
+├── Python_Ancillin_Phase1_Report.pdf      # Phase 1 Official Report PDF
+├── Python_Ancillin_Phase2_Report.pdf      # Phase 2 Official Report PDF
+├── Python_Ancillin_Phase3_Report.pdf      # Phase 3 Official Report PDF
+├── app/                                   # Unified FastAPI application (Phases 1–3)
+├── migrations/                            # Alembic migrations (0001 to 0009)
+├── scripts/                               # Seeder, CSV exporter, PDF generators & official verifier
+├── exports/                               # Verified CSV exports & trial_balance.csv
+└── tests/                                 # Full pytest suite (113 passing tests across Phases 1–3)
+```
+
+| Phase | Days / Tasks | Folder | Git Tag | Report PDF | Test & Verifier Proof |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Phase 1: Foundation** | Days 1–5 (`LF-01` to `LF-05`): Workspace, Employee/Org Models, Seeder, Employee/Team APIs, Salary Structures & Revisions | [`phase-1/`](phase-1/) | `phase-1`, `v0.0.1` | [`Python_Ancillin_Phase1_Report.pdf`](Python_Ancillin_Phase1_Report.pdf) | `71 passed`, `5/5 checks passed` |
+| **Phase 2: Core Development** | Days 6–10 (`LF-06` to `LF-10`): Attendance & Leave, Payroll Calculation Engine, Payslip PDF, Double-Entry Ledger, Invoices & Receivables | [`phase-2/`](phase-2/) | `phase-2` | [`Python_Ancillin_Phase2_Report.pdf`](Python_Ancillin_Phase2_Report.pdf) | `96 passed`, `7,340/7,340 (100%)` payroll match, `5/5 checks passed` |
+| **Phase 3: Connected System** | Days 11–15 (`LF-11` to `LF-15`): Vendors & Expense Bills, Payroll-to-Books (18 runs), JWT RBAC Security, Configurable Tax Engine & Statutory Reports, Trial Balance / P&L / Balance Sheet | [`phase-3/`](phase-3/) | `phase-3` | [`Python_Ancillin_Phase3_Report.pdf`](Python_Ancillin_Phase3_Report.pdf) | `113 passed`, `5/5 checks passed`, Trial Balance `40 compared, 0 mismatched` |
+
+---
 
 Foundation (Task 1) for the LedgerForge employee/payroll backend: a layered **FastAPI** app with
 settings from environment variables, tests, and **Docker Compose** running the API with **PostgreSQL**.

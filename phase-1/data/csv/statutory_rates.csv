@@ -1,0 +1,12 @@
+parameter,value,unit,note,effective_from
+PF_EMPLOYEE_RATE,12.0,percent of basic,Employee PF contribution rate (SAMPLE values for training),2025-04-01
+PF_EMPLOYER_RATE,12.0,percent of basic,Employer PF contribution rate (sample: full 12% shown as PF) (SAMPLE values for training),2025-04-01
+PF_WAGE_CEILING,15000.0,INR per month,Basic wage ceiling for PF (SAMPLE values for training),2025-04-01
+ESI_EMPLOYEE_RATE,0.75,percent of gross,Employee ESI (SAMPLE values for training),2025-04-01
+ESI_EMPLOYER_RATE,3.25,percent of gross,Employer ESI (SAMPLE values for training),2025-04-01
+ESI_WAGE_LIMIT,21000.0,INR per month,ESI applies if monthly fixed gross is at or below this (SAMPLE values for training),2025-04-01
+PT_MONTHLY,200.0,INR per month,"Professional tax when monthly gross >= 25,000 (sample rule) (SAMPLE values for training)",2025-04-01
+PT_GROSS_THRESHOLD,25000.0,INR per month,Professional tax threshold (SAMPLE values for training),2025-04-01
+OT_MULTIPLIER,2.0,x hourly rate,Overtime multiplier (SAMPLE values for training),2025-04-01
+OT_MONTHLY_CAP_HOURS,50.0,hours,Maximum paid overtime hours per month (SAMPLE values for training),2025-04-01
+WORKING_HOURS_PER_MONTH,208.0,hours,Divisor for hourly rate (26 days x 8 hours) (SAMPLE values for training),2025-04-01

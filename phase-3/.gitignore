@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.idea/
+.vscode/
+# Large source dataset; keep out of git (share separately)
+*.xlsx
+*.db
+Task details/
+data/csv/attendance.csv
+
