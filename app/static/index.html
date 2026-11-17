@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LedgerForge — Payroll & Double-Entry Accounting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Navigation -->
+  <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-inner">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <div>
+          <h1 class="text-base font-bold tracking-tight">LedgerForge</h1>
+          <p class="text-xs text-indigo-400 font-medium">Enterprise Payroll & Accounting</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <span id="apiStatus" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live API
+        </span>
+        <a href="/docs" target="_blank" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-md border border-slate-700 transition flex items-center">
+          <i class="fa-solid fa-book-open mr-1.5 text-indigo-400"></i> /docs
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- Auth Card -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6 transition">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 flex items-center">
+            <i class="fa-solid fa-shield-halved text-indigo-600 mr-2"></i> 1. Authentication
+          </h2>
+          <p class="text-xs text-slate-500">Sign in with an ADMIN or HR user account to access payroll endpoints.</p>
+        </div>
+        <div id="authStatusPill" class="text-xs font-medium px-2.5 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200 inline-block self-start">
+          Not Authenticated
+        </div>
+      </div>
+
+      <div id="loginForm" class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Username</label>
+          <input type="text" id="usernameInput" value="admin" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Password</label>
+          <input type="password" id="passwordInput" value="LedgerForge2025!" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+        <div class="flex items-end space-x-2">
+          <button id="loginBtn" onclick="login()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition shadow-sm flex items-center justify-center">
+            <i class="fa-solid fa-arrow-right-to-bracket mr-1.5"></i> Sign In
+          </button>
+          <button id="logoutBtn" onclick="logout()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-3 rounded-lg text-sm transition">
+            Sign Out
+          </button>
+        </div>
+      </div>
+      <p id="loginMessage" class="mt-2 text-xs text-slate-500"></p>
+    </section>
+
+    <!-- Run Payroll Section -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6 transition">
+      <div class="pb-4 border-b border-slate-100">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center">
+          <i class="fa-solid fa-calculator text-indigo-600 mr-2"></i> 2. Run Payroll
+        </h2>
+        <p class="text-xs text-slate-500">Calculate payroll run for a specific month or dispatch the 18-month bulk queue job.</p>
+      </div>
+
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Select Month / Period</label>
+          <select id="payrollMonthSelect" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+            <option value="2025-04">2025-04 (April 2025)</option>
+            <option value="2025-05">2025-05 (May 2025)</option>
+            <option value="2025-06">2025-06 (June 2025)</option>
+            <option value="2025-07">2025-07 (July 2025)</option>
+            <option value="2025-08">2025-08 (August 2025)</option>
+            <option value="2025-09">2025-09 (September 2025)</option>
+            <option value="2025-10">2025-10 (October 2025)</option>
+            <option value="2025-11">2025-11 (November 2025)</option>
+            <option value="2025-12">2025-12 (December 2025)</option>
+          </select>
+        </div>
+
+        <div class="flex items-end">
+          <button onclick="calculateSingleRun()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition shadow-sm flex items-center justify-center">
+            <i class="fa-solid fa-play mr-1.5"></i> Calculate Payroll Run
+          </button>
+        </div>
+
+        <div class="flex items-end">
+          <button onclick="triggerBulkPayrollJob()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition shadow-sm flex items-center justify-center">
+            <i class="fa-solid fa-bolt mr-1.5"></i> Trigger 18-Month Bulk Job
+          </button>
+        </div>
+      </div>
+
+      <!-- Job Progress Bar -->
+      <div id="jobProgressContainer" class="hidden mt-5 p-4 rounded-lg bg-purple-50 border border-purple-200">
+        <div class="flex justify-between items-center mb-1">
+          <span id="jobStageText" class="text-xs font-semibold text-purple-900">Queue Processing...</span>
+          <span id="jobPercentText" class="text-xs font-bold text-purple-700">0%</span>
+        </div>
+        <div class="w-full bg-purple-200 rounded-full h-2.5 overflow-hidden">
+          <div id="jobProgressBar" class="bg-purple-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <p id="jobIdLabel" class="text-[10px] text-purple-600 mt-1 font-mono"></p>
+      </div>
+
+      <!-- Payroll Run Output Table -->
+      <div id="payrollRunResult" class="hidden mt-5 overflow-x-auto">
+        <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Payroll Run Summary</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="block text-[11px] text-slate-500">Run ID</span>
+              <span id="resRunId" class="text-sm font-bold text-slate-800 font-mono">-</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="block text-[11px] text-slate-500">Gross Pay</span>
+              <span id="resGross" class="text-sm font-bold text-emerald-600">-</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="block text-[11px] text-slate-500">Net Pay</span>
+              <span id="resNet" class="text-sm font-bold text-indigo-600">-</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="block text-[11px] text-slate-500">Total Employer Cost</span>
+              <span id="resCost" class="text-sm font-bold text-slate-800">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- View Payslip Section -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6 transition">
+      <div class="pb-4 border-b border-slate-100">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center">
+          <i class="fa-solid fa-file-invoice-dollar text-indigo-600 mr-2"></i> 3. View &amp; Download Payslip
+        </h2>
+        <p class="text-xs text-slate-500">Fetch monthly breakdown for any employee and download the official PDF.</p>
+      </div>
+
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Employee ID</label>
+          <input type="text" id="payslipEmpInput" value="EMP-0002" placeholder="e.g. EMP-0002" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none uppercase font-mono">
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Payroll Run / Month</label>
+          <input type="text" id="payslipRunInput" value="PR-2025-04" placeholder="e.g. PR-2025-04" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none font-mono">
+        </div>
+        <div class="flex items-end">
+          <button onclick="fetchPayslip()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 px-4 rounded-lg text-sm transition shadow-sm flex items-center justify-center">
+            <i class="fa-solid fa-magnifying-glass mr-1.5"></i> View Payslip
+          </button>
+        </div>
+      </div>
+
+      <!-- Payslip Card -->
+      <div id="payslipDisplay" class="hidden mt-6 bg-slate-50 rounded-xl border border-slate-200 p-5 max-w-2xl mx-auto shadow-inner">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <h3 class="font-bold text-base text-slate-900" id="psEmpName">Employee Name</h3>
+            <p class="text-xs text-slate-500"><span id="psEmpId" class="font-mono font-semibold">EMP-0001</span> &bull; <span id="psRole">Role</span> (<span id="psDept">Dept</span>)</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-1 rounded border border-indigo-200" id="psRunId">PR-2025-04</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mt-4 text-xs">
+          <div>
+            <h4 class="font-bold text-slate-700 uppercase tracking-wider mb-1">Earnings</h4>
+            <div class="space-y-1 bg-white p-3 rounded-lg border border-slate-200">
+              <div class="flex justify-between"><span>Basic:</span><span id="psBasic" class="font-medium">-</span></div>
+              <div class="flex justify-between"><span>HRA:</span><span id="psHra" class="font-medium">-</span></div>
+              <div class="flex justify-between"><span>Special Allowance:</span><span id="psSpl" class="font-medium">-</span></div>
+              <div class="flex justify-between font-bold pt-1 border-t border-slate-100 text-slate-900"><span>Gross Pay:</span><span id="psGross">-</span></div>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-700 uppercase tracking-wider mb-1">Deductions</h4>
+            <div class="space-y-1 bg-white p-3 rounded-lg border border-slate-200">
+              <div class="flex justify-between"><span>Provident Fund (PF):</span><span id="psPf" class="font-medium">-</span></div>
+              <div class="flex justify-between"><span>ESI:</span><span id="psEsi" class="font-medium">-</span></div>
+              <div class="flex justify-between"><span>Prof. Tax (PT):</span><span id="psPt" class="font-medium">-</span></div>
+              <div class="flex justify-between"><span>Income Tax (TDS):</span><span id="psTds" class="font-medium">-</span></div>
+              <div class="flex justify-between font-bold pt-1 border-t border-slate-100 text-slate-900"><span>Total Deductions:</span><span id="psDed">-</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center justify-between">
+          <div>
+            <span class="text-xs text-emerald-800 font-medium">Net Take-Home Pay:</span>
+            <div class="text-xl font-extrabold text-emerald-700" id="psNet">₹ 0.00</div>
+          </div>
+          <a id="psPdfDownloadLink" href="#" target="_blank" class="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg transition shadow-sm flex items-center">
+            <i class="fa-solid fa-download mr-1.5"></i> Download PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Diagnostics & Smoke Test Trigger -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6 transition">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 flex items-center">
+            <i class="fa-solid fa-stethoscope text-indigo-600 mr-2"></i> 4. Live Diagnostics & Smoke Check
+          </h2>
+          <p class="text-xs text-slate-500">Run an instant browser smoke test verifying all endpoints against this live host.</p>
+        </div>
+        <button onclick="runBrowserSmokeTest()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3 py-1.5 rounded-lg border border-slate-300 transition flex items-center">
+          <i class="fa-solid fa-play mr-1.5 text-indigo-600"></i> Run Check
+        </button>
+      </div>
+
+      <div id="smokeCheckResults" class="mt-3 space-y-1 text-xs">
+        <p class="text-slate-400 italic">Click 'Run Check' to test health, auth, employees, payroll runs, and ledger.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-8 py-4">
+    <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
+      LedgerForge v1.0.0-rc1 &bull; Production Release Candidate &bull; Ancilin P G (GM00210)
+    </div>
+  </footer>
+
+  <!-- Client-side Logic -->
+  <script>
+    let token = localStorage.getItem('token') || '';
+
+    function updateAuthUI() {
+      const pill = document.getElementById('authStatusPill');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const loginBtn = document.getElementById('loginBtn');
+      if (token) {
+        pill.textContent = 'Authenticated (Admin)';
+        pill.className = 'text-xs font-medium px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 inline-block self-start';
+        logoutBtn.classList.remove('hidden');
+        loginBtn.classList.add('hidden');
+      } else {
+        pill.textContent = 'Not Authenticated';
+        pill.className = 'text-xs font-medium px-2.5 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200 inline-block self-start';
+        logoutBtn.classList.add('hidden');
+        loginBtn.classList.remove('hidden');
+      }
+    }
+
+    async function login() {
+      const u = document.getElementById('usernameInput').value;
+      const p = document.getElementById('passwordInput').value;
+      const msg = document.getElementById('loginMessage');
+      msg.textContent = 'Signing in...';
+
+      try {
+        const resp = await fetch('/api/v1/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          token = data.access_token;
+          localStorage.setItem('token', token);
+          msg.textContent = '✓ Successfully authenticated!';
+          msg.className = 'mt-2 text-xs text-emerald-600 font-medium';
+          updateAuthUI();
+        } else {
+          msg.textContent = '✗ Invalid credentials.';
+          msg.className = 'mt-2 text-xs text-rose-600 font-medium';
+        }
+      } catch (e) {
+        msg.textContent = '✗ Error connecting to server: ' + e;
+        msg.className = 'mt-2 text-xs text-rose-600 font-medium';
+      }
+    }
+
+    function logout() {
+      token = '';
+      localStorage.removeItem('token');
+      document.getElementById('loginMessage').textContent = 'Signed out.';
+      updateAuthUI();
+    }
+
+    async function calculateSingleRun() {
+      if (!token) { alert('Please sign in first.'); return; }
+      const month = document.getElementById('payrollMonthSelect').value;
+      try {
+        const resp = await fetch('/api/v1/payroll/runs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ month: month })
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+          document.getElementById('payrollRunResult').classList.remove('hidden');
+          document.getElementById('resRunId').textContent = data.run_id || 'PR-' + month;
+          document.getElementById('resGross').textContent = '₹ ' + (data.total_gross_pay || 0).toLocaleString();
+          document.getElementById('resNet').textContent = '₹ ' + (data.total_net_pay || 0).toLocaleString();
+          document.getElementById('resCost').textContent = '₹ ' + (data.total_employer_cost || 0).toLocaleString();
+        } else {
+          alert('Payroll Run Error: ' + (data.detail || JSON.stringify(data)));
+        }
+      } catch (e) {
+        alert('Request failed: ' + e);
+      }
+    }
+
+    async function triggerBulkPayrollJob() {
+      if (!token) { alert('Please sign in first.'); return; }
+      const container = document.getElementById('jobProgressContainer');
+      const bar = document.getElementById('jobProgressBar');
+      const percentText = document.getElementById('jobPercentText');
+      const stageText = document.getElementById('jobStageText');
+      const idLabel = document.getElementById('jobIdLabel');
+
+      container.classList.remove('hidden');
+      stageText.textContent = 'Enqueuing bulk payroll job...';
+      bar.style.width = '10%';
+      percentText.textContent = '10%';
+
+      try {
+        const resp = await fetch('/api/v1/jobs/payroll/bulk-run', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ run_by: 'admin' })
+        });
+        const job = await resp.json();
+        if (!resp.ok) {
+          alert('Queue error: ' + (job.detail || JSON.stringify(job)));
+          return;
+        }
+
+        const jobId = job.job_id;
+        idLabel.textContent = 'Job ID: ' + jobId;
+
+        // Poll job progress
+        const interval = setInterval(async () => {
+          const pResp = await fetch('/api/v1/jobs/payroll/' + jobId, {
+            headers: { 'Authorization': 'Bearer ' + token }
+          });
+          if (pResp.ok) {
+            const pData = await pResp.json();
+            const pct = Math.round(pData.progress_percent || 0);
+            bar.style.width = pct + '%';
+            percentText.textContent = pct + '%';
+            stageText.textContent = (pData.status === 'COMPLETED' ? '✓ Completed!' : (pData.current_stage || 'Processing...'));
+
+            if (pData.status === 'COMPLETED' || pData.status === 'FAILED') {
+              clearInterval(interval);
+              if (pData.status === 'COMPLETED') {
+                bar.classList.remove('bg-purple-600');
+                bar.classList.add('bg-emerald-600');
+              }
+            }
+          }
+        }, 1000);
+
+      } catch (e) {
+        alert('Failed to trigger job: ' + e);
+      }
+    }
+
+    async function fetchPayslip() {
+      if (!token) { alert('Please sign in first.'); return; }
+      const empId = document.getElementById('payslipEmpInput').value.trim();
+      const runId = document.getElementById('payslipRunInput').value.trim();
+      if (!empId || !runId) { alert('Please enter both Employee ID and Run ID'); return; }
+
+      try {
+        const resp = await fetch(`/api/v1/payslips/${empId}/${runId}`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          document.getElementById('payslipDisplay').classList.remove('hidden');
+          document.getElementById('psEmpName').textContent = data.employee_name || empId;
+          document.getElementById('psEmpId').textContent = data.employee_id || empId;
+          document.getElementById('psRole').textContent = data.role_title || 'Software Engineer';
+          document.getElementById('psDept').textContent = data.department_name || 'Engineering';
+          document.getElementById('psRunId').textContent = data.run_id || runId;
+
+          document.getElementById('psBasic').textContent = '₹ ' + (data.basic_pay || 0).toLocaleString();
+          document.getElementById('psHra').textContent = '₹ ' + (data.hra || 0).toLocaleString();
+          document.getElementById('psSpl').textContent = '₹ ' + (data.special_allowance || 0).toLocaleString();
+          document.getElementById('psGross').textContent = '₹ ' + (data.gross_pay || 0).toLocaleString();
+
+          document.getElementById('psPf').textContent = '₹ ' + (data.pf_employee || 0).toLocaleString();
+          document.getElementById('psEsi').textContent = '₹ ' + (data.esi_employee || 0).toLocaleString();
+          document.getElementById('psPt').textContent = '₹ ' + (data.professional_tax || 0).toLocaleString();
+          document.getElementById('psTds').textContent = '₹ ' + (data.tds || 0).toLocaleString();
+          document.getElementById('psDed').textContent = '₹ ' + (data.total_deductions || 0).toLocaleString();
+
+          document.getElementById('psNet').textContent = '₹ ' + (data.net_pay || 0).toLocaleString();
+
+          // Update PDF download link
+          document.getElementById('psPdfDownloadLink').href = `/api/v1/payslips/${empId}/${runId}/pdf`;
+        } else {
+          alert('Payslip not found for ' + empId + ' in ' + runId);
+        }
+      } catch (e) {
+        alert('Failed to load payslip: ' + e);
+      }
+    }
+
+    async function runBrowserSmokeTest() {
+      const box = document.getElementById('smokeCheckResults');
+      box.innerHTML = '<p class="text-indigo-600 animate-pulse">Running live diagnostics...</p>';
+      const items = [];
+
+      const addResult = (ok, title, desc) => {
+        items.push(`<div class="flex items-center space-x-2 py-1">
+          <span class="${ok ? 'text-emerald-600' : 'text-rose-600'} font-bold">${ok ? '✓' : '✗'}</span>
+          <span class="font-semibold text-slate-800">${title}</span>
+          <span class="text-slate-500">${desc}</span>
+        </div>`);
+      };
+
+      try {
+        // 1. Health
+        const hResp = await fetch('/api/v1/health');
+        addResult(hResp.ok, 'Health Check', `Status: ${hResp.status}`);
+
+        // 2. Swagger docs
+        const dResp = await fetch('/docs');
+        addResult(dResp.ok, 'Swagger Docs', `Status: ${dResp.status}`);
+
+        // 3. Login
+        const lResp = await fetch('/api/v1/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: 'admin', password: 'LedgerForge2025!' })
+        });
+        const lData = await lResp.json();
+        const testToken = lData.access_token;
+        addResult(lResp.ok && !!testToken, 'Admin Authentication', `Token received`);
+
+        if (testToken) {
+          // 4. Employees
+          const eResp = await fetch('/api/v1/employees', { headers: { 'Authorization': 'Bearer ' + testToken } });
+          const emps = await eResp.json();
+          addResult(eResp.ok && emps.length > 0, 'Employees Directory', `${emps.length || 0} employees found`);
+
+          // 5. Payroll runs
+          const pResp = await fetch('/api/v1/payroll/runs', { headers: { 'Authorization': 'Bearer ' + testToken } });
+          const runs = await pResp.json();
+          addResult(pResp.ok && runs.length > 0, 'Payroll Runs', `${runs.length || 0} runs available`);
+
+          // 6. Chart of accounts
+          const cResp = await fetch('/api/v1/ledger/accounts', { headers: { 'Authorization': 'Bearer ' + testToken } });
+          const coa = await cResp.json();
+          addResult(cResp.ok && coa.length > 0, 'Chart of Accounts', `${coa.length || 0} accounts loaded`);
+        }
+      } catch (err) {
+        addResult(false, 'Network / Host', err.toString());
+      }
+
+      box.innerHTML = items.join('');
+    }
+
+    // Initialize UI on load
+    updateAuthUI();
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Render Blueprint — deploy LedgerForge with one click.
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: ledgerforge
+    runtime: docker
+    repo: https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ledgerforge-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CELERY_BROKER_URL
+        value: ""
+      - key: CELERY_RESULT_BACKEND
+        value: ""
+      - key: REDIS_URL
+        value: ""
+
+databases:
+  - name: ledgerforge-db
+    plan: free
+    databaseName: ledgerforge
+    user: ledgerforge

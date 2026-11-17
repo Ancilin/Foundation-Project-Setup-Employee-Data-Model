@@ -1,8 +1,10 @@
 """Application entry point: `uvicorn app.main:app`."""
 
+from pathlib import Path
+
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 from app.api.router import api_router
 from app.core.config import get_settings
@@ -40,6 +42,13 @@ def create_app() -> FastAPI:
     @app.get("/", include_in_schema=False)
     def root_redirect():
         return RedirectResponse(url="/docs")
+
+    @app.get("/ui", response_class=HTMLResponse, include_in_schema=False)
+    def web_ui():
+        ui_path = Path(__file__).resolve().parent / "static" / "index.html"
+        if ui_path.exists():
+            return HTMLResponse(content=ui_path.read_text(encoding="utf-8"))
+        return HTMLResponse(content="<h1>LedgerForge UI</h1><p><a href='/docs'>Swagger API Docs</a></p>")
 
     # Primary versioned API routes (/api/v1)
     app.include_router(api_router, prefix="/api/v1")

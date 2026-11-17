@@ -14,10 +14,15 @@ COPY alembic.ini ./alembic.ini
 COPY migrations ./migrations
 COPY data ./data
 COPY scripts ./scripts
+COPY start.sh ./start.sh
+
+# Make the startup script executable.
+RUN chmod +x start.sh
 
 # Run as a non-root user.
 RUN useradd --create-home appuser
 USER appuser
 
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default: simple uvicorn. Render/production overrides with start.sh.
+CMD ["./start.sh"]
