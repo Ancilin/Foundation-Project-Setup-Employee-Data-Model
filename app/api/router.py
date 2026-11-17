@@ -10,6 +10,7 @@ from app.api.routes import (
     expense,
     health,
     invoice,
+    jobs,
     leave,
     ledger,
     payroll,
@@ -32,3 +33,4 @@ api_router.include_router(invoice.router)
 api_router.include_router(expense.router)
 api_router.include_router(tax.router)
 api_router.include_router(reports.router)
+api_router.include_router(jobs.router)

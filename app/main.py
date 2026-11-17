@@ -41,8 +41,10 @@ def create_app() -> FastAPI:
     def root_redirect():
         return RedirectResponse(url="/docs")
 
+    # Primary versioned API routes (/api/v1)
     app.include_router(api_router, prefix="/api/v1")
-    app.include_router(api_router)
+    # Legacy alias router for backwards compatibility
+    app.include_router(api_router, include_in_schema=False)
     return app
 
 

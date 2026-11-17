@@ -132,3 +132,18 @@ def post_payroll_run(
         run_id=run_id,
         entry_id=entry_id,
     )
+
+
+@router.post("/post-payroll/{run_id}", response_model=JournalEntryRead, status_code=status.HTTP_201_CREATED, include_in_schema=False)
+def post_payroll_run_legacy(
+    run_id: str,
+    entry_id: str | None = Query(default=None),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
+    """Legacy alias for POST /ledger/payroll/{run_id}/post — kept for test backwards compatibility."""
+    return ledger_service.post_payroll_run_to_ledger(
+        session=db,
+        run_id=run_id,
+        entry_id=entry_id,
+    )

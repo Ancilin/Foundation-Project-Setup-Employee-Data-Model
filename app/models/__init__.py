@@ -7,6 +7,7 @@ from app.models.department import Department
 from app.models.employee import Employee
 from app.models.expense import Expense, Vendor
 from app.models.invoice import Client, Invoice, InvoiceItem, InvoicePayment
+from app.models.job import BackgroundJob
 from app.models.leave import Holiday, LeaveBalance, LeaveRequest, LeaveType
 from app.models.ledger import ChartOfAccount, JournalEntry, JournalLine
 from app.models.payroll import (
@@ -27,6 +28,7 @@ from app.models.user import User
 
 __all__ = [
     "Attendance",
+    "BackgroundJob",
     "Base",
     "ChartOfAccount",
     "Client",

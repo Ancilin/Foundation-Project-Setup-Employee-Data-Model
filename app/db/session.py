@@ -12,8 +12,10 @@ from app.core.config import get_settings
 @lru_cache
 def get_engine() -> Engine:
     url = get_settings().database_url
-    connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
-    return create_engine(url, pool_pre_ping=True, connect_args=connect_args)
+    if url.startswith("sqlite"):
+        from sqlalchemy.pool import StaticPool
+        return create_engine(url, poolclass=StaticPool, connect_args={"check_same_thread": False})
+    return create_engine(url, pool_pre_ping=True)
 
 
 def get_db() -> Iterator[Session]:

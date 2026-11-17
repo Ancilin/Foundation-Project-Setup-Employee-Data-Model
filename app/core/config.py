@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     database_url: str = Field(..., description="SQLAlchemy database URL")
     secret_key: str = Field(..., min_length=16, description="Key used to sign tokens")
 
+    # Queue broker / Redis configuration (Task 16)
+    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis broker URL")
+    celery_broker_url: str | None = Field(default=None, description="Celery broker URL override")
+    celery_result_backend: str | None = Field(default=None, description="Celery result backend URL override")
+
 
 @lru_cache
 def get_settings() -> Settings:

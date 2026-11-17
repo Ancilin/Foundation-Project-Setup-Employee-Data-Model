@@ -12,6 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY alembic.ini ./alembic.ini
 COPY migrations ./migrations
+COPY data ./data
+COPY scripts ./scripts
 
 # Run as a non-root user.
 RUN useradd --create-home appuser
