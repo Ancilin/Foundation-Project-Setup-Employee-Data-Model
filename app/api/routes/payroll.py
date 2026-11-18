@@ -2,7 +2,7 @@
 idempotent auto-posting to ledger, reversal, 18-month Check 2 reconciliation (LF-12), and RBAC (LF-13).
 """
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
 from app.core.security import require_role
@@ -44,11 +44,13 @@ def calculate_payroll_for_employee_month(
 
 @router.get("/runs", response_model=list[PayrollRunRead])
 def get_payroll_runs(
+    limit: int | None = Query(default=None, ge=1, le=100, description="Max runs to return"),
+    offset: int = Query(default=0, ge=0, description="Offset for pagination"),
     _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
-    """List all payroll runs across all months."""
-    return payroll_service.list_payroll_runs(db)
+    """List all payroll runs across all months with optional pagination."""
+    return payroll_service.list_payroll_runs(db, limit=limit, offset=offset)
 
 
 @router.post("/runs", response_model=PayrollRunRead, status_code=status.HTTP_201_CREATED)

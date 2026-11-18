@@ -24,11 +24,24 @@ router = APIRouter(prefix="/ledger", tags=["Ledger"])
 
 @router.get("/accounts", response_model=list[ChartOfAccountRead])
 def get_chart_of_accounts(
+    limit: int | None = Query(default=None, ge=1, le=500, description="Max accounts to return"),
+    offset: int = Query(default=0, ge=0, description="Offset for pagination"),
     _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
-    """List the full Chart of Accounts (Assets, Liabilities, Equity, Income, Expenses)."""
-    return ledger_service.list_chart_of_accounts(db)
+    """List the full Chart of Accounts (Assets, Liabilities, Equity, Income, Expenses) with optional pagination."""
+    return ledger_service.list_chart_of_accounts(db, limit=limit, offset=offset)
+
+
+@router.get("/entries", response_model=list[JournalEntryRead])
+def get_journal_entries(
+    limit: int = Query(default=50, ge=1, le=500, description="Max entries to return"),
+    offset: int = Query(default=0, ge=0, description="Offset for pagination"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
+    """List journal entries ordered by entry_date descending with pagination."""
+    return ledger_service.list_journal_entries(db, limit=limit, offset=offset)
 
 
 @router.get("/accounts/{account_code}/balance", response_model=AccountBalanceRead)

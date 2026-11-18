@@ -72,8 +72,10 @@ def list_expenses(
     vendor_id: str | None = None,
     status: str | None = None,
     month: str | None = None,
+    limit: int | None = None,
+    offset: int = 0,
 ) -> list[Expense]:
-    """List expense bills with optional filters for vendor_id, status, and month (YYYY-MM)."""
+    """List expense bills with optional filters for vendor_id, status, month (YYYY-MM), and pagination."""
     stmt = select(Expense).order_by(Expense.expense_date, Expense.expense_id)
     if vendor_id:
         stmt = stmt.where(Expense.vendor_id == vendor_id)
@@ -82,6 +84,10 @@ def list_expenses(
     rows = list(session.scalars(stmt).all())
     if month:
         rows = [r for r in rows if r.expense_date.isoformat()[:7] == month]
+    if offset:
+        rows = rows[offset:]
+    if limit is not None:
+        rows = rows[:limit]
     return rows
 
 

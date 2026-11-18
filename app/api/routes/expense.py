@@ -85,15 +85,19 @@ def list_expense_bills(
     vendor_id: str | None = Query(default=None),
     status_filter: str | None = Query(default=None, alias="status"),
     month: str | None = Query(default=None, description="YYYY-MM"),
+    limit: int | None = Query(default=None, ge=1, le=500, description="Max bills to return"),
+    offset: int = Query(default=0, ge=0, description="Offset for pagination"),
     _current_user: User = Depends(require_role("ADMIN", "HR")),
     db: Session = Depends(get_db),
 ):
-    """List expense bills with optional filters for vendor_id, status, and month."""
+    """List expense bills with optional filters for vendor_id, status, month, and pagination."""
     return expense_service.list_expenses(
         session=db,
         vendor_id=vendor_id,
         status=status_filter,
         month=month,
+        limit=limit,
+        offset=offset,
     )
 
 

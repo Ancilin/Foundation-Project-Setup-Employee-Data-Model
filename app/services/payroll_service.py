@@ -674,13 +674,14 @@ def _parse_month_bounds(month: str) -> tuple[date, date]:
         raise ValidationError(f"Invalid month '{month}'. Expected 'YYYY-MM'.") from exc
 
 
-def list_payroll_runs(session: Session) -> list[PayrollRun]:
-    """List all payroll runs ordered by period_start and run_id."""
-    return list(
-        session.scalars(
-            select(PayrollRun).order_by(PayrollRun.period_start, PayrollRun.run_id)
-        ).all()
-    )
+def list_payroll_runs(session: Session, limit: int | None = None, offset: int = 0) -> list[PayrollRun]:
+    """List all payroll runs ordered by period_start and run_id with optional pagination."""
+    stmt = select(PayrollRun).order_by(PayrollRun.period_start, PayrollRun.run_id)
+    if offset:
+        stmt = stmt.offset(offset)
+    if limit is not None:
+        stmt = stmt.limit(limit)
+    return list(session.scalars(stmt).all())
 
 
 def get_payroll_run_with_details(session: Session, run_id: str) -> dict[str, Any]:

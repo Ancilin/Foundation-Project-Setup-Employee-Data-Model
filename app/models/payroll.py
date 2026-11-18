@@ -50,6 +50,9 @@ class TaxSlab(Base):
 
 class PayrollRun(TimestampMixin, Base):
     __tablename__ = "payroll_runs"
+    __table_args__ = (
+        Index("ix_payroll_runs_status", "status"),
+    )
 
     run_id: Mapped[str] = mapped_column(String(20), primary_key=True)
     period_start: Mapped[date] = mapped_column(Date)

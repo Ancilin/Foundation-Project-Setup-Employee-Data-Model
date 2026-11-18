@@ -72,9 +72,21 @@ def _prevent_posted_entry_delete(_mapper, _connection, target: JournalEntry) -> 
         )
 
 
-def list_chart_of_accounts(session: Session) -> list[ChartOfAccount]:
-    """Return all accounts ordered by account_code."""
-    return list(session.scalars(select(ChartOfAccount).order_by(ChartOfAccount.account_code)).all())
+def list_chart_of_accounts(session: Session, limit: int | None = None, offset: int = 0) -> list[ChartOfAccount]:
+    """Return all accounts ordered by account_code with optional pagination."""
+    stmt = select(ChartOfAccount).order_by(ChartOfAccount.account_code)
+    if offset:
+        stmt = stmt.offset(offset)
+    if limit is not None:
+        stmt = stmt.limit(limit)
+    return list(session.scalars(stmt).all())
+
+
+def list_journal_entries(session: Session, limit: int = 50, offset: int = 0) -> list[dict[str, Any]]:
+    """List journal entries ordered by entry_date desc with pagination."""
+    stmt = select(JournalEntry).order_by(JournalEntry.entry_date.desc()).offset(offset).limit(limit)
+    entries = session.scalars(stmt).all()
+    return [get_journal_entry_with_lines(session, e.entry_id) for e in entries]
 
 
 def get_journal_entry_with_lines(session: Session, entry_id: str) -> dict[str, Any]:

@@ -29,6 +29,7 @@ class JournalEntry(Base):
     __table_args__ = (
         Index("ix_journal_entries_entry_date", "entry_date"),
         Index("ix_journal_entries_source", "source_type", "source_id"),
+        Index("ix_journal_entries_status", "status"),
     )
 
     entry_id: Mapped[str] = mapped_column(String(20), primary_key=True)

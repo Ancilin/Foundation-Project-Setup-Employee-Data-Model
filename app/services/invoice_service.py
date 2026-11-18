@@ -32,6 +32,24 @@ def list_clients(session: Session) -> list[Client]:
     return list(session.scalars(select(Client).order_by(Client.client_id)).all())
 
 
+def list_invoices(
+    session: Session,
+    client_id: str | None = None,
+    status: str | None = None,
+    limit: int = 50,
+    offset: int = 0,
+) -> list[dict[str, Any]]:
+    """List invoices ordered by invoice_date descending with pagination."""
+    stmt = select(Invoice).order_by(Invoice.invoice_date.desc(), Invoice.invoice_id)
+    if client_id:
+        stmt = stmt.where(Invoice.client_id == client_id)
+    if status:
+        stmt = stmt.where(Invoice.status == status.upper())
+    stmt = stmt.offset(offset).limit(limit)
+    invoices = session.scalars(stmt).all()
+    return [get_invoice_with_details(session, inv.invoice_id) for inv in invoices]
+
+
 def _next_invoice_id(session: Session) -> str:
     count = session.scalar(select(func.count(Invoice.invoice_id))) or 0
     cand = f"INV-{count + 1:05d}"

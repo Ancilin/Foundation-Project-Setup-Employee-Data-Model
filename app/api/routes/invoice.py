@@ -19,6 +19,19 @@ from app.services import invoice_service
 router = APIRouter(prefix="/invoices", tags=["Invoices & Receivables"])
 
 
+@router.get("", response_model=list[InvoiceRead])
+def list_invoices(
+    client_id: str | None = Query(default=None),
+    status: str | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=500, description="Max invoices to return"),
+    offset: int = Query(default=0, ge=0, description="Offset for pagination"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
+    """List invoices with optional filters for client_id, status, and pagination."""
+    return invoice_service.list_invoices(db, client_id=client_id, status=status, limit=limit, offset=offset)
+
+
 @router.get("/clients", response_model=list[ClientRead])
 def get_clients(
     _current_user: User = Depends(require_role("ADMIN", "HR")),

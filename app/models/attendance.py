@@ -35,6 +35,7 @@ class Attendance(TimestampMixin, Base):
         ),
         Index("ix_attendance_employee_date", "employee_id", "attendance_date"),
         Index("ix_attendance_date", "attendance_date"),
+        Index("ix_attendance_date_emp_status", "attendance_date", "employee_id", "status"),
     )
 
     attendance_id: Mapped[str] = mapped_column(String(32), primary_key=True)

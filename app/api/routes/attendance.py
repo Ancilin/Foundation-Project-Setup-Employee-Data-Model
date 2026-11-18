@@ -26,12 +26,14 @@ def create_attendance_record(
 def get_employee_attendance(
     employee_id: str,
     month: str | None = Query(None, description="Optional month filter in YYYY-MM format"),
+    limit: int | None = Query(None, ge=1, le=1000, description="Max records to return"),
+    offset: int = Query(0, ge=0, description="Offset for pagination"),
     current_user: User = Depends(require_role("ADMIN", "HR", "EMPLOYEE")),
     db: Session = Depends(get_db),
 ):
     """List attendance records for an employee (employees may read only their own)."""
     ensure_self_or_hr_admin(current_user, employee_id)
-    return attendance_service.list_employee_attendance(db, employee_id, month=month)
+    return attendance_service.list_employee_attendance(db, employee_id, month=month, limit=limit, offset=offset)
 
 
 @router.get("/{employee_id}/summary", response_model=MonthlySummaryRead)

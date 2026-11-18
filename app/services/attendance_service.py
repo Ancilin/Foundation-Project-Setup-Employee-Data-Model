@@ -199,8 +199,10 @@ def list_employee_attendance(
     session: Session,
     employee_id: str,
     month: str | None = None,
+    limit: int | None = None,
+    offset: int = 0,
 ) -> list[Attendance]:
-    """List attendance rows for an employee, optionally filtered by month ('YYYY-MM')."""
+    """List attendance rows for an employee, optionally filtered by month ('YYYY-MM') with pagination."""
     emp = session.get(Employee, employee_id)
     if not emp:
         raise NotFoundError(f"Employee '{employee_id}' not found")
@@ -213,6 +215,10 @@ def list_employee_attendance(
             Attendance.attendance_date <= end_d,
         )
     stmt = stmt.order_by(Attendance.attendance_date)
+    if offset:
+        stmt = stmt.offset(offset)
+    if limit is not None:
+        stmt = stmt.limit(limit)
     return list(session.scalars(stmt).all())
 
 

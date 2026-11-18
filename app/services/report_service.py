@@ -8,6 +8,7 @@ import csv
 from datetime import date
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
+import time
 from typing import Any
 
 from sqlalchemy import func, select
@@ -18,6 +19,15 @@ from app.models.ledger import ChartOfAccount, JournalEntry, JournalLine
 TWO_PLACES = Decimal("0.01")
 ROOT = Path(__file__).resolve().parent.parent
 EXPORTS_DIR = ROOT / "exports"
+
+# In-memory cache for expensive financial reports (Task 18)
+_REPORT_CACHE: dict[str, tuple[float, dict[str, Any]]] = {}
+CACHE_TTL_SECONDS = 60.0
+
+
+def clear_report_cache() -> None:
+    """Clear cached financial reports (call on ledger posting / reversal)."""
+    _REPORT_CACHE.clear()
 
 
 def _to_dec(val: Decimal | int | float | str | None) -> Decimal:
@@ -73,6 +83,13 @@ def get_trial_balance(
     Separates leaf accounts (is_group == 'N') from parent group headers (is_group == 'Y')
     so group accounts are never counted twice in total_debit or total_credit.
     """
+    cache_key = f"tb:{start_date}:{end_date}:{active_only}"
+    now = time.time()
+    if cache_key in _REPORT_CACHE:
+        cached_time, cached_val = _REPORT_CACHE[cache_key]
+        if now - cached_time < CACHE_TTL_SECONDS:
+            return cached_val
+
     coa_rows = list(
         session.scalars(select(ChartOfAccount).order_by(ChartOfAccount.account_code)).all()
     )
@@ -149,7 +166,7 @@ def get_trial_balance(
         )
 
     diff = round_money(tot_debit - tot_credit)
-    return {
+    report_result = {
         "report_type": "TRIAL_BALANCE",
         "start_date": start_date,
         "end_date": end_date,
@@ -161,6 +178,8 @@ def get_trial_balance(
         "group_rollups": group_rollups,
         "accounts": leaf_rows,
     }
+    _REPORT_CACHE[cache_key] = (now, report_result)
+    return report_result
 
 
 def export_trial_balance_csv(

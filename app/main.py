@@ -9,16 +9,19 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from app.api.router import api_router
 from app.core.config import get_settings
 from app.core.exceptions import AppException
+from app.core.logging import RequestLoggingMiddleware, setup_logging
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    setup_logging()
     app = FastAPI(
         title=settings.app_name,
         version=settings.app_version,
         debug=settings.debug,
         swagger_ui_parameters={"persistAuthorization": True},
     )
+    app.add_middleware(RequestLoggingMiddleware)
 
     @app.exception_handler(AppException)
     async def app_exception_handler(_request: Request, exc: AppException):
