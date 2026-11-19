@@ -86,3 +86,33 @@ class BalanceSheetReportRead(BaseModel):
     accounting_equation_difference: Decimal
     is_balanced: bool
     group_accounts_excluded_from_totals: bool = True
+
+
+class DepartmentPayrollCostRowRead(BaseModel):
+    department_id: str
+    department_name: str
+    cost_center: str
+    unique_employees: int
+    payroll_items_count: int
+    total_gross_pay: Decimal
+    total_deductions: Decimal
+    total_net_pay: Decimal
+    total_pf_employer: Decimal
+    total_esi_employer: Decimal
+    total_employer_cost: Decimal
+    avg_gross_per_item: Decimal
+    share_of_total_cost_percent: Decimal
+
+
+class DepartmentPayrollCostReportRead(BaseModel):
+    report_type: str = "DEPARTMENT_PAYROLL_COST"
+    run_id: str | None = None
+    start_date: date | None = None
+    end_date: date | None = None
+    departments_count: int
+    total_payroll_items: int
+    company_total_gross_pay: Decimal
+    company_total_deductions: Decimal
+    company_total_net_pay: Decimal
+    company_total_employer_cost: Decimal
+    departments: list[DepartmentPayrollCostRowRead]

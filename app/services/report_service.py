@@ -14,7 +14,9 @@ from typing import Any
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from app.models.department import Department
 from app.models.ledger import ChartOfAccount, JournalEntry, JournalLine
+from app.models.payroll import PayrollItem
 
 TWO_PLACES = Decimal("0.01")
 ROOT = Path(__file__).resolve().parent.parent
@@ -435,4 +437,113 @@ def get_balance_sheet(
         "accounting_equation_difference": eq_diff,
         "is_balanced": eq_diff == Decimal("0.00"),
         "group_accounts_excluded_from_totals": True,
+    }
+
+
+def get_department_payroll_cost_report(
+    session: Session,
+    run_id: str | None = None,
+    start_date: date | None = None,
+    end_date: date | None = None,
+) -> dict[str, Any]:
+    """Final Challenge (Task 20): Executive Departmental Payroll Cost & Statutory Breakdown.
+
+    Aggregates payroll_items grouped by department_id in a single SQL GROUP BY query
+    joined with departments so CFO/HR leadership can inspect cost-center spend,
+    employer PF/ESI burden, average pay, and percentage share of total company payroll.
+    """
+    stmt = (
+        select(
+            PayrollItem.department_id,
+            Department.department_name,
+            Department.cost_center,
+            func.count(func.distinct(PayrollItem.employee_id)).label("unique_employees"),
+            func.count(PayrollItem.payroll_item_id).label("payroll_items_count"),
+            func.coalesce(func.sum(PayrollItem.gross_pay), 0).label("total_gross_pay"),
+            func.coalesce(func.sum(PayrollItem.total_deductions), 0).label("total_deductions"),
+            func.coalesce(func.sum(PayrollItem.net_pay), 0).label("total_net_pay"),
+            func.coalesce(func.sum(PayrollItem.pf_employer), 0).label("total_pf_employer"),
+            func.coalesce(func.sum(PayrollItem.esi_employer), 0).label("total_esi_employer"),
+            func.coalesce(func.sum(PayrollItem.employer_cost), 0).label("total_employer_cost"),
+        )
+        .join(Department, PayrollItem.department_id == Department.department_id)
+    )
+
+    if run_id:
+        stmt = stmt.where(PayrollItem.run_id == run_id.strip())
+    if start_date is not None:
+        stmt = stmt.where(PayrollItem.period_start >= start_date)
+    if end_date is not None:
+        stmt = stmt.where(PayrollItem.period_end <= end_date)
+
+    stmt = stmt.group_by(
+        PayrollItem.department_id,
+        Department.department_name,
+        Department.cost_center,
+    )
+
+    rows = session.execute(stmt).all()
+
+    company_gross = Decimal("0.00")
+    company_deductions = Decimal("0.00")
+    company_net = Decimal("0.00")
+    company_employer_cost = Decimal("0.00")
+    total_items = 0
+
+    raw_departments: list[dict[str, Any]] = []
+    for row in rows:
+        items_cnt = int(row.payroll_items_count)
+        gross = round_money(row.total_gross_pay)
+        ded = round_money(row.total_deductions)
+        net = round_money(row.total_net_pay)
+        pf_emp = round_money(row.total_pf_employer)
+        esi_emp = round_money(row.total_esi_employer)
+        emp_cost = round_money(row.total_employer_cost)
+        avg_gross = round_money(gross / Decimal(items_cnt)) if items_cnt > 0 else Decimal("0.00")
+
+        company_gross = round_money(company_gross + gross)
+        company_deductions = round_money(company_deductions + ded)
+        company_net = round_money(company_net + net)
+        company_employer_cost = round_money(company_employer_cost + emp_cost)
+        total_items += items_cnt
+
+        raw_departments.append({
+            "department_id": row.department_id,
+            "department_name": row.department_name,
+            "cost_center": row.cost_center,
+            "unique_employees": int(row.unique_employees),
+            "payroll_items_count": items_cnt,
+            "total_gross_pay": gross,
+            "total_deductions": ded,
+            "total_net_pay": net,
+            "total_pf_employer": pf_emp,
+            "total_esi_employer": esi_emp,
+            "total_employer_cost": emp_cost,
+            "avg_gross_per_item": avg_gross,
+        })
+
+    # Compute each department's % share of total company employer cost and sort highest cost first
+    departments: list[dict[str, Any]] = []
+    for dept in raw_departments:
+        if company_employer_cost > Decimal("0.00"):
+            share = round_money((dept["total_employer_cost"] * Decimal("100")) / company_employer_cost)
+        else:
+            share = Decimal("0.00")
+        dept["share_of_total_cost_percent"] = share
+        departments.append(dept)
+
+    departments.sort(key=lambda d: (-d["total_employer_cost"], d["department_id"]))
+
+    return {
+        "report_type": "DEPARTMENT_PAYROLL_COST",
+        "run_id": run_id,
+        "start_date": start_date,
+        "end_date": end_date,
+        "departments_count": len(departments),
+        "total_payroll_items": total_items,
+        "company_total_gross_pay": company_gross,
+        "company_total_deductions": company_deductions,
+        "company_total_net_pay": company_net,
+        "company_total_employer_cost": company_employer_cost,
+        "departments": departments,
     }
