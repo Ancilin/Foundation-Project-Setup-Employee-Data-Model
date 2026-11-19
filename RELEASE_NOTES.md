@@ -70,9 +70,9 @@ To keep `v1.0.0` focused, verifiable, and maintainable, the following enterprise
 
 ## 4. Known Limits & Honest Audit Notes
 
-1. **Render Free-Tier Cloud Ephemerality (Honest Live Audit Note)**:
-   - During the final Task 20 HTTP probe on November 19, 2026, the previously deployed Render free-tier URL (`https://foundation-project-setup-employee-data.onrender.com/health`) returned `HTTP 404` with header `x-render-routing: no-server`. Render's free tier suspends/expires inactive free PostgreSQL instances after 30 days and spins down idle web services.
-   - **Remediation / Next Step**: Re-deploying the `v1.0.0` tag via the repository's `render.yaml` Blueprint (or upgrading to Render's Starter tier, ~$7/mo web + $7/mo PostgreSQL) restores a permanent always-on public URL immediately with zero code changes. All local Docker Compose and live API verification tests pass 100%.
+1. **Render Free-Tier Cloud Deployment & Cold Start**:
+   - LedgerForge `v1.0.0` is live at **<https://ledgerforge-ijqw.onrender.com>** (`/docs`, `/ui`, `/health`) backed by hosted PostgreSQL via `render.yaml`.
+   - On Render's free web tier, the container sleeps after 15 minutes of inactivity (~30–45s cold wake on the first request), and free Postgres databases expire after 30 days. Upgrading to Render Starter (~$14/mo total for always-on web + managed PostgreSQL) eliminates spin-down with zero code changes.
 2. **In-Memory TTL Cache Is Single-Process**:
    - The 60-second Trial Balance TTL cache in `app/services/report_service.py` lives in Python process memory. Under a single Uvicorn worker it works cleanly (and invalidates automatically on ledger writes), but scaling horizontally to multiple web replicas requires migrating `_REPORT_CACHE` to Redis (`REDIS_URL`).
 3. **SQLite Local Fallback Limitations**:

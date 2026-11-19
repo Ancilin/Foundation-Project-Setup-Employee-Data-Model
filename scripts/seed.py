@@ -154,12 +154,19 @@ def seed_master_dataset(
     chunk_size: int = 10000,
 ) -> dict[str, int]:
     """Seed the database with all reference, employee, salary, attendance, and leave tables."""
-    if not xlsx_path.exists():
-        raise FileNotFoundError(f"Dataset file not found at: {xlsx_path}")
+    csv_dir = ROOT / "data" / "csv"
+    use_csv_fallback = not xlsx_path.exists()
+    if use_csv_fallback and not (csv_dir / "employees.csv").exists():
+        raise FileNotFoundError(f"Dataset file not found at: {xlsx_path} (and no CSV fallback in {csv_dir})")
 
     t0 = time.perf_counter()
     print(f"=== Starting Seed Pipeline (Seed: {RANDOM_SEED}) ===")
-    print(f"Reading dataset: {xlsx_path.name}...")
+    print(f"Reading dataset: {csv_dir if use_csv_fallback else xlsx_path.name}...")
+
+    def _read_sheet(sheet_name: str) -> pd.DataFrame:
+        if use_csv_fallback:
+            return pd.read_csv(csv_dir / f"{sheet_name}.csv")
+        return pd.read_excel(xlsx_path, sheet_name=sheet_name)
 
     fake = get_faker()
     counts: dict[str, int] = {
@@ -174,13 +181,11 @@ def seed_master_dataset(
         "leave_requests": 0,
     }
 
-    csv_dir = ROOT / "data" / "csv"
-
     def _run_seed(session: Session):
         # -------------------------------------------------------------
         # 1. Departments
         # -------------------------------------------------------------
-        df_depts = pd.read_excel(xlsx_path, sheet_name="departments")
+        df_depts = _read_sheet("departments")
         existing_depts = set(session.scalars(select(Department.department_id)).all())
         new_depts = 0
 
@@ -205,7 +210,7 @@ def seed_master_dataset(
         # -------------------------------------------------------------
         # 2. Roles
         # -------------------------------------------------------------
-        df_roles = pd.read_excel(xlsx_path, sheet_name="roles")
+        df_roles = _read_sheet("roles")
         existing_roles = set(session.scalars(select(Role.role_id)).all())
         new_roles = 0
         roles_lookup: dict[str, Role] = {}
@@ -238,7 +243,7 @@ def seed_master_dataset(
         # -------------------------------------------------------------
         # 3. Employees
         # -------------------------------------------------------------
-        df_emps = pd.read_excel(xlsx_path, sheet_name="employees")
+        df_emps = _read_sheet("employees")
         if employee_limit:
             df_emps = df_emps.head(employee_limit)
 

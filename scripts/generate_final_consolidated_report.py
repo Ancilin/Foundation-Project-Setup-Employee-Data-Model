@@ -25,7 +25,7 @@ GITHUB_URL = "https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-
 TAG_V1_URL = f"{GITHUB_URL}/releases/tag/v1.0.0"
 TAG_P4_URL = f"{GITHUB_URL}/releases/tag/phase-4"
 BRANCH_URL = f"{GITHUB_URL}/tree/feat/department-payroll-cost-report"
-LIVE_URL = "https://foundation-project-setup-employee-data.onrender.com"
+LIVE_URL = "https://ledgerforge-ijqw.onrender.com"
 
 
 def _styled_table(data, col_widths, header_hex="#1e3a5f", center_cols=(), font_size=7.4):
@@ -209,7 +209,7 @@ def build_pdf() -> int:
         ["GitHub Repository", Paragraph(f'<a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a>', small)],
         ["Release Tags", Paragraph(f'<a href="{TAG_V1_URL}" color="#2563eb"><b>v1.0.0</b></a> &nbsp;|&nbsp; <a href="{TAG_P4_URL}" color="#2563eb"><b>phase-4</b></a> &nbsp;|&nbsp; phase-3, phase-2, phase-1, v0.0.1', small)],
         ["Final Challenge Branch", Paragraph(f'<a href="{BRANCH_URL}" color="#2563eb">feat/department-payroll-cost-report</a> (merged into master)', small)],
-        ["Live Deployment Link", Paragraph(f'<a href="{LIVE_URL}" color="#2563eb">{LIVE_URL}</a>  (Render Blueprint: render.yaml — see Page 8 &amp; Page 9 note)', small)],
+        ["Live Deployment Link", Paragraph(f'<a href="{LIVE_URL}/docs" color="#2563eb"><b>{LIVE_URL}/docs</b></a> &nbsp;|&nbsp; <a href="{LIVE_URL}/ui" color="#2563eb">/ui</a> &nbsp;|&nbsp; <a href="{LIVE_URL}/health" color="#2563eb">/health</a>', small)],
         ["5-Minute Demo Video", "Unlisted Demo Link: [Paste tested unlisted YouTube / Google Drive link in Google Form] (Script in docs/DEMO_SCRIPT.md)"],
         ["Submission Date", "November 19, 2026"],
     ]
@@ -525,12 +525,12 @@ def build_pdf() -> int:
 
     el.append(Paragraph("Deployment URLs &amp; Instant Local Startup", h2))
     el.append(Paragraph(
-        f"&bull; <b>Cloud Production Blueprint URL:</b> <a href='{LIVE_URL}' color='#2563eb'>{LIVE_URL}</a> "
-        f"(Swagger Docs: <font face='Courier'>/docs</font> · Mobile Web UI: <font face='Courier'>/ui</font> · Health Probe: <font face='Courier'>/health</font>)<br/>"
+        f"&bull; <b>Live Cloud Production URL (Render + Hosted PostgreSQL):</b> <a href='{LIVE_URL}/docs' color='#2563eb'><b>{LIVE_URL}/docs</b></a><br/>"
+        f"&bull; <b>Mobile Web UI:</b> <a href='{LIVE_URL}/ui' color='#2563eb'>{LIVE_URL}/ui</a> &nbsp;|&nbsp; "
+        f"<b>Health Probe:</b> <a href='{LIVE_URL}/health' color='#2563eb'>{LIVE_URL}/health</a> (HTTP 200, database: healthy)<br/>"
         f"&bull; <b>One-Command Local Docker Stack:</b> <font face='Courier'>cp .env.example .env &amp;&amp; docker compose up --build</font> "
         f"(launches PostgreSQL 16, Redis, FastAPI on <font face='Courier'>http://localhost:8000</font>, and Celery Worker).<br/>"
-        f"&bull; <b>Honest Note on Free-Tier Cloud Uptime:</b> On final probe, Render's free tier returned <font face='Courier'>404 no-server</font> "
-        f"due to free-tier inactivity expiry; redeploying tag <font face='Courier'>v1.0.0</font> via <font face='Courier'>render.yaml</font> restores the live URL in ~2 minutes.",
+        f"&bull; <b>Note on Free-Tier Cold Start:</b> Render's free web tier sleeps after 15 minutes of inactivity; the first request takes ~30–45s to wake, after which responses are sub-second.",
         body,
     ))
 
@@ -614,7 +614,7 @@ def build_pdf() -> int:
 
     limits_tbl = [
         ["Area", "Honest Current Limit in v1.0.0", "Planned Next-Step Improvement (v1.1+)"],
-        ["Cloud Hosting Tier", "Render free tier spins down after 15 min idle and expires free Postgres after 30 days (returned 404 no-server on final Task 20 probe).", "Deploy `v1.0.0` on Render Starter (~$14/mo for always-on web + managed Postgres) with automated nightly `pg_dump` to S3/R2."],
+        ["Cloud Hosting Tier", "Live on Render Free Tier (ledgerforge-ijqw.onrender.com), which sleeps after 15 min idle (~30–45s cold wake) and expires free Postgres after 30 days.", "Upgrade to Render Starter (~$14/mo for always-on web + managed Postgres) with automated nightly `pg_dump` to S3/R2."],
         ["Report Caching", "60-second Trial Balance TTL cache lives in process memory—safe for 1 worker, but not shared across multiple horizontal replicas.", "Move `_REPORT_CACHE` keys and invalidation pub/sub into Redis (`REDIS_URL`), which is already part of `docker-compose.yml`."],
         ["Large Excel Exports", "CSV streams chunk-by-chunk with constant RAM, whereas `.xlsx` buffers the ZIP workbook in memory via `openpyxl` write-only mode.", "Offload >50k-row Excel exports to a Celery background job that writes to object storage and returns a signed download URL."],
         ["Banking &amp; E-Filing", "Payroll marks runs `PAID` and posts balanced ledger entries, but does not call bank NEFT/IMPS APIs or EPFO/TRACES filing portals.", "Add pluggable payout adapters (RazorpayX / bank H2H SFTP) and statutory ECR / Form 24Q export generators."],

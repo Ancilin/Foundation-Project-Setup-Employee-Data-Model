@@ -3,9 +3,10 @@
 **Candidate:** Ancilin P G (ID: `GM00210`) | **Track:** Python Developer | **Release:** [`v1.0.0`](https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model/releases/tag/v1.0.0)
 
 **Key Handover Documents:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md) · [`CHANGELOG.md`](CHANGELOG.md) · [`docs/architecture.md`](docs/architecture.md) · [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · [`Python_Ancillin_Final_Consolidated_Report.pdf`](Python_Ancillin_Final_Consolidated_Report.pdf)
-- **Interactive API Docs (Swagger UI — 91/91 endpoints with real examples):** `/docs`
-- **Mobile-Friendly Web Portal (Login, Run Payroll, View & Download Payslips):** `/ui`
-- **Live Health Probe:** `/health` (Render Blueprint: [`render.yaml`](render.yaml))
+- **Live Production App:** <https://ledgerforge-ijqw.onrender.com>
+- **Interactive API Docs (Swagger UI — 91/91 endpoints with real examples):** <https://ledgerforge-ijqw.onrender.com/docs>
+- **Mobile-Friendly Web Portal (Login, Run Payroll, View & Download Payslips):** <https://ledgerforge-ijqw.onrender.com/ui>
+- **Live Health Probe:** <https://ledgerforge-ijqw.onrender.com/health>
 
 ---
 
