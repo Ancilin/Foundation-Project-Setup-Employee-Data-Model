@@ -16,8 +16,8 @@ COPY data ./data
 COPY scripts ./scripts
 COPY start.sh ./start.sh
 
-# Make the startup script executable.
-RUN chmod +x start.sh
+# Strip any Windows CRLF line endings and make startup script executable.
+RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 
 # Run as a non-root user.
 RUN useradd --create-home appuser

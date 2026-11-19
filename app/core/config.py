@@ -2,7 +2,7 @@
 
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -23,6 +23,17 @@ class Settings(BaseSettings):
     # Inside Docker Compose the host is the service name (`db`), not `localhost`.
     database_url: str = Field(..., description="SQLAlchemy database URL")
     secret_key: str = Field(..., min_length=16, description="Key used to sign tokens")
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _normalize_postgres_driver(cls, v: str) -> str:
+        """Render and Heroku inject postgres:// or postgresql://; SQLAlchemy needs postgresql+psycopg:// for psycopg v3."""
+        if isinstance(v, str):
+            if v.startswith("postgres://"):
+                return "postgresql+psycopg://" + v[len("postgres://"):]
+            if v.startswith("postgresql://"):
+                return "postgresql+psycopg://" + v[len("postgresql://"):]
+        return v
 
     # Queue broker / Redis configuration (Task 16)
     redis_url: str = Field(default="redis://localhost:6379/0", description="Redis broker URL")
