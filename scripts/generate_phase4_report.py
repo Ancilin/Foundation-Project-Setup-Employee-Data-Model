@@ -1,4 +1,4 @@
-"""Generate Python_Ancillin_Phase4_Report.pdf using reportlab — Phase 4 Tasks 16, 17, 18, 19 & 20 Complete (v1.0.0)."""
+"""Generate Python_Ancillin_Phase4_Report.pdf — Phase 4 Review & Report (Days 16–20, strictly 2–3 pages)."""
 
 import shutil
 from pathlib import Path
@@ -21,325 +21,289 @@ REPORTS_PDF = ROOT / "reports" / "Python_Ancillin_Phase4_Report.pdf"
 DESKTOP_PDF = Path(r"C:\Users\ancillin\Desktop\Python_Ancillin_Phase4_Report.pdf")
 
 GITHUB_URL = "https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model"
+TAG_PHASE4_URL = f"{GITHUB_URL}/releases/tag/phase-4"
+TAG_V1_URL = f"{GITHUB_URL}/releases/tag/v1.0.0"
+BRANCH_URL = f"{GITHUB_URL}/tree/feat/department-payroll-cost-report"
 LIVE_APP_URL = "https://foundation-project-setup-employee-data.onrender.com"
 
 
-def build_pdf() -> None:
+def _on_page(canvas, doc):
+    canvas.saveState()
+    canvas.setFont("Helvetica", 7.2)
+    canvas.setFillColor(colors.HexColor("#64748b"))
+    canvas.drawString(36, 16, "LedgerForge — Phase 4 Report (Days 16–20) | Ancilin P G (GM00210)")
+    canvas.drawRightString(letter[0] - 36, 16, f"Page {doc.page}")
+    canvas.restoreState()
+
+
+def _table(data, col_widths, header_hex="#1e3a5f", center_cols=()):
+    tbl = Table(data, colWidths=col_widths)
+    cmds = [
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor(header_hex)),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTSIZE", (0, 0), (-1, -1), 7.0),
+        ("LEADING", (0, 0), (-1, -1), 9.2),
+        ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 4),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+        ("TOPPADDING", (0, 0), (-1, -1), 2.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.5),
+    ]
+    for c in center_cols:
+        cmds.append(("ALIGN", (c, 0), (c, -1), "CENTER"))
+    tbl.setStyle(TableStyle(cmds))
+    return tbl
+
+
+def build_pdf() -> int:
+    page_counter = {"pages": 0}
+
+    def _track_page(canvas, doc):
+        page_counter["pages"] = max(page_counter["pages"], doc.page)
+        _on_page(canvas, doc)
+
     doc = SimpleDocTemplate(
         str(OUTPUT_PDF),
         pagesize=letter,
         leftMargin=36,
         rightMargin=36,
-        topMargin=22,
-        bottomMargin=22,
+        topMargin=26,
+        bottomMargin=28,
     )
-
     styles = getSampleStyleSheet()
 
-    title_style = ParagraphStyle(
-        "DocTitle",
-        parent=styles["Normal"],
-        fontName="Helvetica-Bold",
-        fontSize=15,
-        leading=18,
-        textColor=colors.HexColor("#0f172a"),
-        spaceAfter=2,
+    title_s = ParagraphStyle(
+        "TitleS", parent=styles["Normal"], fontName="Helvetica-Bold",
+        fontSize=15, leading=18, textColor=colors.HexColor("#0f172a"), spaceAfter=2,
+    )
+    sub_s = ParagraphStyle(
+        "SubS", parent=styles["Normal"], fontName="Helvetica-Bold",
+        fontSize=9.2, leading=12, textColor=colors.HexColor("#2563eb"), spaceAfter=3,
+    )
+    meta_s = ParagraphStyle(
+        "MetaS", parent=styles["Normal"], fontName="Helvetica",
+        fontSize=7.9, leading=10.8, textColor=colors.HexColor("#334155"), spaceAfter=2,
+    )
+    h_s = ParagraphStyle(
+        "HS", parent=styles["Normal"], fontName="Helvetica-Bold",
+        fontSize=10.2, leading=13, textColor=colors.HexColor("#1e3a5f"), spaceBefore=7, spaceAfter=3,
+    )
+    body_s = ParagraphStyle(
+        "BodyS", parent=styles["Normal"], fontName="Helvetica",
+        fontSize=8.0, leading=11.0, textColor=colors.HexColor("#1e293b"), spaceAfter=3,
+    )
+    code_s = ParagraphStyle(
+        "CodeS", parent=styles["Normal"], fontName="Courier",
+        fontSize=7.0, leading=9.3, textColor=colors.HexColor("#0f172a"),
+        backColor=colors.HexColor("#f1f5f9"), spaceAfter=3, leftIndent=6, rightIndent=6,
+    )
+    cell_s = ParagraphStyle(
+        "CellS", parent=styles["Normal"], fontName="Helvetica",
+        fontSize=6.9, leading=9.0, textColor=colors.HexColor("#1e293b"),
     )
 
-    subtitle_style = ParagraphStyle(
-        "DocSubtitle",
-        parent=styles["Normal"],
-        fontName="Helvetica-Bold",
-        fontSize=9,
-        leading=12,
-        textColor=colors.HexColor("#2563eb"),
-        spaceAfter=3,
-    )
+    el = []
 
-    meta_style = ParagraphStyle(
-        "MetaText",
-        parent=styles["Normal"],
-        fontName="Helvetica",
-        fontSize=7.8,
-        leading=10.2,
-        textColor=colors.HexColor("#475569"),
-        spaceAfter=2,
-    )
-
-    section_style = ParagraphStyle(
-        "SectionHead",
-        parent=styles["Normal"],
-        fontName="Helvetica-Bold",
-        fontSize=10,
-        leading=13,
-        textColor=colors.HexColor("#1e3a5f"),
-        spaceBefore=6,
-        spaceAfter=2,
-    )
-
-    body_style = ParagraphStyle(
-        "BodyText2",
-        parent=styles["Normal"],
-        fontName="Helvetica",
-        fontSize=7.8,
-        leading=10.6,
-        textColor=colors.HexColor("#1e293b"),
-        spaceAfter=2.5,
-    )
-
-    bold_body = ParagraphStyle(
-        "BoldBody",
-        parent=body_style,
-        fontName="Helvetica-Bold",
-    )
-
-    code_style = ParagraphStyle(
-        "CodeBlock",
-        parent=styles["Normal"],
-        fontName="Courier",
-        fontSize=6.8,
-        leading=8.8,
-        textColor=colors.HexColor("#1e293b"),
-        backColor=colors.HexColor("#f1f5f9"),
-        spaceAfter=2,
-        leftIndent=6,
-        rightIndent=6,
-    )
-
-    elements = []
-
-    # ── Header / Meta ──
-    elements.append(Paragraph("Python Developer Internship — Phase 4 Engineering Report", title_style))
-    elements.append(Paragraph("Tasks 16–20: Release Candidate, Cloud Deploy, Performance, Backups, Exports, Final Audit &amp; v1.0.0 Handover", subtitle_style))
-    elements.append(Paragraph("Candidate: Ancilin P G &nbsp;|&nbsp; ID: GM00210 &nbsp;|&nbsp; Evaluation Date: November 2026", meta_style))
-    elements.append(Paragraph(
-        f'GitHub Repository: <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a> &nbsp;|&nbsp; Release Tag: <b>v1.0.0</b><br/>'
-        f'Release Notes: <font face="Courier">RELEASE_NOTES.md</font> &nbsp;|&nbsp; Final Challenge Branch: <font face="Courier">feat/department-payroll-cost-report</font>',
-        meta_style,
+    # ── PAGE 1: Header + 5-Task Table + Core Verification Proof ──
+    el.append(Paragraph("Python Developer Programme — Phase 4 Engineering Report", title_s))
+    el.append(Paragraph("Phase 4 (Days 16–20): Production Release, Performance, Backups, Exports, Final Audit &amp; Challenge", sub_s))
+    el.append(Paragraph(
+        f'<b>Name:</b> Ancilin P G (ID: GM00210) &nbsp;|&nbsp; <b>Track:</b> Python Developer &nbsp;|&nbsp; <b>Phase:</b> Phase 4 (Days 16–20)<br/>'
+        f'<b>GitHub Repository:</b> <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a><br/>'
+        f'<b>Git Tags:</b> <a href="{TAG_PHASE4_URL}" color="#2563eb"><b>phase-4</b></a> &nbsp;|&nbsp; '
+        f'<a href="{TAG_V1_URL}" color="#2563eb"><b>v1.0.0</b></a> &nbsp;|&nbsp; '
+        f'<b>Final Challenge Branch:</b> <a href="{BRANCH_URL}" color="#2563eb">feat/department-payroll-cost-report</a>',
+        meta_s,
     ))
-    elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
-    elements.append(Spacer(1, 3))
+    el.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor("#cbd5e1")))
+    el.append(Spacer(1, 4))
 
-    # ── 1. Phase 4 Overview ──
-    elements.append(Paragraph("1. Phase 4 Executive Summary", section_style))
-    elements.append(Paragraph(
-        "Phase 4 delivers full production readiness and v1.0.0 handover for LedgerForge: containerized release candidate (Task 16), "
-        "cloud deployment blueprint &amp; mobile web UX (Task 17), EXPLAIN query optimization, JSON observability, DB health probes, and "
-        "tested disaster recovery (Task 18), streaming CSV/Excel exports, 100% OpenAPI examples &amp; Mermaid architecture (Task 19), "
-        "and the Task 20 Final Audit, Final Challenge feature branch, release notes, and v1.0.0 release tag. "
-        "All 132 automated unit and integration tests pass cleanly.",
-        body_style,
-    ))
-
-    # ── 2. Tasks 16, 17, 18, 19 Completion Checklist ──
-    elements.append(Paragraph("2. Phase 4 Complete Requirements Checklist", section_style))
-    chk_data = [
-        ["#", "Task Milestone", "Status", "Implementation Evidence"],
-        ["1", "Task 16: Background Jobs Queue", "DONE", "Celery + Redis task queue with thread fallback (app/services/job_service.py)"],
-        ["2", "Task 16: Versioned API & 30+ Tests", "DONE", "128 tests passed (target: 30+), ~90% coverage, all routes prefixed /api/v1"],
-        ["3", "Task 16: Docker & Secrets Isolation", "DONE", "Dockerfile + docker-compose.yml (api, db, redis, worker); zero secrets in image"],
-        ["4", "Task 16: GitHub Actions CI/CD", "DONE", ".github/workflows/ci.yml runs pytest & coverage automatically on push"],
-        ["5", "Task 17: Hosting Evaluation Matrix", "DONE", "Render selected over Railway/Fly.io/Supabase for native Docker blueprint"],
-        ["6", "Task 17: Hosted PostgreSQL & Live Deploy", "DONE", "render.yaml blueprint + start.sh running migrations & seeding on startup"],
-        ["7", "Task 17: Mobile-First Web UX (/ui)", "DONE", "Responsive interface: Login, Run Payroll, Payslip viewer & PDF download"],
-        ["8", "Task 17: Live Smoke Test Suite", "DONE", "smoke_test.py: 22/22 checks passed against live and local endpoints"],
-        ["9", "Task 18: Query EXPLAIN & Indexing", "DONE", "EXPLAIN analysis on slowest queries; composite indexes added in migration 0011"],
-        ["10", "Task 18: Pagination Everywhere", "DONE", "Added limit/offset to accounts, entries, attendance, expenses, payroll, invoices"],
-        ["11", "Task 18: Expensive Report Caching", "DONE", "In-memory TTL cache on Trial Balance: 69.5ms cold to 0.01ms hot (8,900x faster)"],
-        ["12", "Task 18: Structured JSON Logging", "DONE", "app/core/logging.py emits machine-readable JSON logs for every request"],
-        ["13", "Task 18: Health Check with DB Probe", "DONE", "GET /health executes SELECT 1; returns 200 on healthy DB and 503 on failure"],
-        ["14", "Task 18: Backup & Tested Restore", "DONE", "scripts/backup_restore.py: Restores snapshot to fresh DB, 193,036 rows (100% MATCH)"],
-        ["15", "Task 19: Streaming CSV & Excel Exports", "DONE", "GET /api/v1/exports/{employees,payroll,ledger} with date filters & ?format=csv|xlsx"],
-        ["16", "Task 19: Incremental Delta Export", "DONE", "GET /api/v1/exports/changes?since=<ISO> + ?since filter on all stream endpoints"],
-        ["17", "Task 19: OpenAPI Examples (100%)", "DONE", "app/core/openapi.py enriches 91/91 operations with real examples (asserted in pytest)"],
-        ["18", "Task 19: Stranger-Ready README & 10 Examples", "DONE", "README.md with 3-step Docker/local quick start, 10 curl examples, FAQ & CHANGELOG.md"],
-        ["19", "Task 19: Mermaid Architecture & Export Proof", "DONE", "docs/architecture.md + README Mermaid; payroll export verified 7,340/7,340 (100.00%)"],
-        ["20", "Task 20: Final Audit, Release Notes & v1.0.0", "DONE", "5/5 checks, 7,340/7,340 payroll, 40/40 TB; RELEASE_NOTES.md, DEMO_SCRIPT.md, tag v1.0.0"],
-        ["21", "Task 20: Final Challenge (Own Branch)", "DONE", "feat/department-payroll-cost-report: GET /api/v1/reports/department-payroll-cost (4 tests)"],
+    # ── 1. Table of the 5 Phase 4 Tasks ──
+    el.append(Paragraph("1. Phase 4 Tasks Summary (Days 16 to 20)", h_s))
+    tasks_tbl = [
+        ["Task", "Milestone", "Status", "Concrete Evidence (Code / Proof / Links)"],
+        [
+            "Task 16\n(Day 16)",
+            "Release Candidate:\nJobs, /api/v1 & CI/CD",
+            "DONE",
+            Paragraph(
+                f"Celery + Redis background job queue with local thread fallback (<font face='Courier'>app/services/job_service.py</font>), "
+                f"all routes versioned under <font face='Courier'>/api/v1</font>, multi-service Docker Compose, and GitHub Actions CI "
+                f"(<a href='{GITHUB_URL}/blob/phase-4/.github/workflows/ci.yml' color='#2563eb'>ci.yml</a>).", cell_s
+            ),
+        ],
+        [
+            "Task 17\n(Day 17)",
+            "Release to Production:\nCloud DB, /ui & Smoke",
+            "DONE",
+            Paragraph(
+                f"Hosting matrix (Render selected), Infrastructure-as-Code <a href='{GITHUB_URL}/blob/phase-4/render.yaml' color='#2563eb'>render.yaml</a> "
+                f"+ <font face='Courier'>start.sh</font> with zero secrets in Git, responsive <font face='Courier'>/ui</font> web portal (login, payroll, payslip PDF), "
+                f"and <font face='Courier'>scripts/smoke_test.py</font> (22/22 checks passed).", cell_s
+            ),
+        ],
+        [
+            "Task 18\n(Day 18)",
+            "Performance, Health\n&amp; Tested Backups",
+            "DONE",
+            Paragraph(
+                f"<font face='Courier'>EXPLAIN</font> profiling + composite indexes (migration <font face='Courier'>0011</font>, 52.7–64.9% faster), "
+                f"pagination everywhere, TTL Trial Balance cache (8,907x faster), structured JSON logs (<font face='Courier'>app/core/logging.py</font>), "
+                f"DB-probing <font face='Courier'>/health</font> (HTTP 503 on DB outage), and <font face='Courier'>backup_restore.py</font> restoring 193,036/193,036 rows.", cell_s
+            ),
+        ],
+        [
+            "Task 19\n(Day 19)",
+            "Exports, OpenAPI Docs\n&amp; Architecture",
+            "DONE",
+            Paragraph(
+                f"Streaming CSV &amp; Excel (<font face='Courier'>.xlsx</font>) exports for employees, payroll &amp; ledger with date filters + "
+                f"incremental <font face='Courier'>/exports/changes?since=...</font> (7,340/7,340 = 100.00% payroll match); 91/91 (100%) OpenAPI examples; "
+                f"stranger-ready <a href='{GITHUB_URL}/blob/phase-4/README.md' color='#2563eb'>README.md</a> (10 curl examples), "
+                f"<a href='{GITHUB_URL}/blob/phase-4/docs/architecture.md' color='#2563eb'>Mermaid diagram</a> &amp; <font face='Courier'>CHANGELOG.md</font>.", cell_s
+            ),
+        ],
+        [
+            "Task 20\n(Day 20)",
+            "Final Audit, Release\nNotes &amp; Final Challenge",
+            "DONE",
+            Paragraph(
+                f"Final audit passed (5/5 checks, 7,340/7,340 payroll, 40/40 Trial Balance, 132/132 pytest); "
+                f"<a href='{GITHUB_URL}/blob/phase-4/RELEASE_NOTES.md' color='#2563eb'>RELEASE_NOTES.md</a> &amp; demo guide; "
+                f"Final Challenge <font face='Courier'>GET /api/v1/reports/department-payroll-cost</font> built independently on "
+                f"<a href='{BRANCH_URL}' color='#2563eb'>feat/department-payroll-cost-report</a> and merged into <font face='Courier'>v1.0.0</font>.", cell_s
+            ),
+        ],
     ]
-    t_chk = Table(chk_data, colWidths=[16, 160, 36, 314])
-    t_chk.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 6.5),
-        ("LEADING", (0, 0), (-1, -1), 8.5),
-        ("ALIGN", (0, 0), (0, -1), "CENTER"),
-        ("ALIGN", (2, 0), (2, -1), "CENTER"),
-        ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 3),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 3),
-        ("TOPPADDING", (0, 0), (-1, -1), 1.5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.5),
-    ]))
-    elements.append(t_chk)
-    elements.append(Spacer(1, 3))
+    el.append(_table(tasks_tbl, [48, 92, 36, 364], center_cols=(0, 2)))
+    el.append(Spacer(1, 5))
 
-    # ── 3. Performance Profiling & EXPLAIN Optimization ──
-    elements.append(Paragraph("3. Performance Profiling &amp; Query Optimization (Task 18)", section_style))
-    elements.append(Paragraph(
-        "Using SQLite and PostgreSQL query profiling tools (<font face='Courier'>EXPLAIN QUERY PLAN</font>), "
-        "execution plans were inspected for the system's most resource-intensive operations before and after adding targeted composite indexes.",
-        body_style,
+    # ── 2. Proof It Works: Automated Tests & Official Verifier Output ──
+    el.append(Paragraph("2. Proof It Works — Automated Tests &amp; Official Checker Output", h_s))
+    el.append(Paragraph(
+        "Every phase deliverable was verified end-to-end using the full <font face='Courier'>pytest</font> suite and the official "
+        "<font face='Courier'>scripts/verify_ledgerforge.py</font> checker against exported production datasets:",
+        body_s,
     ))
-    perf_data = [
-        ["Operation / Query", "Before Optimization", "After Index / Cache", "Improvement", "Optimization Applied"],
-        ["Query 1: Attendance 30-Day Aggregation (150,156 rows)", "45.75 ms (Temp B-Tree)", "21.63 ms", "52.7% faster", "Added composite index ix_attendance_date_emp_status"],
-        ["Query 2: Trial Balance Ledger Join (6,784 lines)", "22.77 ms (Scan journal_lines)", "9.44 ms", "58.5% faster", "Added index ix_journal_entries_status on posted entries"],
-        ["Query 3: Open Invoices & Receivables (743 records)", "1.14 ms (Status scan)", "0.40 ms", "64.9% faster", "Added index ix_invoices_status and covering index"],
-        ["Report Cache: Trial Balance Cold Compute", "87.30 ms (Database scan)", "69.47 ms", "20.4% faster", "Indexed double-entry ledger sums aggregation"],
-        ["Report Cache: Trial Balance Hot Cache (In-Memory)", "87.30 ms", "0.01 ms", "8,907x faster", "In-memory TTL cache with auto-invalidation on new entries"],
-        ["Payroll Calculation Engine Read Throughput", "2.14 ms per run", "0.67 ms per run", "68.7% faster", "Added index ix_payroll_runs_status; covering scan"],
+    el.append(Paragraph(
+        "$ pytest -q<br/>"
+        "132 passed, 4 warnings in 153.14s  (0 failed; includes 100% OpenAPI 91/91 example coverage &amp; 4 Final Challenge tests)<br/><br/>"
+        "$ python scripts/verify_ledgerforge.py checks --data exports<br/>"
+        "PASS  Every journal entry balances  -  debits-credits=0.0, unbalanced entries=0<br/>"
+        "PASS  Payroll equals ledger, every month  -  largest monthly difference=0.00<br/>"
+        "PASS  Receivables equal open invoices  -  ledger 1100=139,394,278.00, open (sent/overdue/part-paid) invoices=139,394,278.00<br/>"
+        "PASS  Payroll employees exist  -  payroll rows with unknown employee=0<br/>"
+        "PASS  Nobody is paid after leaving  -  payroll rows after exit_date=0<br/>"
+        "5/5 checks passed<br/><br/>"
+        "$ python scripts/verify_ledgerforge.py payroll exports/task19_payroll_export.csv --data exports<br/>"
+        "Rows expected 7340, rows found in your file 7340 | Exact matches (within 1 paisa): 7340/7340 = 100.00%<br/><br/>"
+        "$ python scripts/verify_ledgerforge.py trial-balance exports/trial_balance.csv --data exports<br/>"
+        "Accounts compared: 40, mismatched: 0",
+        code_s,
+    ))
+
+    el.append(PageBreak())
+
+    # ── PAGE 2: Performance + Backup/Restore + Final Challenge ──
+    el.append(Paragraph("3. Performance Benchmarks &amp; Tested Disaster Recovery (Task 18)", h_s))
+    perf_rows = [
+        ["Query / Operation Profiled", "Before", "After", "Speedup", "Fix Applied"],
+        ["Attendance 30-Day Aggregation (150,156 rows)", "45.75 ms", "21.63 ms", "52.7% faster", "Composite index ix_attendance_date_emp_status"],
+        ["Trial Balance Ledger Join (6,784 lines)", "22.77 ms", "9.44 ms", "58.5% faster", "Index ix_journal_entries_status on posted entries"],
+        ["Open Invoices & Receivables (743 rows)", "1.14 ms", "0.40 ms", "64.9% faster", "Covering index ix_invoices_status"],
+        ["Trial Balance Report (Cold vs. TTL Hot Cache)", "87.30 ms", "0.01 ms", "8,907x faster", "60s TTL cache with auto-invalidation on ledger writes"],
+        ["Disaster Recovery Restore (29 tables)", "Backup 50.8 MB", "Fresh DB", "100% Parity", "193,036 / 193,036 rows matched via backup_restore.py"],
     ]
-    t_perf = Table(perf_data, colWidths=[150, 85, 80, 60, 151])
-    t_perf.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#334155")),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 6.5),
-        ("LEADING", (0, 0), (-1, -1), 8.5),
-        ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
-        ("LEFTPADDING", (0, 0), (-1, -1), 3),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 3),
-        ("TOPPADDING", (0, 0), (-1, -1), 2),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
-    ]))
-    elements.append(t_perf)
+    el.append(_table(perf_rows, [160, 62, 54, 62, 202], header_hex="#334155", center_cols=(1, 2, 3)))
+    el.append(Spacer(1, 5))
 
-    elements.append(PageBreak())
-
-    # ── 4. Backup & Tested Restore Verification ──
-    elements.append(Paragraph("4. Disaster Recovery: Backup &amp; Tested Restore Proof (Task 18)", section_style))
-    elements.append(Paragraph(
-        "A dedicated automation script (<font face='Courier'>scripts/backup_restore.py</font>) was created to perform atomic online "
-        "backups, restore them into a clean, isolated database, and verify record count parity across every application table.",
-        body_style,
+    # ── 4. Final Challenge (Mini Challenge on Own Branch) ──
+    el.append(Paragraph("4. Final Challenge — Built Independently on Its Own Branch (Task 20)", h_s))
+    el.append(Paragraph(
+        "<b>Branch:</b> <font face='Courier'>feat/department-payroll-cost-report</font> (pushed to GitHub and merged via <font face='Courier'>--no-ff</font> into <font face='Courier'>master</font>).<br/>"
+        "<b>What I Built:</b> <font face='Courier'>GET /api/v1/reports/department-payroll-cost</font> — an executive Departmental Payroll Cost &amp; Statutory Breakdown "
+        "endpoint supporting optional <font face='Courier'>run_id</font>, <font face='Courier'>start_date</font>, and <font face='Courier'>end_date</font> filters, protected by <font face='Courier'>ADMIN/HR</font> RBAC.<br/>"
+        "<b>Design Decisions:</b> Used a single SQL <font face='Courier'>GROUP BY</font> join between <font face='Courier'>payroll_items</font> and <font face='Courier'>departments</font> "
+        "to avoid N+1 queries, exact <font face='Courier'>Decimal</font> arithmetic with <font face='Courier'>ROUND_HALF_UP</font>, safe zero-division guards, OpenAPI enrichment (91/91 coverage), "
+        "and 4 unit/integration tests (<font face='Courier'>tests/test_department_cost_report.py</font>).<br/>"
+        "<b>Verified Result on 18-Month DB:</b> 11 departments, 7,340 payroll items, total employer cost <b>₹861,586,392.42</b> — matching Profit &amp; Loss "
+        "accounts <font face='Courier'>5001–5005</font> (<b>₹861,586,392.42</b>) to the exact paisa (Engineering 39.58%, Sales 14.70%, Data &amp; AI 12.85%; total share = 100.00%).",
+        body_s,
     ))
-    backup_sample = [
-        ["Table Name", "Original Database", "Restored Database", "Status", "Table Name", "Original Database", "Restored Database", "Status"],
-        ["attendance", "150,156", "150,156", "MATCH", "journal_lines", "6,784", "6,784", "MATCH"],
-        ["payroll_items", "7,340", "7,340", "MATCH", "salary_structures", "12,295", "12,295", "MATCH"],
-        ["journal_entries", "2,524", "2,524", "MATCH", "salary_revisions", "2,459", "2,459", "MATCH"],
-        ["leave_requests", "3,442", "3,442", "MATCH", "employee_assignments", "1,606", "1,606", "MATCH"],
-        ["employees", "745", "745", "MATCH", "invoices", "743", "743", "MATCH"],
-        ["users", "745", "745", "MATCH", "invoice_payments", "709", "709", "MATCH"],
-        ["expenses", "501", "501", "MATCH", "chart_of_accounts", "47", "47", "MATCH"],
-        ["payroll_runs", "18", "18", "MATCH", "roles", "58", "58", "MATCH"],
+    el.append(Spacer(1, 4))
+
+    # ── 5. What I Learned (In My Own Words — 4 lines) ──
+    el.append(Paragraph("5. What I Learned (In My Own Words)", h_s))
+    el.append(Paragraph(
+        "Phase 4 taught me that writing working endpoints is only half of software engineering—shipping a service means making it "
+        "observable, fast, recoverable, and understandable by someone who has never met you. Profiling with <font face='Courier'>EXPLAIN</font> "
+        "proved that guessing bottlenecks wastes time compared to measuring first and indexing second. Practising an actual database restore "
+        "showed me why teams say an untested backup is just a hope. Most importantly, writing stranger-ready documentation and auditing "
+        "my own live deployment forced me to spot and document honest limits rather than hide them.",
+        body_s,
+    ))
+    el.append(Spacer(1, 4))
+
+    # ── 6. Problems I Hit and How I Solved Them ──
+    el.append(Paragraph("6. Problems I Hit &amp; How I Solved Them", h_s))
+    probs_rows = [
+        ["Problem Encountered", "Root Cause", "How I Solved It"],
+        [
+            "Streaming payroll export &amp; tests failed with TypeError on PayrollItem fields",
+            "Used assumed names (item_id, basic_pay) instead of actual ORM column names (payroll_item_id, basic) and Title Case CHECK constraints",
+            "Inspected SQLAlchemy __table__.columns and CHECK constraints directly, fixed export_service.py &amp; test fixtures, and verified 7,340/7,340 (100.00%) match",
+        ],
+        [
+            "Incremental delta export missed JournalEntry records on SQLite",
+            "JournalEntry.created_at was nullable VARCHAR(32) without a server_default unlike TimestampMixin tables",
+            "Updated delta filter to match created_at >= since.isoformat() OR entry_date >= since.date(), then covered it with an automated assertion in test_exports.py",
+        ],
+        [
+            "37 of 90 OpenAPI operations lacked Swagger examples initially",
+            "Only requestBody paths had examples; read-only GET endpoints and path params were uncovered",
+            "Extended app/core/openapi.py with parameter + 200 response examples and added a pytest gate enforcing 100% (91/91) coverage automatically",
+        ],
+        [
+            "Render free-tier public URL returned 404 (no-server) during final Task 20 audit",
+            "Render free tier spins down idle web services and expires free Postgres instances after 30 days",
+            "Documented this honestly in RELEASE_NOTES.md; verified one-click redeploy via render.yaml Blueprint and ran full local &amp; official verifier checks",
+        ],
     ]
-    t_bak = Table(backup_sample, colWidths=[80, 50, 50, 42, 85, 50, 50, 42])
-    t_bak.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1e3a5f")),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 6.5),
-        ("LEADING", (0, 0), (-1, -1), 8.5),
-        ("ALIGN", (1, 0), (3, -1), "CENTER"),
-        ("ALIGN", (5, 0), (7, -1), "CENTER"),
-        ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
-        ("LEFTPADDING", (0, 0), (-1, -1), 3),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 3),
-        ("TOPPADDING", (0, 0), (-1, -1), 1.5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.5),
-    ]))
-    elements.append(t_bak)
-    elements.append(Spacer(1, 2))
-    elements.append(Paragraph(
-        "<b>Audited Summary:</b> Total <b>193,036 rows</b> across 29 tables. <b>100% exact parity achieved</b>. "
-        "Backup file: <font face='Courier'>backups/ledgerforge_backup_*.db</font> (50.8 MB). Restoration verified with zero data corruption.",
-        bold_body,
+    el.append(_table(probs_rows, [145, 165, 230], header_hex="#7c2d12"))
+    el.append(Spacer(1, 5))
+
+    # ── 7. What I Would Improve Next ──
+    el.append(Paragraph("7. What I Would Improve Next", h_s))
+    el.append(Paragraph(
+        "&bull; <b>Distributed Redis Caching:</b> Move the 60-second Trial Balance TTL cache from in-process Python memory to Redis (<font face='Courier'>REDIS_URL</font>) "
+        "so cache invalidation stays consistent across multiple Uvicorn replicas.<br/>"
+        "&bull; <b>Always-On Production Tier &amp; Automated Nightly Backups:</b> Upgrade from free-tier hosting to a paid managed PostgreSQL + always-on web service "
+        "with scheduled <font face='Courier'>pg_dump</font> backups and automated weekly restore verification.<br/>"
+        "&bull; <b>Uniform Day-1 Schema Contract:</b> Standardize timezone-aware <font face='Courier'>created_at/updated_at</font> timestamps and uppercase enums in a single "
+        "shared SQLAlchemy <font face='Courier'>Base</font> before Migration 0001.<br/>"
+        "&bull; <b>Enterprise Integrations (v1.1+):</b> Add bank NEFT/IMPS disbursement webhooks, statutory EPFO/TRACES e-filing exports, and multi-tenant isolation.",
+        body_s,
+    ))
+    el.append(Spacer(1, 4))
+    el.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
+    el.append(Paragraph(
+        "<b>Self-Check Passed:</b> I can explain every module, trace any payroll figure from attendance to the Balance Sheet, add a feature on a clean branch, "
+        "and debug failures live in an interview. — <b>Ancilin P G (GM00210), Tag: phase-4 / v1.0.0</b>",
+        meta_s,
     ))
 
-    # ── 5. Health Checks & Structured JSON Logging ──
-    elements.append(Paragraph("5. Health Probes &amp; Structured JSON Observability", section_style))
-    elements.append(Paragraph(
-        "&bull; <b>Active Database Health Probe:</b> The <font face='Courier'>/health</font> endpoint executes an active "
-        "<font face='Courier'>SELECT 1</font> query on the connected database. If the database connection drops or times out, "
-        "the endpoint detects the failure, reports <font face='Courier'>status: \"unhealthy\"</font>, and returns <b>HTTP 503 Service Unavailable</b>. "
-        "This allows load balancers (such as AWS ALB or Render edge routers) to automatically redirect traffic away from impaired pods.<br/>"
-        "&bull; <b>Structured JSON Logging:</b> Every HTTP request is intercepted by <font face='Courier'>RequestLoggingMiddleware</font> "
-        "and formatted using <font face='Courier'>JSONFormatter</font> into structured JSON lines containing "
-        "<font face='Courier'>{\"timestamp\": \"...\", \"level\": \"INFO\", \"method\": \"POST\", \"path\": \"/api/v1/...\", \"status_code\": 200, \"duration_ms\": 14.2, \"client_ip\": \"...\"}</font>. "
-        "Logs are immediately searchable and parseable in centralized log aggregators (Datadog, CloudWatch, Loki).",
-        body_style,
-    ))
-
-    # ── 6. Critical Analysis: The One Number to Watch Daily ──
-    elements.append(Paragraph("6. Critical System Analysis: Which One Number to Watch Daily?", section_style))
-    elements.append(Paragraph(
-        "<b>The One Metric: Trial Balance Imbalance Delta (|Total Debits - Total Credits|)</b><br/>"
-        "In enterprise financial and payroll engineering, software health is not merely uptime—it is <b>computational and financial correctness</b>. "
-        "While standard web apps monitor server CPU or HTTP 500 error rates, an accounting system can return HTTP 200 while silently corrupting balances. "
-        "The single most critical daily number is the <b>Trial Balance Imbalance Delta</b>: <font face='Courier'>|&Sigma; Debits - &Sigma; Credits|</font>. "
-        "It MUST ALWAYS BE EXACTLY <b>&cent;0.00 / ₹0.00</b>.<br/>"
-        "If this number ever deviates by even a single cent/paisa, it signals an immediate breach of double-entry immutability—such as an "
-        "interrupted transaction, a rounding bug in statutory tax deductions, or an unbalanced manual journal entry. "
-        "Operationally, the primary secondary metric to watch alongside it is <b>p99 HTTP Request Latency (< 250ms)</b> to catch connection pool saturation.",
-        body_style,
-    ))
-
-    # ── 7. Data Exports, OpenAPI Examples & Handover Documentation (Task 19) ──
-    elements.append(Paragraph("7. Data Exports, OpenAPI Examples &amp; Documentation (Task 19)", section_style))
-    elements.append(Paragraph(
-        "&bull; <b>Streaming CSV &amp; Excel Exports:</b> Implemented chunked streaming generators (<font face='Courier'>app/services/export_service.py</font>) "
-        "exposed at <font face='Courier'>/api/v1/exports/employees</font>, <font face='Courier'>/payroll</font>, and <font face='Courier'>/ledger</font> "
-        "supporting <font face='Courier'>start_date</font>, <font face='Courier'>end_date</font>, <font face='Courier'>since</font>, and "
-        "<font face='Courier'>format=csv|xlsx</font> (using <font face='Courier'>openpyxl</font> write-only streaming mode for memory efficiency).<br/>"
-        "&bull; <b>Official Payroll Export Verification:</b> Streamed all payroll rows to <font face='Courier'>exports/task19_payroll_export.csv</font> "
-        "and verified against the official dataset using <font face='Courier'>scripts/verify_ledgerforge.py payroll</font>: "
-        "<b>7,340 / 7,340 rows matched (100.00% within 1 paisa)</b>, and <font face='Courier'>verify_ledgerforge.py checks</font> passed <b>5/5</b>.<br/>"
-        "&bull; <b>Incremental Delta Export:</b> Added <font face='Courier'>GET /api/v1/exports/changes?since=&lt;ISO-8601&gt;</font> returning delta counts "
-        "and IDs for modified employees, payroll items, and journal entries.<br/>"
-        "&bull; <b>100% OpenAPI Example Coverage:</b> <font face='Courier'>app/core/openapi.py</font> enriches all <b>90/90</b> API operations with realistic "
-        "request, parameter, and response examples in <font face='Courier'>/docs</font>, enforced automatically by <font face='Courier'>tests/test_exports.py</font>.<br/>"
-        "&bull; <b>Stranger-Ready README, Mermaid Architecture &amp; Onboarding Fixes:</b> Rewrote <font face='Courier'>README.md</font> with 3-command Docker/local "
-        "setup, 10 copy-paste <font face='Courier'>curl</font> examples, embedded Mermaid architecture diagram (<font face='Courier'>docs/architecture.md</font>), "
-        "and <font face='Courier'>CHANGELOG.md</font>. Fresh-clone walkthrough fixes added Windows PowerShell separator notes, SQLite fallback guidance, "
-        "Render cold-start expectations, and admin login shortcut documentation.",
-        body_style,
-    ))
-
-    # ── 8. Final Audit, Final Challenge & Career Lesson (Task 20) ──
-    elements.append(Paragraph("8. Final Audit, Final Challenge &amp; Career Reflection (Task 20)", section_style))
-    elements.append(Paragraph(
-        "&bull; <b>Final Challenge (<font face='Courier'>feat/department-payroll-cost-report</font>):</b> Independently designed and shipped "
-        "<font face='Courier'>GET /api/v1/reports/department-payroll-cost</font> on its own branch using a single SQL <font face='Courier'>GROUP BY</font> "
-        "join (zero N+1 queries), Decimal rounding, ADMIN/HR RBAC, OpenAPI example (91/91 coverage), and 4 pytest tests. "
-        "Across 18 months: 11 departments, 7,340 items, ₹861,586,392.42 employer cost (Engineering 39.58%, Sales 14.70%, Data &amp; AI 12.85%; sum = 100.00%).<br/>"
-        "&bull; <b>Final Audit &amp; Honest Note:</b> <font face='Courier'>verify_ledgerforge.py checks</font>: <b>5/5 passed</b>; "
-        "<font face='Courier'>payroll</font>: <b>7,340/7,340 (100.00%)</b>; <font face='Courier'>trial-balance</font>: <b>40/40 (0 mismatched)</b>; "
-        "<font face='Courier'>pytest</font>: <b>132 passed</b>. Honest limit documented in <font face='Courier'>RELEASE_NOTES.md</font>: "
-        "the Render free-tier web service returned <font face='Courier'>404 no-server</font> on final probe due to free-tier spin-down/expiry, "
-        "recoverable via <font face='Courier'>render.yaml</font> Blueprint redeploy.<br/>"
-        "&bull; <b>Career Lesson:</b> Standardize timezone-aware <font face='Courier'>created_at/updated_at</font> columns and strict enum casing "
-        "inside a shared SQLAlchemy <font face='Courier'>Base</font> contract on Day 1 to avoid downstream incremental export and schema friction.",
-        body_style,
-    ))
-
-    # ── 9. Sign-off ──
-    elements.append(Spacer(1, 4))
-    elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
-    elements.append(Paragraph(
-        "<b>Phase 4 &amp; v1.0.0 Sign-Off:</b> All milestones for Days 16–20 (Tasks 16, 17, 18, 19 &amp; 20) are complete, verified "
-        "(132/132 tests, 5/5 checks, 7,340/7,340 payroll, 40/40 trial balance, 91/91 OpenAPI examples), documented in "
-        "<font face='Courier'>RELEASE_NOTES.md</font> and <font face='Courier'>Python_Ancillin_Final_Consolidated_Report.pdf</font>, and tagged <b>v1.0.0</b>.",
-        body_style,
-    ))
-    elements.append(Spacer(1, 2))
-    elements.append(Paragraph("— Ancilin P G, November 2026", meta_style))
-
-    doc.build(elements)
-    print(f"✓ PDF written: {OUTPUT_PDF}")
-
-    # Copy to reports/ and Desktop
+    doc.build(el, onFirstPage=_track_page, onLaterPages=_track_page)
+    print(f"✓ Phase 4 PDF written ({page_counter['pages']} pages): {OUTPUT_PDF}")
     for dest in (REPORTS_PDF, DESKTOP_PDF):
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(OUTPUT_PDF, dest)
         print(f"  → copied to {dest}")
+    return page_counter["pages"]
 
 
 if __name__ == "__main__":
-    build_pdf()
+    pages = build_pdf()
+    assert 2 <= pages <= 3, f"Phase 4 report must be 2–3 pages, got {pages}!"
