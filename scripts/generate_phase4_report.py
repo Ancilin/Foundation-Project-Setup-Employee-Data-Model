@@ -1,4 +1,4 @@
-"""Generate Python_Ancillin_Phase4_Report.pdf using reportlab — Phase 4 Tasks 16, 17, & 18 Complete."""
+"""Generate Python_Ancillin_Phase4_Report.pdf using reportlab — Phase 4 Tasks 16, 17, 18 & 19 Complete."""
 
 import shutil
 from pathlib import Path
@@ -110,7 +110,7 @@ def build_pdf() -> None:
 
     # ── Header / Meta ──
     elements.append(Paragraph("Python Developer Internship — Phase 4 Engineering Report", title_style))
-    elements.append(Paragraph("Tasks 16, 17 &amp; 18: Release Candidate, Production Cloud Deployment, Performance &amp; Disaster Recovery", subtitle_style))
+    elements.append(Paragraph("Tasks 16, 17, 18 &amp; 19: Release Candidate, Cloud Deploy, Performance, Backups, Exports &amp; Documentation", subtitle_style))
     elements.append(Paragraph("Candidate: Ancilin P G &nbsp;|&nbsp; ID: GM00210 &nbsp;|&nbsp; Evaluation Date: November 2026", meta_style))
     elements.append(Paragraph(
         f'GitHub Repository: <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a> &nbsp;|&nbsp; Tag: <b>v1.0.0-rc1</b><br/>'
@@ -123,19 +123,20 @@ def build_pdf() -> None:
     # ── 1. Phase 4 Overview ──
     elements.append(Paragraph("1. Phase 4 Executive Summary", section_style))
     elements.append(Paragraph(
-        "Phase 4 takes LedgerForge through full product readiness: from containerized release candidate (Task 16), "
-        "to live cloud production deployment with hosted database and web UX (Task 17), to high-performance query optimization, "
-        "structured JSON observability, automated health probes, and tested disaster recovery backup restoration (Task 18). "
-        "All 122 automated unit and integration tests pass cleanly with 90% code coverage across 4,700+ statements.",
+        "Phase 4 takes LedgerForge through complete production and handover readiness: containerized release candidate (Task 16), "
+        "live cloud production deployment with hosted PostgreSQL and mobile web UX (Task 17), EXPLAIN query optimization, "
+        "structured JSON observability, DB health probes, and tested backup restoration (Task 18), plus streaming CSV/Excel data exports, "
+        "incremental change feeds, 100% OpenAPI examples, Mermaid architecture diagrams, and stranger-ready documentation (Task 19). "
+        "All 128 automated unit and integration tests pass cleanly with ~90% code coverage.",
         body_style,
     ))
 
-    # ── 2. Tasks 16, 17, 18 Completion Checklist ──
+    # ── 2. Tasks 16, 17, 18, 19 Completion Checklist ──
     elements.append(Paragraph("2. Phase 4 Complete Requirements Checklist", section_style))
     chk_data = [
         ["#", "Task Milestone", "Status", "Implementation Evidence"],
         ["1", "Task 16: Background Jobs Queue", "DONE", "Celery + Redis task queue with thread fallback (app/services/job_service.py)"],
-        ["2", "Task 16: Versioned API & 30+ Tests", "DONE", "122 tests passed (target: 30+), 90% coverage, all routes prefixed /api/v1"],
+        ["2", "Task 16: Versioned API & 30+ Tests", "DONE", "128 tests passed (target: 30+), ~90% coverage, all routes prefixed /api/v1"],
         ["3", "Task 16: Docker & Secrets Isolation", "DONE", "Dockerfile + docker-compose.yml (api, db, redis, worker); zero secrets in image"],
         ["4", "Task 16: GitHub Actions CI/CD", "DONE", ".github/workflows/ci.yml runs pytest & coverage automatically on push"],
         ["5", "Task 17: Hosting Evaluation Matrix", "DONE", "Render selected over Railway/Fly.io/Supabase for native Docker blueprint"],
@@ -148,6 +149,11 @@ def build_pdf() -> None:
         ["12", "Task 18: Structured JSON Logging", "DONE", "app/core/logging.py emits machine-readable JSON logs for every request"],
         ["13", "Task 18: Health Check with DB Probe", "DONE", "GET /health executes SELECT 1; returns 200 on healthy DB and 503 on failure"],
         ["14", "Task 18: Backup & Tested Restore", "DONE", "scripts/backup_restore.py: Restores snapshot to fresh DB, 193,036 rows (100% MATCH)"],
+        ["15", "Task 19: Streaming CSV & Excel Exports", "DONE", "GET /api/v1/exports/{employees,payroll,ledger} with date filters & ?format=csv|xlsx"],
+        ["16", "Task 19: Incremental Delta Export", "DONE", "GET /api/v1/exports/changes?since=<ISO> + ?since filter on all stream endpoints"],
+        ["17", "Task 19: OpenAPI Examples (100%)", "DONE", "app/core/openapi.py enriches 90/90 operations with real examples (asserted in pytest)"],
+        ["18", "Task 19: Stranger-Ready README & 10 Examples", "DONE", "README.md with 3-step Docker/local quick start, 10 curl examples, FAQ & CHANGELOG.md"],
+        ["19", "Task 19: Mermaid Architecture & Export Proof", "DONE", "docs/architecture.md + README Mermaid; payroll export verified 7,340/7,340 (100.00%)"],
     ]
     t_chk = Table(chk_data, colWidths=[16, 160, 36, 314])
     t_chk.setStyle(TableStyle([
@@ -273,13 +279,34 @@ def build_pdf() -> None:
         body_style,
     ))
 
-    # ── 7. Sign-off ──
+    # ── 7. Data Exports, OpenAPI Examples & Handover Documentation (Task 19) ──
+    elements.append(Paragraph("7. Data Exports, OpenAPI Examples &amp; Documentation (Task 19)", section_style))
+    elements.append(Paragraph(
+        "&bull; <b>Streaming CSV &amp; Excel Exports:</b> Implemented chunked streaming generators (<font face='Courier'>app/services/export_service.py</font>) "
+        "exposed at <font face='Courier'>/api/v1/exports/employees</font>, <font face='Courier'>/payroll</font>, and <font face='Courier'>/ledger</font> "
+        "supporting <font face='Courier'>start_date</font>, <font face='Courier'>end_date</font>, <font face='Courier'>since</font>, and "
+        "<font face='Courier'>format=csv|xlsx</font> (using <font face='Courier'>openpyxl</font> write-only streaming mode for memory efficiency).<br/>"
+        "&bull; <b>Official Payroll Export Verification:</b> Streamed all payroll rows to <font face='Courier'>exports/task19_payroll_export.csv</font> "
+        "and verified against the official dataset using <font face='Courier'>scripts/verify_ledgerforge.py payroll</font>: "
+        "<b>7,340 / 7,340 rows matched (100.00% within 1 paisa)</b>, and <font face='Courier'>verify_ledgerforge.py checks</font> passed <b>5/5</b>.<br/>"
+        "&bull; <b>Incremental Delta Export:</b> Added <font face='Courier'>GET /api/v1/exports/changes?since=&lt;ISO-8601&gt;</font> returning delta counts "
+        "and IDs for modified employees, payroll items, and journal entries.<br/>"
+        "&bull; <b>100% OpenAPI Example Coverage:</b> <font face='Courier'>app/core/openapi.py</font> enriches all <b>90/90</b> API operations with realistic "
+        "request, parameter, and response examples in <font face='Courier'>/docs</font>, enforced automatically by <font face='Courier'>tests/test_exports.py</font>.<br/>"
+        "&bull; <b>Stranger-Ready README, Mermaid Architecture &amp; Onboarding Fixes:</b> Rewrote <font face='Courier'>README.md</font> with 3-command Docker/local "
+        "setup, 10 copy-paste <font face='Courier'>curl</font> examples, embedded Mermaid architecture diagram (<font face='Courier'>docs/architecture.md</font>), "
+        "and <font face='Courier'>CHANGELOG.md</font>. Fresh-clone walkthrough fixes added Windows PowerShell separator notes, SQLite fallback guidance, "
+        "Render cold-start expectations, and admin login shortcut documentation.",
+        body_style,
+    ))
+
+    # ── 8. Sign-off ──
     elements.append(Spacer(1, 4))
     elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
     elements.append(Paragraph(
-        "<b>Phase 4 Sign-Off:</b> All milestones for Day 16 (Task 16), Day 17 (Task 17), and Day 18 (Task 18) have been fully implemented, "
-        "benchmarked, and committed. LedgerForge is containerized, cloud-deployed, fully versioned, protected by automated CI/CD, "
-        "observable with structured JSON logs, accelerated by database indexes and caching, and backed by a proven disaster recovery mechanism.",
+        "<b>Phase 4 Sign-Off:</b> All milestones for Days 16–19 (Tasks 16, 17, 18 &amp; 19) have been fully implemented, "
+        "verified (128/128 tests passing, 7,340/7,340 payroll export exact match, 5/5 official checks, 90/90 OpenAPI examples), "
+        "and documented. LedgerForge is production-deployed, fast, observable, recoverable, and ready for team handover and final Task 20 presentation.",
         body_style,
     ))
     elements.append(Spacer(1, 2))

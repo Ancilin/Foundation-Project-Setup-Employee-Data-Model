@@ -57,6 +57,23 @@ def create_app() -> FastAPI:
     app.include_router(api_router, prefix="/api/v1")
     # Legacy alias router for backwards compatibility
     app.include_router(api_router, include_in_schema=False)
+
+    def custom_openapi():
+        if app.openapi_schema:
+            return app.openapi_schema
+        from fastapi.openapi.utils import get_openapi
+        from app.core.openapi import enrich_openapi_schema
+
+        schema = get_openapi(
+            title=settings.app_name,
+            version=settings.app_version,
+            description="LedgerForge Enterprise Payroll & Double-Entry Accounting REST API with OpenAPI Examples",
+            routes=app.routes,
+        )
+        app.openapi_schema = enrich_openapi_schema(schema)
+        return app.openapi_schema
+
+    app.openapi = custom_openapi
     return app
 
 
