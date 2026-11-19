@@ -1,4 +1,4 @@
-"""Generate Python_Ancillin_Phase4_Report.pdf using reportlab — Phase 4 Tasks 16, 17, 18 & 19 Complete."""
+"""Generate Python_Ancillin_Phase4_Report.pdf using reportlab — Phase 4 Tasks 16, 17, 18, 19 & 20 Complete (v1.0.0)."""
 
 import shutil
 from pathlib import Path
@@ -110,11 +110,11 @@ def build_pdf() -> None:
 
     # ── Header / Meta ──
     elements.append(Paragraph("Python Developer Internship — Phase 4 Engineering Report", title_style))
-    elements.append(Paragraph("Tasks 16, 17, 18 &amp; 19: Release Candidate, Cloud Deploy, Performance, Backups, Exports &amp; Documentation", subtitle_style))
+    elements.append(Paragraph("Tasks 16–20: Release Candidate, Cloud Deploy, Performance, Backups, Exports, Final Audit &amp; v1.0.0 Handover", subtitle_style))
     elements.append(Paragraph("Candidate: Ancilin P G &nbsp;|&nbsp; ID: GM00210 &nbsp;|&nbsp; Evaluation Date: November 2026", meta_style))
     elements.append(Paragraph(
-        f'GitHub Repository: <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a> &nbsp;|&nbsp; Tag: <b>v1.0.0-rc1</b><br/>'
-        f'Production App: <a href="{LIVE_APP_URL}" color="#2563eb">{LIVE_APP_URL}</a> &nbsp;|&nbsp; API Docs: <a href="{LIVE_APP_URL}/docs" color="#2563eb">{LIVE_APP_URL}/docs</a> &nbsp;|&nbsp; Web UI: <a href="{LIVE_APP_URL}/ui" color="#2563eb">{LIVE_APP_URL}/ui</a>',
+        f'GitHub Repository: <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a> &nbsp;|&nbsp; Release Tag: <b>v1.0.0</b><br/>'
+        f'Release Notes: <font face="Courier">RELEASE_NOTES.md</font> &nbsp;|&nbsp; Final Challenge Branch: <font face="Courier">feat/department-payroll-cost-report</font>',
         meta_style,
     ))
     elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
@@ -123,11 +123,11 @@ def build_pdf() -> None:
     # ── 1. Phase 4 Overview ──
     elements.append(Paragraph("1. Phase 4 Executive Summary", section_style))
     elements.append(Paragraph(
-        "Phase 4 takes LedgerForge through complete production and handover readiness: containerized release candidate (Task 16), "
-        "live cloud production deployment with hosted PostgreSQL and mobile web UX (Task 17), EXPLAIN query optimization, "
-        "structured JSON observability, DB health probes, and tested backup restoration (Task 18), plus streaming CSV/Excel data exports, "
-        "incremental change feeds, 100% OpenAPI examples, Mermaid architecture diagrams, and stranger-ready documentation (Task 19). "
-        "All 128 automated unit and integration tests pass cleanly with ~90% code coverage.",
+        "Phase 4 delivers full production readiness and v1.0.0 handover for LedgerForge: containerized release candidate (Task 16), "
+        "cloud deployment blueprint &amp; mobile web UX (Task 17), EXPLAIN query optimization, JSON observability, DB health probes, and "
+        "tested disaster recovery (Task 18), streaming CSV/Excel exports, 100% OpenAPI examples &amp; Mermaid architecture (Task 19), "
+        "and the Task 20 Final Audit, Final Challenge feature branch, release notes, and v1.0.0 release tag. "
+        "All 132 automated unit and integration tests pass cleanly.",
         body_style,
     ))
 
@@ -151,9 +151,11 @@ def build_pdf() -> None:
         ["14", "Task 18: Backup & Tested Restore", "DONE", "scripts/backup_restore.py: Restores snapshot to fresh DB, 193,036 rows (100% MATCH)"],
         ["15", "Task 19: Streaming CSV & Excel Exports", "DONE", "GET /api/v1/exports/{employees,payroll,ledger} with date filters & ?format=csv|xlsx"],
         ["16", "Task 19: Incremental Delta Export", "DONE", "GET /api/v1/exports/changes?since=<ISO> + ?since filter on all stream endpoints"],
-        ["17", "Task 19: OpenAPI Examples (100%)", "DONE", "app/core/openapi.py enriches 90/90 operations with real examples (asserted in pytest)"],
+        ["17", "Task 19: OpenAPI Examples (100%)", "DONE", "app/core/openapi.py enriches 91/91 operations with real examples (asserted in pytest)"],
         ["18", "Task 19: Stranger-Ready README & 10 Examples", "DONE", "README.md with 3-step Docker/local quick start, 10 curl examples, FAQ & CHANGELOG.md"],
         ["19", "Task 19: Mermaid Architecture & Export Proof", "DONE", "docs/architecture.md + README Mermaid; payroll export verified 7,340/7,340 (100.00%)"],
+        ["20", "Task 20: Final Audit, Release Notes & v1.0.0", "DONE", "5/5 checks, 7,340/7,340 payroll, 40/40 TB; RELEASE_NOTES.md, DEMO_SCRIPT.md, tag v1.0.0"],
+        ["21", "Task 20: Final Challenge (Own Branch)", "DONE", "feat/department-payroll-cost-report: GET /api/v1/reports/department-payroll-cost (4 tests)"],
     ]
     t_chk = Table(chk_data, colWidths=[16, 160, 36, 314])
     t_chk.setStyle(TableStyle([
@@ -300,13 +302,30 @@ def build_pdf() -> None:
         body_style,
     ))
 
-    # ── 8. Sign-off ──
+    # ── 8. Final Audit, Final Challenge & Career Lesson (Task 20) ──
+    elements.append(Paragraph("8. Final Audit, Final Challenge &amp; Career Reflection (Task 20)", section_style))
+    elements.append(Paragraph(
+        "&bull; <b>Final Challenge (<font face='Courier'>feat/department-payroll-cost-report</font>):</b> Independently designed and shipped "
+        "<font face='Courier'>GET /api/v1/reports/department-payroll-cost</font> on its own branch using a single SQL <font face='Courier'>GROUP BY</font> "
+        "join (zero N+1 queries), Decimal rounding, ADMIN/HR RBAC, OpenAPI example (91/91 coverage), and 4 pytest tests. "
+        "Across 18 months: 11 departments, 7,340 items, ₹861,586,392.42 employer cost (Engineering 39.58%, Sales 14.70%, Data &amp; AI 12.85%; sum = 100.00%).<br/>"
+        "&bull; <b>Final Audit &amp; Honest Note:</b> <font face='Courier'>verify_ledgerforge.py checks</font>: <b>5/5 passed</b>; "
+        "<font face='Courier'>payroll</font>: <b>7,340/7,340 (100.00%)</b>; <font face='Courier'>trial-balance</font>: <b>40/40 (0 mismatched)</b>; "
+        "<font face='Courier'>pytest</font>: <b>132 passed</b>. Honest limit documented in <font face='Courier'>RELEASE_NOTES.md</font>: "
+        "the Render free-tier web service returned <font face='Courier'>404 no-server</font> on final probe due to free-tier spin-down/expiry, "
+        "recoverable via <font face='Courier'>render.yaml</font> Blueprint redeploy.<br/>"
+        "&bull; <b>Career Lesson:</b> Standardize timezone-aware <font face='Courier'>created_at/updated_at</font> columns and strict enum casing "
+        "inside a shared SQLAlchemy <font face='Courier'>Base</font> contract on Day 1 to avoid downstream incremental export and schema friction.",
+        body_style,
+    ))
+
+    # ── 9. Sign-off ──
     elements.append(Spacer(1, 4))
     elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
     elements.append(Paragraph(
-        "<b>Phase 4 Sign-Off:</b> All milestones for Days 16–19 (Tasks 16, 17, 18 &amp; 19) have been fully implemented, "
-        "verified (128/128 tests passing, 7,340/7,340 payroll export exact match, 5/5 official checks, 90/90 OpenAPI examples), "
-        "and documented. LedgerForge is production-deployed, fast, observable, recoverable, and ready for team handover and final Task 20 presentation.",
+        "<b>Phase 4 &amp; v1.0.0 Sign-Off:</b> All milestones for Days 16–20 (Tasks 16, 17, 18, 19 &amp; 20) are complete, verified "
+        "(132/132 tests, 5/5 checks, 7,340/7,340 payroll, 40/40 trial balance, 91/91 OpenAPI examples), documented in "
+        "<font face='Courier'>RELEASE_NOTES.md</font> and <font face='Courier'>Python_Ancillin_Final_Consolidated_Report.pdf</font>, and tagged <b>v1.0.0</b>.",
         body_style,
     ))
     elements.append(Spacer(1, 2))

@@ -1,11 +1,11 @@
 # LedgerForge API — HR, Payroll & Double-Entry Accounting Platform
 
-**Candidate:** Ancilin P G (ID: `GM00210`) | **Track:** Python Developer | **Release:** `v1.0.0-rc1`
+**Candidate:** Ancilin P G (ID: `GM00210`) | **Track:** Python Developer | **Release:** [`v1.0.0`](https://github.com/Ancilin/Foundation-Project-Setup-Employee-Data-Model/releases/tag/v1.0.0)
 
-**Live Production App:** <https://foundation-project-setup-employee-data.onrender.com>
-- **Interactive API Docs (Swagger UI — 90/90 endpoints with real examples):** <https://foundation-project-setup-employee-data.onrender.com/docs>
-- **Mobile-Friendly Web Portal (Login, Run Payroll, View & Download Payslips):** <https://foundation-project-setup-employee-data.onrender.com/ui>
-- **Live Health Probe:** <https://foundation-project-setup-employee-data.onrender.com/health>
+**Key Handover Documents:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md) · [`CHANGELOG.md`](CHANGELOG.md) · [`docs/architecture.md`](docs/architecture.md) · [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · [`Python_Ancillin_Final_Consolidated_Report.pdf`](Python_Ancillin_Final_Consolidated_Report.pdf)
+- **Interactive API Docs (Swagger UI — 91/91 endpoints with real examples):** `/docs`
+- **Mobile-Friendly Web Portal (Login, Run Payroll, View & Download Payslips):** `/ui`
+- **Live Health Probe:** `/health` (Render Blueprint: [`render.yaml`](render.yaml))
 
 ---
 
@@ -14,11 +14,12 @@
 LedgerForge is a production-ready **FastAPI + SQLAlchemy 2.0 + PostgreSQL + Celery/Redis** backend that unifies **Employee & Org Management**, **Attendance & Leave**, **Indian Statutory Payroll** (EPF, ESI, Professional Tax, New-Regime TDS), **Double-Entry General Ledger**, **Invoicing & Expense Bills**, **Financial Statements** (Trial Balance, P&L, Balance Sheet), **Background Jobs**, and **Streaming CSV / Excel Data Exports**.
 
 Every calculation is mathematically verified against the official 18-month master dataset (**745 employees**, **150,156 attendance rows**, **7,340 payroll items**, **2,524 journal entries**):
-- **Automated Tests:** `128 passed` (`pytest`, ~90% coverage)
+- **Automated Tests:** `132 passed` (`pytest`, ~90% coverage)
 - **Official Payroll Accuracy:** `7,340 / 7,340 = 100.00%` exact match (within 1 paisa)
 - **Official Integrity Checks:** `5 / 5 checks passed` (zero unbalanced entries, zero payroll-to-ledger variance, zero payments after exit)
 - **Trial Balance Accuracy:** `40 / 40` accounts exact match (`0` mismatched)
 - **Backup & Restore Proof:** `193,036 / 193,036` rows across 29 tables restored with 100% parity
+- **Final Challenge (Task 20):** Executive Departmental Payroll Cost Report (`GET /api/v1/reports/department-payroll-cost`) built on branch `feat/department-payroll-cost-report`
 
 ---
 
@@ -29,7 +30,7 @@ Every calculation is mathematically verified against the official 18-month maste
 | **Phase 1: Foundation** | Days 1–5 (`LF-01`–`LF-05`) | FastAPI layered architecture, PostgreSQL + Docker, Alembic migrations, Employee/Org hierarchy, Master Seeder, Salary Structures & Revisions | `phase-1` | [`Python_Ancillin_Phase1_Report.pdf`](Python_Ancillin_Phase1_Report.pdf) |
 | **Phase 2: Core Development** | Days 6–10 (`LF-06`–`LF-10`) | Attendance & Leave, Indian Gross-to-Net Payroll Engine, Payslip PDFs, Double-Entry Ledger, Client Invoices & Receivables | `phase-2` | [`Python_Ancillin_Phase2_Report.pdf`](Python_Ancillin_Phase2_Report.pdf) |
 | **Phase 3: Connected System** | Days 11–15 (`LF-11`–`LF-15`) | Vendors & Expense Bills, 18-Run Payroll-to-Books, JWT RBAC (`ADMIN`/`HR`/`EMPLOYEE`), Configurable Tax Engine, Trial Balance / P&L / Balance Sheet | `phase-3` | [`Python_Ancillin_Phase3_Report.pdf`](Python_Ancillin_Phase3_Report.pdf) |
-| **Phase 4: Production & Handoff** | Days 16–19 (`LF-16`–`LF-19`) | Celery/Redis Background Jobs, `/api/v1` versioning, CI/CD, Cloud Deploy + `/ui`, EXPLAIN Indexing & TTL Cache, JSON Logs, DB Health Probe, Backup/Restore, Streaming CSV/Excel Exports & OpenAPI Examples | `v1.0.0-rc1` | [`Python_Ancillin_Phase4_Report.pdf`](Python_Ancillin_Phase4_Report.pdf) |
+| **Phase 4: Production & Handover** | Days 16–20 (`LF-16`–`LF-20`) | Celery/Redis Background Jobs, `/api/v1`, CI/CD, Cloud Blueprint + `/ui`, EXPLAIN Indexing & TTL Cache, JSON Logs, DB Health Probe, Backup/Restore, Streaming CSV/Excel Exports, OpenAPI Examples, Final Challenge & `v1.0.0` Audit | `v1.0.0` | [`Python_Ancillin_Phase4_Report.pdf`](Python_Ancillin_Phase4_Report.pdf) · [`Final Report`](Python_Ancillin_Final_Consolidated_Report.pdf) |
 
 ---
 

@@ -5,6 +5,23 @@ All notable changes to **LedgerForge** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-11-19
+
+### Added — Task 20: Final Audit, Demo, Handover & Final Challenge
+- **Final Challenge (`feat/department-payroll-cost-report`)**: Built independently on its own feature branch and merged via `--no-ff` into `master`:
+  - `GET /api/v1/reports/department-payroll-cost` (protected by `ADMIN`/`HR` RBAC) returning single-SQL `GROUP BY` per-department headcount, gross/deductions/net pay, employer PF/ESI cost, total employer CTC, average gross, and percentage spend share sorted highest-cost first.
+  - Verified on full 18-month database: **11 departments**, **7,340 payroll items**, **₹861,586,392.42** total employer cost (cost shares sum to `100.00%`).
+  - Added OpenAPI response example (**91/91 = 100%** endpoint example coverage) and 4 automated tests in `tests/test_department_cost_report.py` (total **132 passing tests**).
+- **Release Notes & Honest Audit (`RELEASE_NOTES.md`)**: Documented full `v1.0.0` feature scope, explicit exclusions, honest limits (including Render free-tier spin-down & single-worker TTL cache), final verifier outputs, Final Challenge decisions, and career reflection.
+- **5-Minute Demo Script (`docs/DEMO_SCRIPT.md`)**: Minute-by-minute walkthrough for live demo recording.
+- **Final Consolidated Report (`Python_Ancillin_Final_Consolidated_Report.pdf`)**: Complete Days 1–20 engineering & handover report PDF alongside updated `Python_Ancillin_Phase4_Report.pdf`.
+
+### Verified — Final Release Audit
+- `pytest -q`: **132 passed, 0 failed**
+- `verify_ledgerforge.py checks --data exports`: **5/5 checks passed**
+- `verify_ledgerforge.py payroll exports/task19_payroll_export.csv --data exports`: **7,340 / 7,340 (100.00%)** exact match within 1 paisa
+- `verify_ledgerforge.py trial-balance exports/trial_balance.csv --data exports`: **40 compared, 0 mismatched**
+
 ## [1.0.0-rc1] - 2026-11-19
 
 ### Added — Task 19: Exports & Documentation
