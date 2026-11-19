@@ -13,6 +13,7 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.report import (
     BalanceSheetReportRead,
+    DepartmentPayrollCostReportRead,
     ProfitAndLossReportRead,
     TrialBalanceReportRead,
 )
@@ -65,4 +66,25 @@ def get_balance_sheet_report(
     return report_service.get_balance_sheet(
         session=db,
         as_of_date=as_of_date,
+    )
+
+
+@router.get(
+    "/department-payroll-cost",
+    response_model=DepartmentPayrollCostReportRead,
+    summary="Executive Departmental Payroll Cost & Statutory Breakdown (Task 20 Final Challenge)",
+)
+def get_department_payroll_cost_report(
+    run_id: str | None = Query(default=None, description="Optional payroll run ID filter (e.g. PR-2025-04)"),
+    start_date: date | None = Query(default=None, description="Optional period start >= YYYY-MM-DD"),
+    end_date: date | None = Query(default=None, description="Optional period end <= YYYY-MM-DD"),
+    _current_user: User = Depends(require_role("ADMIN", "HR")),
+    db: Session = Depends(get_db),
+):
+    """Aggregate gross pay, statutory deductions, net pay, employer PF/ESI cost, and % spend share per department."""
+    return report_service.get_department_payroll_cost_report(
+        session=db,
+        run_id=run_id,
+        start_date=start_date,
+        end_date=end_date,
     )

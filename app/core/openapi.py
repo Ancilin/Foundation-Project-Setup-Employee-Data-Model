@@ -236,6 +236,24 @@ RESPONSE_EXAMPLES: dict[str, Any] = {
         "total_equity": "86350000.00",
         "is_balanced": True,
     },
+    "/reports/department-payroll-cost": {
+        "report_type": "DEPARTMENT_PAYROLL_COST",
+        "run_id": "PR-2025-04",
+        "departments_count": 11,
+        "total_payroll_items": 412,
+        "company_total_gross_pay": "52410000.00",
+        "company_total_employer_cost": "55890000.00",
+        "departments": [
+            {
+                "department_id": "D01",
+                "department_name": "Engineering",
+                "cost_center": "CC-ENG",
+                "unique_employees": 145,
+                "total_employer_cost": "24850000.00",
+                "share_of_total_cost_percent": "44.46",
+            }
+        ],
+    },
 }
 
 
