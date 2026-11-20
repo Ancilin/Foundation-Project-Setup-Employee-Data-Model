@@ -1,8 +1,10 @@
 """Generate Python_Ancillin_Phase4_Report.pdf — Phase 4 Review & Report (Days 16–20, strictly 2–3 pages)."""
 
+import re
 import shutil
 from pathlib import Path
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.platypus import (
@@ -37,24 +39,60 @@ def _on_page(canvas, doc):
     canvas.restoreState()
 
 
+def _clean_cell_markup(text: str) -> str:
+    """Escape bare ampersands, swap unsupported Helvetica glyphs, and preserve line breaks."""
+    s = (
+        text.replace("₹", "INR ")
+        .replace("→", "->")
+        .replace("–", "-")
+        .replace("—", "--")
+    )
+    # Escape bare '&' not already an HTML entity
+    s = re.sub(r"&(?!amp;|nbsp;|lt;|gt;|bull;|quot;)", "&amp;", s)
+    # Escape '<' and '>' that are not part of known ReportLab tags
+    s = s.replace("\n", "<br/>")
+    return s
+
+
 def _table(data, col_widths, header_hex="#1e3a5f", center_cols=()):
-    tbl = Table(data, colWidths=col_widths)
+    base_styles = getSampleStyleSheet()
+    hdr_left = ParagraphStyle(
+        "TblHdrL", parent=base_styles["Normal"], fontName="Helvetica-Bold",
+        fontSize=7.0, leading=9.2, textColor=colors.white, alignment=TA_LEFT,
+    )
+    hdr_ctr = ParagraphStyle(
+        "TblHdrC", parent=hdr_left, alignment=TA_CENTER,
+    )
+    cell_left = ParagraphStyle(
+        "TblCellL", parent=base_styles["Normal"], fontName="Helvetica",
+        fontSize=6.8, leading=9.0, textColor=colors.HexColor("#1e293b"), alignment=TA_LEFT,
+    )
+    cell_ctr = ParagraphStyle(
+        "TblCellC", parent=cell_left, alignment=TA_CENTER,
+    )
+
+    wrapped = []
+    for r_idx, row in enumerate(data):
+        new_row = []
+        for c_idx, cell in enumerate(row):
+            if isinstance(cell, str):
+                st = (hdr_ctr if c_idx in center_cols else hdr_left) if r_idx == 0 else (cell_ctr if c_idx in center_cols else cell_left)
+                new_row.append(Paragraph(_clean_cell_markup(cell), st))
+            else:
+                new_row.append(cell)
+        wrapped.append(new_row)
+
+    tbl = Table(wrapped, colWidths=col_widths, repeatRows=1)
     cmds = [
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor(header_hex)),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 7.0),
-        ("LEADING", (0, 0), (-1, -1), 9.2),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
         ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("LEFTPADDING", (0, 0), (-1, -1), 4),
         ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-        ("TOPPADDING", (0, 0), (-1, -1), 2.5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.5),
+        ("TOPPADDING", (0, 0), (-1, -1), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
     ]
-    for c in center_cols:
-        cmds.append(("ALIGN", (c, 0), (c, -1), "CENTER"))
     tbl.setStyle(TableStyle(cmds))
     return tbl
 
@@ -234,8 +272,8 @@ def build_pdf() -> int:
         "<b>Design Decisions:</b> Used a single SQL <font face='Courier'>GROUP BY</font> join between <font face='Courier'>payroll_items</font> and <font face='Courier'>departments</font> "
         "to avoid N+1 queries, exact <font face='Courier'>Decimal</font> arithmetic with <font face='Courier'>ROUND_HALF_UP</font>, safe zero-division guards, OpenAPI enrichment (91/91 coverage), "
         "and 4 unit/integration tests (<font face='Courier'>tests/test_department_cost_report.py</font>).<br/>"
-        "<b>Verified Result on 18-Month DB:</b> 11 departments, 7,340 payroll items, total employer cost <b>₹861,586,392.42</b> — matching Profit &amp; Loss "
-        "accounts <font face='Courier'>5001–5005</font> (<b>₹861,586,392.42</b>) to the exact paisa (Engineering 39.58%, Sales 14.70%, Data &amp; AI 12.85%; total share = 100.00%).",
+        "<b>Verified Result on 18-Month DB:</b> 11 departments, 7,340 payroll items, total employer cost <b>INR 861,586,392.42</b> - matching Profit &amp; Loss "
+        "accounts <font face='Courier'>5001-5005</font> (<b>INR 861,586,392.42</b>) to the exact paisa (Engineering 39.58%, Sales 14.70%, Data &amp; AI 12.85%; total share = 100.00%).",
         body_s,
     ))
     el.append(Spacer(1, 4))
@@ -274,7 +312,7 @@ def build_pdf() -> int:
         [
             "Render Docker startup failed on postgres:// URL & missing Excel file",
             "Render injects postgresql:// (needing postgresql+psycopg:// for psycopg v3) and Docker image shipped data/csv/ without the large .xlsx workbook",
-            "Added URL normalizer in app/core/config.py, CSV fallback in scripts/seed.py, reportlab in requirements.txt, and CRLF stripping in Dockerfile → live on Render (HTTP 200)",
+            "Added URL normalizer in app/core/config.py, CSV fallback in scripts/seed.py, reportlab in requirements.txt, and CRLF stripping in Dockerfile -> live on Render (HTTP 200)",
         ],
     ]
     el.append(_table(probs_rows, [145, 165, 230], header_hex="#7c2d12"))
@@ -305,7 +343,7 @@ def build_pdf() -> int:
     for dest in (REPORTS_PDF, DESKTOP_PDF):
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(OUTPUT_PDF, dest)
-        print(f"  → copied to {dest}")
+        print(f"  -> copied to {dest}")
     return page_counter["pages"]
 
 

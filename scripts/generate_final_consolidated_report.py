@@ -1,9 +1,11 @@
 """Generate Python_Ancillin_Final_Consolidated_Report.pdf — Complete 10-Page Consolidated Project Report (8–12 pages, Google Form Submission)."""
 
+import re
 import shutil
 from pathlib import Path
 from reportlab.graphics.shapes import Drawing, Line, Polygon, Rect, String
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.platypus import (
@@ -29,14 +31,50 @@ LIVE_URL = "https://ledgerforge-ijqw.onrender.com"
 DEMO_VIDEO_URL = "https://drive.google.com/file/d/1r71lqbsPnuN5xNPHircIQvE4ynPZ5qIg/view?usp=sharing"
 
 
+def _clean_cell_markup(text: str) -> str:
+    """Wrap backticks in Courier, replace unsupported Helvetica glyphs, and escape bare ampersands."""
+    s = (
+        text.replace("₹", "INR ")
+        .replace("→", "->")
+        .replace("–", "-")
+        .replace("—", "--")
+        .replace("·", "|")
+    )
+    # Escape bare '&' not already an HTML entity
+    s = re.sub(r"&(?!amp;|nbsp;|lt;|gt;|bull;|quot;)", "&amp;", s)
+    # Convert markdown `code` spans to Courier font
+    s = re.sub(r"`([^`]+)`", r"<font face='Courier'>\1</font>", s)
+    s = s.replace("\n", "<br/>")
+    return s
+
+
 def _styled_table(data, col_widths, header_hex="#1e3a5f", center_cols=(), font_size=7.4):
-    tbl = Table(data, colWidths=col_widths)
+    base_styles = getSampleStyleSheet()
+    hdr_left = ParagraphStyle(
+        "SHdrL", parent=base_styles["Normal"], fontName="Helvetica-Bold",
+        fontSize=font_size, leading=font_size + 2.2, textColor=colors.white, alignment=TA_LEFT,
+    )
+    hdr_ctr = ParagraphStyle("SHdrC", parent=hdr_left, alignment=TA_CENTER)
+    cell_left = ParagraphStyle(
+        "SCellL", parent=base_styles["Normal"], fontName="Helvetica",
+        fontSize=font_size, leading=font_size + 2.4, textColor=colors.HexColor("#1e293b"), alignment=TA_LEFT,
+    )
+    cell_ctr = ParagraphStyle("SCellC", parent=cell_left, alignment=TA_CENTER)
+
+    wrapped = []
+    for r_idx, row in enumerate(data):
+        new_row = []
+        for c_idx, cell in enumerate(row):
+            if isinstance(cell, str):
+                st = (hdr_ctr if c_idx in center_cols else hdr_left) if r_idx == 0 else (cell_ctr if c_idx in center_cols else cell_left)
+                new_row.append(Paragraph(_clean_cell_markup(cell), st))
+            else:
+                new_row.append(cell)
+        wrapped.append(new_row)
+
+    tbl = Table(wrapped, colWidths=col_widths, repeatRows=1)
     cmds = [
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor(header_hex)),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), font_size),
-        ("LEADING", (0, 0), (-1, -1), font_size + 2.4),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#94a3b8")),
         ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f8fafc")]),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -45,8 +83,6 @@ def _styled_table(data, col_widths, header_hex="#1e3a5f", center_cols=(), font_s
         ("TOPPADDING", (0, 0), (-1, -1), 3.2),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 3.2),
     ]
-    for c in center_cols:
-        cmds.append(("ALIGN", (c, 0), (c, -1), "CENTER"))
     tbl.setStyle(TableStyle(cmds))
     return tbl
 
@@ -99,7 +135,7 @@ def _build_architecture_drawing() -> Drawing:
     _draw_arrow_down(d, 427, 76, 54)
 
     # Tier 4: ORM & Database
-    _draw_box(d, 20, 16, 490, 38, "SQLAlchemy 2.0 ORM  →  PostgreSQL 16 (Hosted / Docker Volume)  |  SQLite Local Fallback", "29 Normalized Tables · CHECK Constraints · Alembic Migrations (0001–0011) · Composite Indexes · Verified Backup/Restore", "#f1f5f9", "#334155", "#0f172a")
+    _draw_box(d, 20, 16, 490, 38, "SQLAlchemy 2.0 ORM  ->  PostgreSQL 16 (Hosted / Docker Volume)  |  SQLite Local Fallback", "29 Normalized Tables · CHECK Constraints · Alembic Migrations (0001–0011) · Composite Indexes · Verified Backup/Restore", "#f1f5f9", "#334155", "#0f172a")
     return d
 
 
@@ -108,7 +144,7 @@ def _build_payroll_flow_drawing() -> Drawing:
     d = Drawing(530, 112)
     stages = [
         (8, "1. Attendance", "30 / 30 Payable", "#eff6ff", "#2563eb"),
-        (114, "2. Payroll Engine", "Gross→Net + CTC", "#ecfdf5", "#059669"),
+        (114, "2. Payroll Engine", "Gross->Net + CTC", "#ecfdf5", "#059669"),
         (220, "3. Payslip PDF", "EMP-0002 Slip", "#fefce8", "#ca8a04"),
         (326, "4. Journal Entry", "JE-000105 (43 L)", "#fff7ed", "#ea580c"),
         (432, "5. Statements", "TB · P&L · BS", "#f3e8ff", "#7c3aed"),
@@ -119,7 +155,7 @@ def _build_payroll_flow_drawing() -> Drawing:
             _draw_arrow_right(d, x + 92, x + 106, 75)
 
     # Bottom verification bar
-    _draw_box(d, 8, 8, 516, 32, "Mathematical Reconciliation Invariant Across Every Stage: Variance = ₹0.00", "SUM(payroll_items.employer_cost) = ₹861,586,392.42  ==  P&L Accts 5001–5005  |  Balance Sheet: Assets (₹463.76M) == Liab + Equity + Profit", "#ecfdf5", "#047857", "#065f46")
+    _draw_box(d, 8, 8, 516, 32, "Mathematical Reconciliation Invariant Across Every Stage: Variance = INR 0.00", "SUM(payroll_items.employer_cost) = INR 861,586,392.42  ==  P&L Accts 5001–5005  |  Balance Sheet: Assets (INR 463.76M) == Liab + Equity + Profit", "#ecfdf5", "#047857", "#065f46")
     _draw_arrow_down(d, 265, 54, 40)
     return d
 
@@ -295,8 +331,8 @@ def build_pdf() -> int:
     ))
     built_bullets = [
         "&bull; <b>29 Normalized Relational Tables &amp; 11 Alembic Migrations:</b> Modelling departments, roles, employees, reporting trees, salary structures/revisions, 150,156 daily attendance logs, leave balances, 18 payroll runs (7,340 items), 47-account Chart of Accounts, 2,524 balanced journal entries, 743 client invoices, 501 vendor expense bills, tax slabs, and background jobs.",
-        "&bull; <b>91 Documented API v1 Endpoints + Mobile Web Portal (/ui):</b> Strictly layered FastAPI routes (`Route → Service → ORM`), JWT HS256 + bcrypt RBAC, interactive Swagger UI with 100% example coverage, and a responsive `/ui` portal for login, payroll execution, and payslip PDF downloads.",
-        "&bull; <b>Exact Indian Statutory &amp; Double-Entry Accounting Engine:</b> Database-driven tax rules computing Gross-to-Net pay to the exact paisa (`7,340/7,340 = 100.00%` match) and auto-posting balanced journal entries so `Debits == Credits` (`₹5,298,104,813.57`) and `Assets == Liabilities + Equity + Current Profit` (`₹463,762,958.65`, variance `₹0.00`).",
+        "&bull; <b>91 Documented API v1 Endpoints + Mobile Web Portal (/ui):</b> Strictly layered FastAPI routes (`Route -> Service -> ORM`), JWT HS256 + bcrypt RBAC, interactive Swagger UI with 100% example coverage, and a responsive `/ui` portal for login, payroll execution, and payslip PDF downloads.",
+        "&bull; <b>Exact Indian Statutory &amp; Double-Entry Accounting Engine:</b> Database-driven tax rules computing Gross-to-Net pay to the exact paisa (`7,340/7,340 = 100.00%` match) and auto-posting balanced journal entries so `Debits == Credits` (`INR 5,298,104,813.57`) and `Assets == Liabilities + Equity + Current Profit` (`INR 463,762,958.65`, variance `INR 0.00`).",
         "&bull; <b>Production Engineering Discipline:</b> Docker Compose multi-container stack (API, PostgreSQL, Redis, Celery worker), GitHub Actions CI, `EXPLAIN`-guided composite indexes (52–65% faster), 8,900x faster TTL report caching, structured JSON logs, DB-probing `/health`, tested 193,036-row disaster recovery, streaming CSV/Excel exports, and an independent Final Challenge analytics report.",
     ]
     for b in built_bullets:
@@ -311,7 +347,7 @@ def build_pdf() -> int:
     el.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#cbd5e1")))
     el.append(Spacer(1, 4))
     el.append(Paragraph(
-        "LedgerForge enforces a strict unidirectional layered architecture (<b>Client → Middleware → Route → Domain Service → ORM → Database</b>). "
+        "LedgerForge enforces a strict unidirectional layered architecture (<b>Client -> Middleware -> Route -> Domain Service -> ORM -> Database</b>). "
         "HTTP routers never contain accounting or tax formulas; domain services never import FastAPI HTTP primitives. "
         "The same architecture diagram is maintained as Mermaid source in <font face='Courier'>docs/architecture.md</font> and <font face='Courier'>README.md</font>.",
         body,
@@ -375,7 +411,7 @@ def build_pdf() -> int:
     el.append(Spacer(1, 8))
     el.append(Paragraph(
         "<b>Statutory Guardrails Enforced in Code:</b> (a) Exited employees are excluded automatically past `exit_date` (verified: 0 post-exit rows); "
-        "(b) Mid-month joiners/leavers are prorated by `payable_days / calendar_days`; (c) Payroll runs follow an explicit state machine (`DRAFT → APPROVED → PAID`) "
+        "(b) Mid-month joiners/leavers are prorated by `payable_days / calendar_days`; (c) Payroll runs follow an explicit state machine (`DRAFT -> APPROVED -> PAID`) "
         "preventing accidental duplicate runs for the same period.",
         callout,
     ))
@@ -401,7 +437,7 @@ def build_pdf() -> int:
     ))
     m3_tbl = [
         ["Dimension", "Evidence / Details"],
-        ["One Concrete Proof", "Across 2,524 posted journal entries and 6,784 journal lines: 0 unbalanced entries (debits - credits = 0.00), largest monthly payroll-to-ledger difference = 0.00 across all 18 months, and Ledger Account 1100 (₹139,394,278.00) equals open invoices (₹139,394,278.00) to the paisa."],
+        ["One Concrete Proof", "Across 2,524 posted journal entries and 6,784 journal lines: 0 unbalanced entries (debits - credits = 0.00), largest monthly payroll-to-ledger difference = 0.00 across all 18 months, and Ledger Account 1100 (INR 139,394,278.00) equals open invoices (INR 139,394,278.00) to the paisa."],
         ["One Key Lesson", "Accounting records must be immutable once posted—supporting corrective reversal entries instead of `DELETE`/`UPDATE` mutations preserves full auditability and guarantees that sub-ledger totals never silently drift from the general ledger."],
     ]
     el.append(_styled_table(m3_tbl, [110, 426], header_hex="#1e3a5f", font_size=7.8))
@@ -418,7 +454,7 @@ def build_pdf() -> int:
     ))
     m4_tbl = [
         ["Dimension", "Evidence / Details"],
-        ["One Concrete Proof", "`verify_ledgerforge.py trial-balance` matched 40 / 40 accounts (0 mismatched); Trial Balance balances at ₹5,298,104,813.57 (diff ₹0.00); Balance Sheet verifies Assets (₹463,762,958.65) == Liabilities (₹77,499,607.07) + Equity (₹161,579,764.00) + Current Profit (₹224,683,587.58) with ₹0.00 difference."],
+        ["One Concrete Proof", "`verify_ledgerforge.py trial-balance` matched 40 / 40 accounts (0 mismatched); Trial Balance balances at INR 5,298,104,813.57 (diff INR 0.00); Balance Sheet verifies Assets (INR 463,762,958.65) == Liabilities (INR 77,499,607.07) + Equity (INR 161,579,764.00) + Current Profit (INR 224,683,587.58) with INR 0.00 difference."],
         ["One Key Lesson", "Explicitly filtering `is_group == 'N'` in every financial aggregation prevented subtle 2x double-counting bugs on parent accounts (1000/2000/3000/4000/5000), and moving tax slabs into database tables turns annual budget changes into data updates instead of risky code deployments."],
     ]
     el.append(_styled_table(m4_tbl, [110, 426], header_hex="#0f766e", font_size=7.8))
@@ -449,9 +485,9 @@ def build_pdf() -> int:
         ["Attendance 30-Day Query (150,156 rows)", "45.75 ms (Temp B-Tree)", "21.63 ms", "52.7% faster", "Composite index ix_attendance_date_emp_status"],
         ["Trial Balance Ledger Join (6,784 lines)", "22.77 ms (Full scan)", "9.44 ms", "58.5% faster", "Index ix_journal_entries_status"],
         ["Open Invoices AR Query (743 rows)", "1.14 ms (Status scan)", "0.40 ms", "64.9% faster", "Covering index ix_invoices_status"],
-        ["Trial Balance Report (Cold → TTL Hot)", "87.30 ms", "0.01 ms", "8,907x faster", "60s TTL cache w/ ledger write invalidation"],
+        ["Trial Balance Report (Cold -> TTL Hot)", "87.30 ms", "0.01 ms", "8,907x faster", "60s TTL cache w/ ledger write invalidation"],
         ["Payroll Run Read Throughput", "2.14 ms / run", "0.67 ms / run", "68.7% faster", "Index ix_payroll_runs_status"],
-        ["Backup → Fresh DB Restore (29 tables)", "50.8 MB backup", "193,036 / 193,036", "100% parity", "Automated verification in backup_restore.py"],
+        ["Backup -> Fresh DB Restore (29 tables)", "50.8 MB backup", "193,036 / 193,036", "100% parity", "Automated verification in backup_restore.py"],
     ]
     el.append(_styled_table(perf_rows, [145, 92, 76, 56, 167], header_hex="#334155", center_cols=(2, 3), font_size=7.2))
     el.append(Spacer(1, 8))
@@ -485,17 +521,17 @@ def build_pdf() -> int:
         [
             "1. Attendance\n&amp; Leave",
             "Module 2\nattendance, leave_requests",
-            "EMP-0002 has 30 calendar days in April 2025, 30 days employed, 0.00 LOP days → 30.00 payable days (100% proration factor). Exited employees past exit_date are excluded (0 violations across 386 employees).",
+            "EMP-0002 has 30 calendar days in April 2025, 30 days employed, 0.00 LOP days -> 30.00 payable days (100% proration factor). Exited employees past exit_date are excluded (0 violations across 386 employees).",
         ],
         [
             "2. Salary &\nTax Rules",
             "Modules 1 &amp; 4\nsalary_structures, tax_slabs",
-            "Effective April 2025 salary structure loaded for EMP-0002: Fixed Monthly Gross ₹179,130.40. Active FY2025-26 New-Regime TDS slabs and statutory rates (EPF cap ₹1,800, PT ₹200) fetched from database tables.",
+            "Effective April 2025 salary structure loaded for EMP-0002: Fixed Monthly Gross INR 179,130.40. Active FY2025-26 New-Regime TDS slabs and statutory rates (EPF cap INR 1,800, PT INR 200) fetched from database tables.",
         ],
         [
             "3. Payroll\nCalculation",
             "Module 2\npayroll_runs, payroll_items",
-            "EMP-0002 result: Gross ₹179,130.40 − Deductions ₹20,625.79 (EPF ₹1,800.00 + PT ₹200.00 + TDS ₹18,625.79) = Net Pay ₹158,504.61; Employer Cost = ₹180,930.40 (+₹1,800 Employer PF). Full PR-2025-04 total (386 items): Gross ₹52,740,110.43 | Net ₹46,035,111.16 | Employer Cost ₹53,363,392.08.",
+            "EMP-0002 result: Gross INR 179,130.40 − Deductions INR 20,625.79 (EPF INR 1,800.00 + PT INR 200.00 + TDS INR 18,625.79) = Net Pay INR 158,504.61; Employer Cost = INR 180,930.40 (+INR 1,800 Employer PF). Full PR-2025-04 total (386 items): Gross INR 52,740,110.43 | Net INR 46,035,111.16 | Employer Cost INR 53,363,392.08.",
         ],
         [
             "4. Payslip\n&amp; Export",
@@ -505,12 +541,12 @@ def build_pdf() -> int:
         [
             "5. Double-Entry\nLedger Posting",
             "Module 3\njournal_entries, journal_lines",
-            "Auto-posted Journal Entry JE-000105 (2025-04-30, POSTED, 43 lines): DEBIT cost-center Payroll Expenses (Accts 5001–5005) = ₹53,363,392.08; CREDIT Salaries Payable 2100 (₹46,035,111.16), EPF Payable 2110 (₹1,237,927.88), ESI Payable 2120 (₹5,314.10), TDS Payable 2130 (₹6,007,238.94), PT Payable 2140 (₹74,800.00), Advances 1300 (₹3,000.00) = ₹53,363,392.08. Variance = ₹0.00.",
+            "Auto-posted Journal Entry JE-000105 (2025-04-30, POSTED, 43 lines): DEBIT cost-center Payroll Expenses (Accts 5001–5005) = INR 53,363,392.08; CREDIT Salaries Payable 2100 (INR 46,035,111.16), EPF Payable 2110 (INR 1,237,927.88), ESI Payable 2120 (INR 5,314.10), TDS Payable 2130 (INR 6,007,238.94), PT Payable 2140 (INR 74,800.00), Advances 1300 (INR 3,000.00) = INR 53,363,392.08. Variance = INR 0.00.",
         ],
         [
             "6. Financial\nStatements",
             "Module 4\nTB, P&amp;L, Balance Sheet",
-            "18 posted payroll entries sum to ₹861,586,392.42 in P&L Accts 5001–5005 (matching Departmental Payroll Cost Report to the paisa). Trial Balance balances at ₹5,298,104,813.57; Net Profit ₹224,683,587.58 flows into Balance Sheet Equity so Assets == Liabilities + Equity + Profit = ₹463,762,958.65 (diff ₹0.00).",
+            "18 posted payroll entries sum to INR 861,586,392.42 in P&L Accts 5001–5005 (matching Departmental Payroll Cost Report to the paisa). Trial Balance balances at INR 5,298,104,813.57; Net Profit INR 224,683,587.58 flows into Balance Sheet Equity so Assets == Liabilities + Equity + Profit = INR 463,762,958.65 (diff INR 0.00).",
         ],
     ]
     el.append(_styled_table(trace_rows, [68, 92, 376], header_hex="#1e3a5f", font_size=7.3))
@@ -547,11 +583,11 @@ def build_pdf() -> int:
 
     el.append(Paragraph("Step-by-Step Testing Guide (Web UI, Swagger &amp; CLI)", h2))
     el.append(Paragraph(
-        "<b>A. Web Portal Walkthrough (<font face='Courier'>/ui</font>):</b> Open <font face='Courier'>/ui</font> on desktop or phone → log in as "
-        "<font face='Courier'>admin</font> / <font face='Courier'>LedgerForge2025!</font> → calculate payroll for <font face='Courier'>EMP-0002</font> (<font face='Courier'>2025-04</font>) → "
-        "inspect Gross/PF/PT/TDS/Net breakdown → download official PDF payslip.<br/>"
-        "<b>B. Interactive API Testing (<font face='Courier'>/docs</font>):</b> Open <font face='Courier'>/docs</font> → execute <font face='Courier'>POST /api/v1/auth/login</font> "
-        "(pre-filled example!) → copy <font face='Courier'>access_token</font> → click <b>Authorize</b> → test any of the 91 enriched endpoints including "
+        "<b>A. Web Portal Walkthrough (<font face='Courier'>/ui</font>):</b> Open <font face='Courier'>/ui</font> on desktop or phone -> log in as "
+        "<font face='Courier'>admin</font> / <font face='Courier'>LedgerForge2025!</font> -> calculate payroll for <font face='Courier'>EMP-0002</font> (<font face='Courier'>2025-04</font>) -> "
+        "inspect Gross/PF/PT/TDS/Net breakdown -> download official PDF payslip.<br/>"
+        "<b>B. Interactive API Testing (<font face='Courier'>/docs</font>):</b> Open <font face='Courier'>/docs</font> -> execute <font face='Courier'>POST /api/v1/auth/login</font> "
+        "(pre-filled example!) -> copy <font face='Courier'>access_token</font> -> click <b>Authorize</b> -> test any of the 91 enriched endpoints including "
         "<font face='Courier'>GET /api/v1/reports/department-payroll-cost</font> and <font face='Courier'>GET /api/v1/exports/payroll?format=xlsx</font>.<br/>"
         "<b>C. Automated CLI Verification:</b>",
         body,
@@ -583,12 +619,12 @@ def build_pdf() -> int:
         [
             "Paisa rounding drift in early payroll runs",
             "Intermediate float rounding caused 1–2 paisa mismatches on TDS & EPF across 7,340 rows",
-            "Switched every salary/tax calculation to `Decimal` with `ROUND_HALF_UP` at statutory boundaries → achieved 7,340/7,340 (100.00%) exact match.",
+            "Switched every salary/tax calculation to `Decimal` with `ROUND_HALF_UP` at statutory boundaries -> achieved 7,340/7,340 (100.00%) exact match.",
         ],
         [
             "Group account double-counting risk in statements",
             "Summing all ChartOfAccount rows counted both parent groups (e.g. 5000) and leaf children (5001–5005)",
-            "Separated `is_group='N'` leaves from `is_group='Y'` rollups across Trial Balance, P&L, and Balance Sheet → 40/40 accounts exact match.",
+            "Separated `is_group='N'` leaves from `is_group='Y'` rollups across Trial Balance, P&L, and Balance Sheet -> 40/40 accounts exact match.",
         ],
         [
             "ORM column &amp; CHECK constraint mismatches in Task 19",
@@ -659,7 +695,7 @@ def build_pdf() -> int:
         ["D05", "Marketing", "14", "224", "24,058,878.44", "2.79%"],
         ["D10", "Legal & Compliance", "12", "170", "23,630,719.45", "2.74%"],
         ["D00", "Executive Office", "1", "18", "8,805,986.41", "1.02%"],
-        ["TOTAL", "All 11 Departments (Matches P&L 5001–5005 = ₹861,586,392.42)", "530", "7,340", "861,586,392.42", "100.00%"],
+        ["TOTAL", "All 11 Departments (Matches P&L 5001–5005 = INR 861,586,392.42)", "530", "7,340", "861,586,392.42", "100.00%"],
     ]
     el.append(_styled_table(dept_rows, [48, 224, 52, 42, 114, 56], header_hex="#1e3a5f", center_cols=(0, 2, 3, 5), font_size=7.0))
     el.append(Spacer(1, 8))
@@ -687,7 +723,7 @@ def build_pdf() -> int:
     for dest in (REPORTS_PDF, DESKTOP_PDF):
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(OUTPUT_PDF, dest)
-        print(f"  → copied to {dest}")
+        print(f"  -> copied to {dest}")
     return page_counter["pages"]
 
 
