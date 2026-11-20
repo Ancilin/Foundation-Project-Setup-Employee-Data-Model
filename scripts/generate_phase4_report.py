@@ -25,6 +25,7 @@ TAG_PHASE4_URL = f"{GITHUB_URL}/releases/tag/phase-4"
 TAG_V1_URL = f"{GITHUB_URL}/releases/tag/v1.0.0"
 BRANCH_URL = f"{GITHUB_URL}/tree/feat/department-payroll-cost-report"
 LIVE_APP_URL = "https://ledgerforge-ijqw.onrender.com"
+DEMO_VIDEO_URL = "https://drive.google.com/file/d/1r71lqbsPnuN5xNPHircIQvE4ynPZ5qIg/view?usp=sharing"
 
 
 def _on_page(canvas, doc):
@@ -115,7 +116,8 @@ def build_pdf() -> int:
         f'<b>GitHub Repository:</b> <a href="{GITHUB_URL}" color="#2563eb">{GITHUB_URL}</a><br/>'
         f'<b>Live Production App:</b> <a href="{LIVE_APP_URL}/docs" color="#2563eb">{LIVE_APP_URL}/docs</a> &nbsp;|&nbsp; '
         f'<a href="{LIVE_APP_URL}/ui" color="#2563eb">{LIVE_APP_URL}/ui</a> &nbsp;|&nbsp; '
-        f'<a href="{LIVE_APP_URL}/health" color="#2563eb">/health</a><br/>'
+        f'<a href="{LIVE_APP_URL}/health" color="#2563eb">/health</a> &nbsp;|&nbsp; '
+        f'<b>5-Min Demo Video:</b> <a href="{DEMO_VIDEO_URL}" color="#2563eb">Watch Demo</a><br/>'
         f'<b>Git Tags:</b> <a href="{TAG_PHASE4_URL}" color="#2563eb"><b>phase-4</b></a> &nbsp;|&nbsp; '
         f'<a href="{TAG_V1_URL}" color="#2563eb"><b>v1.0.0</b></a> &nbsp;|&nbsp; '
         f'<b>Final Challenge Branch:</b> <a href="{BRANCH_URL}" color="#2563eb">feat/department-payroll-cost-report</a>',

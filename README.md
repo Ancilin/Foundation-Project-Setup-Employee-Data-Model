@@ -4,6 +4,7 @@
 
 **Key Handover Documents:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md) · [`CHANGELOG.md`](CHANGELOG.md) · [`docs/architecture.md`](docs/architecture.md) · [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) · [`Python_Ancillin_Final_Consolidated_Report.pdf`](Python_Ancillin_Final_Consolidated_Report.pdf)
 - **Live Production App:** <https://ledgerforge-ijqw.onrender.com>
+- **5-Minute Live Demo Video:** <https://drive.google.com/file/d/1r71lqbsPnuN5xNPHircIQvE4ynPZ5qIg/view?usp=sharing>
 - **Interactive API Docs (Swagger UI — 91/91 endpoints with real examples):** <https://ledgerforge-ijqw.onrender.com/docs>
 - **Mobile-Friendly Web Portal (Login, Run Payroll, View & Download Payslips):** <https://ledgerforge-ijqw.onrender.com/ui>
 - **Live Health Probe:** <https://ledgerforge-ijqw.onrender.com/health>

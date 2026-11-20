@@ -26,6 +26,7 @@ TAG_V1_URL = f"{GITHUB_URL}/releases/tag/v1.0.0"
 TAG_P4_URL = f"{GITHUB_URL}/releases/tag/phase-4"
 BRANCH_URL = f"{GITHUB_URL}/tree/feat/department-payroll-cost-report"
 LIVE_URL = "https://ledgerforge-ijqw.onrender.com"
+DEMO_VIDEO_URL = "https://drive.google.com/file/d/1r71lqbsPnuN5xNPHircIQvE4ynPZ5qIg/view?usp=sharing"
 
 
 def _styled_table(data, col_widths, header_hex="#1e3a5f", center_cols=(), font_size=7.4):
@@ -210,7 +211,7 @@ def build_pdf() -> int:
         ["Release Tags", Paragraph(f'<a href="{TAG_V1_URL}" color="#2563eb"><b>v1.0.0</b></a> &nbsp;|&nbsp; <a href="{TAG_P4_URL}" color="#2563eb"><b>phase-4</b></a> &nbsp;|&nbsp; phase-3, phase-2, phase-1, v0.0.1', small)],
         ["Final Challenge Branch", Paragraph(f'<a href="{BRANCH_URL}" color="#2563eb">feat/department-payroll-cost-report</a> (merged into master)', small)],
         ["Live Deployment Link", Paragraph(f'<a href="{LIVE_URL}/docs" color="#2563eb"><b>{LIVE_URL}/docs</b></a> &nbsp;|&nbsp; <a href="{LIVE_URL}/ui" color="#2563eb">/ui</a> &nbsp;|&nbsp; <a href="{LIVE_URL}/health" color="#2563eb">/health</a>', small)],
-        ["5-Minute Demo Video", "Unlisted Demo Link: [Paste tested unlisted YouTube / Google Drive link in Google Form] (Script in docs/DEMO_SCRIPT.md)"],
+        ["5-Minute Demo Video", Paragraph(f'<a href="{DEMO_VIDEO_URL}" color="#2563eb"><b>{DEMO_VIDEO_URL}</b></a>', small)],
         ["Submission Date", "November 19, 2026"],
     ]
     el.append(_styled_table(cover_meta, [132, 404], header_hex="#1e3a5f", font_size=8.0))
