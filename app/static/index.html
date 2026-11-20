@@ -215,9 +215,9 @@
             <span class="text-xs text-emerald-800 font-medium">Net Take-Home Pay:</span>
             <div class="text-xl font-extrabold text-emerald-700" id="psNet">₹ 0.00</div>
           </div>
-          <a id="psPdfDownloadLink" href="#" target="_blank" class="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg transition shadow-sm flex items-center">
+          <button id="psPdfDownloadLink" type="button" onclick="downloadPayslipPdf()" class="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg transition shadow-sm flex items-center cursor-pointer">
             <i class="fa-solid fa-download mr-1.5"></i> Download PDF
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -246,7 +246,7 @@
   <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 mt-8 py-4">
     <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
-      LedgerForge v1.0.0-rc1 &bull; Production Release Candidate &bull; Ancilin P G (GM00210)
+      LedgerForge v1.0.0 &bull; Production Release &bull; Ancilin P G (GM00210)
     </div>
   </footer>
 
@@ -411,7 +411,7 @@
           document.getElementById('psDept').textContent = data.department_name || 'Engineering';
           document.getElementById('psRunId').textContent = data.run_id || runId;
 
-          document.getElementById('psBasic').textContent = '₹ ' + (data.basic_pay || 0).toLocaleString();
+          document.getElementById('psBasic').textContent = '₹ ' + (data.basic ?? data.basic_pay ?? 0).toLocaleString();
           document.getElementById('psHra').textContent = '₹ ' + (data.hra || 0).toLocaleString();
           document.getElementById('psSpl').textContent = '₹ ' + (data.special_allowance || 0).toLocaleString();
           document.getElementById('psGross').textContent = '₹ ' + (data.gross_pay || 0).toLocaleString();
@@ -424,13 +424,39 @@
 
           document.getElementById('psNet').textContent = '₹ ' + (data.net_pay || 0).toLocaleString();
 
-          // Update PDF download link
-          document.getElementById('psPdfDownloadLink').href = `/api/v1/payslips/${empId}/${runId}/pdf`;
+          // Store current payslip target for authenticated PDF download
+          const pdfBtn = document.getElementById('psPdfDownloadLink');
+          pdfBtn.dataset.empId = empId;
+          pdfBtn.dataset.runId = runId;
         } else {
           alert('Payslip not found for ' + empId + ' in ' + runId);
         }
       } catch (e) {
         alert('Failed to load payslip: ' + e);
+      }
+    }
+
+    async function downloadPayslipPdf() {
+      if (!token) { alert('Please sign in first.'); return; }
+      const pdfBtn = document.getElementById('psPdfDownloadLink');
+      const empId = pdfBtn.dataset.empId || document.getElementById('payslipEmpInput').value.trim();
+      const runId = pdfBtn.dataset.runId || document.getElementById('payslipRunInput').value.trim();
+      if (!empId || !runId) { alert('Please load a payslip first.'); return; }
+
+      try {
+        const resp = await fetch(`/api/v1/payslips/${empId}/${runId}/pdf`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!resp.ok) {
+          const errText = await resp.text();
+          alert('PDF download failed (' + resp.status + '): ' + errText);
+          return;
+        }
+        const blob = await resp.blob();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      } catch (e) {
+        alert('Failed to download PDF: ' + e);
       }
     }
 

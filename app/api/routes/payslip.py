@@ -4,7 +4,8 @@ from fastapi import APIRouter, Depends, Header, Query, Request, Response
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.core.security import ensure_self_or_hr_admin, get_current_user, oauth2_scheme
+from app.core.security import bearer_scheme, ensure_self_or_hr_admin, get_current_user, oauth2_scheme
+from fastapi.security import HTTPAuthorizationCredentials
 from app.db.session import get_db
 from app.models.user import User
 from app.schemas.payslip import PayslipResponse
@@ -16,6 +17,8 @@ router = APIRouter(prefix="/payslips", tags=["Payslips"])
 def _resolve_payslip_caller(
     request: Request,
     token: str | None = Depends(oauth2_scheme),
+    bearer: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+    access_token: str | None = Query(default=None, description="Optional JWT token for direct browser PDF links"),
     requester_id: str | None = Query(default=None, description="Caller employee_id for ownership verification"),
     requester_role: str | None = Query(default=None, description="Caller role (e.g., EMPLOYEE, HR, ADMIN)"),
     x_employee_id: str | None = Header(default=None, alias="X-Employee-Id"),
@@ -27,12 +30,13 @@ def _resolve_payslip_caller(
     eff_emp_id = requester_id or x_employee_id or x_user_employee_id
     eff_role = requester_role or x_role or x_user_role
     auth_header = request.headers.get("Authorization")
+    eff_token = token or access_token
 
     user_count = db.scalar(select(func.count(User.user_id))) or 0
-    if auth_header or token or user_count > 0:
-        if user_count == 0 and not auth_header and not token and (eff_emp_id or eff_role):
+    if auth_header or eff_token or bearer or user_count > 0:
+        if user_count == 0 and not auth_header and not eff_token and not bearer and (eff_emp_id or eff_role):
             return eff_emp_id, eff_role, None
-        current_user = get_current_user(request=request, token=token, db=db)
+        current_user = get_current_user(request=request, token=eff_token, bearer=bearer, db=db)
         return current_user.employee_id, current_user.role, current_user
 
     return eff_emp_id, eff_role, None
